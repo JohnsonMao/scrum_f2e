@@ -1,0 +1,48 @@
+:root {
+    --primary-default: #00FFE0;
+    --primary-dark: #008D96;
+    --primary-deepdark: #005656;
+    --primary-linear: linear-gradient(
+        rgba(0, 255, 224, 0) 0%,
+        rgba(0, 255, 224, 0.25) 60%,
+        rgba(0, 255, 224, 0.45) 80%,
+        rgba(0, 255, 224, 0.7) 90%,
+        rgba(0, 255, 224, 0.9) 100%
+    );
+
+    --text-default: #FFFFFF;
+    --text-dark: #005656;
+    --text-tint: #005656;
+
+    --role-sm: #D355FF;
+    --role-sm-dark: #4C0071;
+    --role-sm-tint: #FF00F5;
+    --role-sm-linear: linear-gradient(
+        rgba(211, 85, 255, 0) 0%,
+        rgba(211, 85, 255, 0.05) 60%,
+        rgba(211, 85, 255, 0.2) 80%,
+        rgba(211, 85, 255, 0.6) 100%
+    );
+
+    --role-team1: #FFC700;
+    --role-team1-linear: linear-gradient(
+        rgba(255, 199, 0, 0) 0%,
+        rgba(255, 199, 0, 0.05) 60%,
+        rgba(255, 199, 0, 0.2) 80%,
+        rgba(255, 199, 0, 0.6) 100%
+    );
+    --role-team2: #FF5C00;
+    --role-team2-linear: linear-gradient(
+        rgba(255, 122, 0, 0) 0%,
+        rgba(255, 122, 0, 0.05) 60%,
+        rgba(255, 122, 0, 0.2) 80%,
+        rgba(255, 122, 0, 0.6) 100%
+    );
+    --role-team-dark: #933500;
+
+    --bg-dark: #0A0D14;
+    --bg-dark-60: #0A0D1460;
+    --bg-transitions: #1C324560;
+
+    --danger: #FF0000;
+}

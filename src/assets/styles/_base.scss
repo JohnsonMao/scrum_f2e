@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'GenJyuuGothic-P';
+    src: url('./fonts/GenJyuuGothic-P-Normal.woff2') format('woff2'),
+        url('./fonts/GenJyuuGothic-P-Normal.woff') format('woff');
+}
+
+body {
+    font-family: GenJyuuGothic-P, sans-serif;
+    font-size: 20px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-default);
+}
+
+h2 {
+    line-height: 1.5;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+b {
+    font-weight: bold;
+}
+
+.fz-l {
+    font-size: 24px;
+}
+
+.fz-s {
+    font-size: 16px;
+}
+
+
