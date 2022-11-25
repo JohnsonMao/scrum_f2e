@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgrPlugin from 'vite-plugin-svgr';
+import autoprefixer from 'autoprefixer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -13,6 +14,27 @@ export default defineConfig(({ mode }) => {
 			alias: {
 				'@': '/src',
 				'@images': '/src/assets/images'
+			}
+		},
+		css: {
+			postcss: {
+				plugins: [
+					autoprefixer({
+						overrideBrowserslist: [
+							'Android 4.1',
+							'IOS 7.1',
+							'Chrome > 40',
+							'ff > 31',
+							'ie 11',
+							'> 1%'
+						]
+					})
+				]
+			},
+			preprocessorOptions: {
+				scss: {
+					additionalData: '@import "@/assets/styles/inject.scss";'
+				}
 			}
 		},
 		build: {

@@ -1,0 +1,14 @@
+@mixin position($position, $left: initial, $top: initial, $right: initial, $bottom: initial) {
+    position: $position;
+    left: $left;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+}
+
+@mixin flex($justify-content: center, $align-items: center, $flex-flow: row wrap) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    flex-flow: $flex-flow;
+}

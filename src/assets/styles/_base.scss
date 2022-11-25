@@ -1,17 +1,17 @@
 @font-face {
     font-family: 'GenJyuuGothic-P';
-    src: url('./fonts/GenJyuuGothic-P-Normal.woff2') format('woff2'),
-        url('./fonts/GenJyuuGothic-P-Normal.woff') format('woff');
+    src: url('./fonts/GenJyuuGothic-P-Medium.woff2') format('woff2'),
+        url('./fonts/GenJyuuGothic-P-Medium.woff') format('woff');
 }
 
 body {
     font-family: GenJyuuGothic-P, sans-serif;
-    font-size: 20px;
+    font-size: $fz-base;
     line-height: 1.8;
     letter-spacing: 0.05em;
     height: 100vh;
-    background: var(--bg-dark);
-    color: var(--text-default);
+    background: $bg-dark;
+    color: $text-default;
 }
 
 h2 {
@@ -24,16 +24,18 @@ h3 {
     font-size: 24px;
 }
 
-b {
+.b {
     font-weight: bold;
 }
 
 .fz-l {
-    font-size: 24px;
+    font-size: $fz-l;
 }
 
 .fz-s {
-    font-size: 16px;
+    font-size: $fz-s;
 }
 
-
+.container {
+    padding: 0 20px;
+}

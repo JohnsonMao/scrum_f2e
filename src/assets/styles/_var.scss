@@ -1,48 +1,68 @@
-:root {
-    --primary-default: #00FFE0;
-    --primary-dark: #008D96;
-    --primary-deepdark: #005656;
-    --primary-linear: linear-gradient(
-        rgba(0, 255, 224, 0) 0%,
-        rgba(0, 255, 224, 0.25) 60%,
-        rgba(0, 255, 224, 0.45) 80%,
-        rgba(0, 255, 224, 0.7) 90%,
-        rgba(0, 255, 224, 0.9) 100%
-    );
+$primary-default: #00FFE0;
+$primary-dark: #008D96;
+$primary-deepdark: #005656;
+$primary-linear: linear-gradient(
+    rgba(0, 255, 224, 0) 0%,
+    rgba(0, 255, 224, 0.25) 60%,
+    rgba(0, 255, 224, 0.45) 80%,
+    rgba(0, 255, 224, 0.7) 90%,
+    rgba(0, 255, 224, 0.9) 100%
+);
+$role-po-linear: linear-gradient(
+    rgba(0, 255, 224, 0) 0%,
+    rgba(0, 255, 224, 0.03) 60%,
+    rgba(0, 255, 224, 0.12) 78%,
+    rgba(0, 255, 224, 0.36) 100%
+);
+$role-po-box-shadow: 0 0 20px rgba(0, 255, 224, 0.3),
+                    0 0 40px rgba(0, 255, 224, 0.2),
+                    0 0 60px rgba(0, 255, 224, 0.1);
 
-    --text-default: #FFFFFF;
-    --text-dark: #005656;
-    --text-tint: #005656;
+$text-default: #FFFFFF;
+$text-dark: #005656;
+$text-tint: #00FFE0;
 
-    --role-sm: #D355FF;
-    --role-sm-dark: #4C0071;
-    --role-sm-tint: #FF00F5;
-    --role-sm-linear: linear-gradient(
-        rgba(211, 85, 255, 0) 0%,
-        rgba(211, 85, 255, 0.05) 60%,
-        rgba(211, 85, 255, 0.2) 80%,
-        rgba(211, 85, 255, 0.6) 100%
-    );
+$role-sm: #D355FF;
+$role-sm-dark: #4C0071;
+$role-sm-tint: #FF00F5;
+$role-sm-linear: linear-gradient(
+    rgba(211, 85, 255, 0) 0%,
+    rgba(211, 85, 255, 0.05) 60%,
+    rgba(211, 85, 255, 0.2) 80%,
+    rgba(211, 85, 255, 0.6) 100%
+);
+$role-sm-box-shadow: 0 0 20px rgba(211, 85, 255, 0.3),
+                    0 0 40px rgba(211, 85, 255, 0.2),
+                    0 0 60px rgba(211, 85, 255, 0.1);
 
-    --role-team1: #FFC700;
-    --role-team1-linear: linear-gradient(
-        rgba(255, 199, 0, 0) 0%,
-        rgba(255, 199, 0, 0.05) 60%,
-        rgba(255, 199, 0, 0.2) 80%,
-        rgba(255, 199, 0, 0.6) 100%
-    );
-    --role-team2: #FF5C00;
-    --role-team2-linear: linear-gradient(
-        rgba(255, 122, 0, 0) 0%,
-        rgba(255, 122, 0, 0.05) 60%,
-        rgba(255, 122, 0, 0.2) 80%,
-        rgba(255, 122, 0, 0.6) 100%
-    );
-    --role-team-dark: #933500;
+$role-team1: #FFC700;
+$role-team1-linear: linear-gradient(
+    rgba(255, 199, 0, 0) 0%,
+    rgba(255, 199, 0, 0.05) 60%,
+    rgba(255, 199, 0, 0.2) 80%,
+    rgba(255, 199, 0, 0.6) 100%
+);
+$role-team1-box-shadow: 0 0 20px rgba(255, 199, 0, 0.3),
+                    0 0 40px rgba(255, 199, 0, 0.2),
+                    0 0 60px rgba(255, 199, 0, 0.1);
+$role-team2: #FF5C00;
+$role-team2-linear: linear-gradient(
+    rgba(255, 122, 0, 0) 0%,
+    rgba(255, 122, 0, 0.05) 60%,
+    rgba(255, 122, 0, 0.2) 80%,
+    rgba(255, 122, 0, 0.6) 100%
+);
+$role-team2-box-shadow: 0 0 20px rgba(255, 122, 0, 0.3),
+                    0 0 40px rgba(255, 122, 0, 0.2),
+                    0 0 60px rgba(255, 122, 0, 0.1);
+$role-team-dark: #933500;
 
-    --bg-dark: #0A0D14;
-    --bg-dark-60: #0A0D1460;
-    --bg-transitions: #1C324560;
+$bg-dark: #0A0D14;
+$bg-dark-60: #0A0D1460;
+$bg-transitions: #1C324560;
 
-    --danger: #FF0000;
-}
+$danger: #FF0000;
+
+$fz-base: 20px;
+$fz-l: $fz-base / 5 * 6;
+$fz-s: $fz-base / 5 * 4;
