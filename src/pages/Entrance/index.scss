@@ -1,0 +1,217 @@
+.entrance {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+
+    &__leaf {
+        @include position(fixed);
+        transition: 1s;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__logo {
+        @include position(fixed, 50%, 50%);
+        width: 900px;
+        transform: translate(-50%, -55%);
+        transition: 1s;
+        animation: extranceIn 1s;
+        z-index: 10;
+
+        img {
+            width: 100%;
+            object-fit: contain;
+        }
+
+        h2 {
+            @include position(absolute, 50%, 72%);
+            width: max-content;
+            transform: translate(-50%, -50%);
+            text-shadow: 2px 2px 3px var(--primary-default);
+        }
+
+        button {
+            @include position(absolute, 50%, 82%);
+            transform: translate(-50%, -50%);
+        }
+    }
+    &__chat {
+        @include position(fixed, 50%, 50%);
+        @include flex(center, center, column);
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        gap: 32px;
+
+        button {
+            transition-delay: 1.2s;
+            transition-duration: 1s;
+        }
+    }
+}
+
+.bg_leaf {
+    &_l_2 {
+        height: 100%;
+        bottom: 0;
+        z-index: 2;
+    }
+    &_b_2 {
+        width: 62%;
+        left: 12%;
+        bottom: 0;
+        z-index: 1;
+    }
+    &_r_2 {
+        height: 100%;
+        right: 0;
+        z-index: 2;
+    }
+    &_t_2 {
+        width: 80%;
+        left: 12%;
+        z-index: 1;
+    }
+    &_lb_1 {
+        width: 60%;
+        bottom: 0;
+        z-index: 4;
+    }
+    &_lt_1 {
+        height: 70%;
+        left: 0;
+        z-index: 4;
+    }
+    &_rb_1 {
+        height: 70%;
+        right: 0;
+        bottom: 0;
+        z-index: 4;
+    }
+    &_t_1 {
+        width: 50%;
+        right: 18%;
+        z-index: 4;
+    }
+}
+
+.lightPoint {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 4px 4px var(--tint-color),
+        0 0 6px 6px var(--dark-color),
+        0 0 24px 8px var(--dark-color),
+        0 0 40px 24px var(--dark-color);
+    z-index: 11;
+}
+
+.l {
+    &_sm {
+        --tint-color: var(--role-sm-tint);
+        --dark-color: var(--role-sm-dark);
+        @include position(absolute, 16%, 25%);
+    }
+    &_ee {
+        --tint-color: var(--role-team1-defalut);
+        --dark-color: var(--role-team1-defalut);
+        @include position(absolute, 13%, 48%);
+        animation-delay: -1s;
+    }
+    &_gg {
+        --tint-color: var(--role-team2-default);
+        --dark-color: var(--danger);
+        @include position(absolute, 10%, 34%);
+        animation-delay: -2s;
+    }
+}
+.r {
+    &_sm {
+        --tint-color: var(--role-sm-tint);
+        --dark-color: var(--role-sm-dark);
+        @include position(absolute, initial, 30%, 6%);
+        animation-delay: -3s;
+    }
+    &_ee {
+        --tint-color: var(--role-team1-defalut);
+        --dark-color: var(--role-team1-defalut);
+        @include position(absolute, initial, 42%, 12%);
+        animation-delay: -4s;
+    }
+    &_gg {
+        --tint-color: var(--role-team2-default);
+        --dark-color: var(--danger);
+        @include position(absolute, initial, 24%, 16%);
+        animation-delay: random(30) / -10 s;
+        animation-delay: -5s;
+    }
+}
+
+.hello {
+    .entrance__chat button {
+        opacity: 0;
+    }
+}
+
+.join,
+.go {
+    .bg_leaf {
+        &_lb_1 {
+            transform: translate(-100%, 100%);
+        }
+        &_lt_1 {
+            transform: translate(-100%, -100%);
+        }
+        &_rb_1 {
+            transform: translate(100%, 100%);
+        }
+        &_t_1 {
+            transform: translate(0, -100%);
+        }
+    }
+    .entrance__logo {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.join {
+    .entrance__chat button {
+        opacity: 1;
+    }
+}
+
+.go {
+    .bg_leaf {
+        &_l_2 {
+            transform: translate(-100%, 0);
+        }
+        &_b_2 {
+            transform: translate(0, 100%);
+        }
+        &_r_2 {
+            transform: translate(100%, 0);
+        }
+        &_t_2 {
+            transform: translate(0, -100%);
+        }
+    }
+    .entrance__chat button {
+        transition: 1s;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+@keyframes extranceIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

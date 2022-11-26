@@ -1,0 +1,9 @@
+
+<svg width="0" height="0" style="position: absolute;">
+    <filter id="fractal" filterUnits="userSpaceOnUse" x="0" y="0">
+        <feTurbulence type="fractalNoise" baseFrequency="0.995" numOctaves="10" seed="1" result="img" />
+        <feDisplacementMap in="SourceGraphic" in2="img" xChannelSelector="R" yChannelSelector="G" scale="600">
+            <animate attributeName="scale" values="0;300;600" keyTimes="0;0.75;1" begin="0s" dur="2s" repeatCount="1" />
+        </feDisplacementMap>
+    </filter>
+</svg>

@@ -1,0 +1,16 @@
+.progress__bar {
+    --percent: 50%;
+
+    @include position(fixed, 0, 0, 0);
+    background: var(--primary-dark);
+    height: 12px;
+    
+    &::after {
+        @include position(absolute);
+        content: '';
+        background: linear-gradient(90deg, transparent, var(--primary-default));
+        width: var(--percent);
+        height: inherit;
+        animation: loading 1s infinite linear;
+    }
+}

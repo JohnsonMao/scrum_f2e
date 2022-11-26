@@ -1,0 +1,55 @@
+.loading {
+    --percent: 50%;
+
+    @include flex(center, center, column);
+    height: 100vh;
+    gap: 24px;
+
+    &__frame {
+        position: relative;
+
+        &::after {
+            @include position(absolute, -40%, 66%, -40%, -12%);
+            content: '';
+            background: radial-gradient(
+                50% 50% at 50% 50%,
+                var(--primary-dark),
+                transparent
+            );
+            z-index: -1;
+        }
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 20vh;
+        background: var(--primary-linear);
+        transform: rotate(180deg);
+    }
+
+    &__bar {
+        position: relative;
+        background: var(--primary-dark);
+        width: 80vw;
+        height: 8px;
+        
+        &::after {
+            @include position(absolute);
+            content: '';
+            background: linear-gradient(90deg, transparent, var(--primary-default));
+            width: var(--percent);
+            height: inherit;
+            animation: loading 1s infinite linear;
+        }
+    }
+}
+
+@keyframes loading {
+    50% {
+        opacity: 0.5;
+    }
+}

@@ -1,0 +1,43 @@
+.productOwner {
+    padding: 20px;
+
+    &__chat {
+        @include flex();
+        gap: 32px;
+    }
+}
+
+.po-mask {
+    @include position(fixed, 0, 0, 0, 0);
+    @include flex();
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+
+    &.show.po_1 {
+        background: rgba(var(--primary), 0.2);
+        pointer-events: auto;
+        opacity: 1;
+
+        span {
+            padding: 4px 20px;
+            border: 2px solid var(--primary-default);
+            border-radius: 28px;
+            color: var(--primary-default);
+        }
+    }
+}
+
+.po_2_button {
+    @include position(fixed, initial, initial, 40px, 60px);
+    opacity: 0;
+    pointer-events: none;
+}
+.po_2.po_2_button {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.jira {
+    margin-bottom: -6px;
+}

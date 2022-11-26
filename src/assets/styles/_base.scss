@@ -6,12 +6,13 @@
 
 body {
     font-family: GenJyuuGothic-P, sans-serif;
-    font-size: $fz-base;
+    font-size: var(--fz-base);
     line-height: 1.8;
     letter-spacing: 0.05em;
     height: 100vh;
-    background: $bg-dark;
-    color: $text-default;
+    background: var(--bg-dark);
+    color: var(--text-default);
+    overflow: hidden;
 }
 
 h2 {
@@ -24,18 +25,27 @@ h3 {
     font-size: 24px;
 }
 
+button {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .b {
     font-weight: bold;
 }
 
 .fz-l {
-    font-size: $fz-l;
+    font-size: var(--fz-l);
 }
 
 .fz-s {
-    font-size: $fz-s;
+    font-size: var(--fz-s);
 }
 
 .container {
-    padding: 0 20px;
+    padding: 0 32px;
 }

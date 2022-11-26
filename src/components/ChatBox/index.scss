@@ -4,6 +4,39 @@
     white-space: pre-wrap;
     border-radius: 40px;
     flex: 1;
+    transform: scale(0.01);
+    transform-origin: left;
+
+    &.large {
+        padding: 100px 84px;
+        border-radius: 80px;
+    }
+
+    &.no-next .chatBox__next {
+        display: none;
+    }
+
+    &.po {
+        --ani-bg: var(--primary-default);
+
+        background-image: var(--role-po-linear);
+        border: 2px solid var(--primary-default);
+        box-shadow: var(--role-po-box-shadow);
+
+        .chatBox__name {
+            background: var(--primary-default);
+            color: var(--bg-dark);
+
+            &::before {
+                background: var(--primary-deepdark);
+                box-shadow: var(--role-po-box-shadow);
+            }
+        }
+        .chatBox__next path {
+            stroke: var(--primary-default);
+            fill: var(--primary-default);
+        }
+    }
 
     &__name {
         @include position(absolute, -12px, 40px);
@@ -24,35 +57,8 @@
     }
 
     &__text {
-        background: linear-gradient(90deg, $text-default calc(100% - 60px), $text-tint, $text-dark);
-        background-size: 0 100px;
-        background-repeat: no-repeat;
-        background-position: 0 100%;
-        background-clip: text;
-        animation: textBg 3.4s forwards steps(34, jump-none);
-        
-        span {
-            animation: showText 3.4s forwards steps(34, jump-none);
-        }
-    }
-
-    &.po {
-        background: $role-po-linear;
-        border: 2px solid $primary-default;
-        box-shadow: $role-po-box-shadow;
-
-        .chatBox__name {
-            background: $primary-default;
-            color: $bg-dark;
-
-            &::before {
-                background: $primary-deepdark;
-                box-shadow: $role-po-box-shadow;
-            }
-        }
-        .chatBox__next path {
-            stroke: $primary-default;
-            fill: $primary-default;
+        .heightlight {
+            color: var(--text-tint);
         }
     }
 }
@@ -63,20 +69,5 @@
     }
     100% {
         transform: translateY(80%) scale(1.2, 0.5);
-    }
-}
-
-@keyframes showText {
-    0% {
-        color: transparent;
-    }
-    99.99% {
-        color: transparent;
-    }
-}
-
-@keyframes textBg {
-    100% {
-        background-size: 100% 100%;
     }
 }
