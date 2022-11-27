@@ -8,17 +8,27 @@ function Background() {
 	});
 
 	const [parallax, setParallax] = useState('0%');
-
+	
 	useEffect(() => {
+		let timer = null;
+
 		const handleMouse = (e) => {
-			setParallax(
-				((e.pageX / window.innerWidth) * 10 - 5).toFixed(2) + '%'
-			);
+			if (!timer) {
+				timer = setTimeout(() => {
+					setParallax(
+						((e.pageX / window.innerWidth) * 10 - 5).toFixed(2) + '%'
+					);
+					timer = null
+				}, 10)
+			}
 		};
 
 		window.addEventListener('mousemove', handleMouse);
 
-		return () => window.removeEventListener('mousemove', handleMouse);
+		return () => {
+			window.removeEventListener('mousemove', handleMouse);
+			timer && clearTimeout(timer);
+		}
 	}, []);
 
 	return (

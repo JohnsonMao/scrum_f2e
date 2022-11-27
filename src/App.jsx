@@ -9,7 +9,10 @@ import Footer from './components/Footer';
 import Loading from './components/Loading';
 import Entrance from './pages/Entrance';
 import ProductOwner from './pages/ProductOwner';
+import SprintPlanning from './pages/SprintPlanning';
+import SprintBacklog from './pages/SprintBacklog';
 import particlesJson from '@/assets/configs/particlesjs-config.json?url';
+import { ReactComponent as NoiseSvg } from '@images/noise.svg';
 
 function App() {
 	const particlesInit = useCallback(async (engine) => {
@@ -28,9 +31,12 @@ function App() {
 			<Routes>
 				<Route path="/Extrance" element={<Entrance />} />
 				<Route path="/ProductOwner" element={<ProductOwner />} />
+				<Route path="/SprintPlanning" element={<SprintPlanning />} />
+				<Route path="/SprintBacklog" element={<SprintBacklog />} />
 				<Route path="/" element={<Loading />} />
 			</Routes>
 			<Footer />
+			<NoiseSvg />
 		</>
 	);
 }

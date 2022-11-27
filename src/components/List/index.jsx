@@ -1,14 +1,14 @@
 import './index.scss';
 
-function List({ children, className }) {
-	const title = '產品代辦清單';
-	const subtitle = 'Product Backlog';
+function List({ children, className, title, subtitle }) {
+	const listTitle = title || '產品代辦清單';
+	const listSubtitle = subtitle || 'Product Backlog';
 
 	return (
 		<div className={`list ${className}`}>
 			<div className="list__title">
-				<h2>{title}</h2>
-				<span className="fz-s">{subtitle}</span>
+				<h2>{listTitle}</h2>
+				<span className="fz-s">{listSubtitle}</span>
 			</div>
 			<div className="list__body">{children}</div>
 			<div className="list__bg1"></div>

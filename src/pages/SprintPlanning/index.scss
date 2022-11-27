@@ -1,0 +1,437 @@
+.circle {
+    @include flex();
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin: 10px auto;
+    padding: 70px;
+    border-radius: 50%;
+    width: 40vh;
+    height: 40vh;
+    transition: 1s;
+    transform: translate(-50%, -10%);
+    pointer-events: none;
+    opacity: 0;
+
+    svg {
+        filter: drop-shadow(12px 12px 1px rgba(255, 255, 255, 0.15)) url(#noise) blur(1px);
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        height: inherit;
+        width: inherit;
+        padding: inherit;
+        border-radius: inherit;
+        backdrop-filter: blur(4px);
+        z-index: -2;
+    }
+
+    &::before {
+        z-index: -1;
+    }
+
+    .text {
+        position: absolute;
+        padding: 0 12px;
+        background: var(--bg);
+        color: var(--bg-dark);
+        font-weight: bold;
+        transform: translateY(-100%);
+        transition-duration: 0.5s;
+        transition-delay: 1s;
+        opacity: 0;
+
+        &::after {
+            @include position(absolute, 50%, 100%);
+            content: '';
+            width: 2px;
+            height: 50%;
+            background: var(--bg);
+        }
+        &::before {
+            @include position(absolute, calc(50% - 2px), 150%);
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--bg);
+        }
+    }
+    .sprint {
+        --bg: var(--text-tint);
+        top: 10%;
+        left: 16%;
+    }
+    .sprintBacklog {
+        --bg: var(--text-tint);
+        top: 10%;
+        right: 0;
+    }
+}
+
+.circle_0,
+.circle_1,
+.circle_2 {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    transition: 1s;
+    opacity: 0;
+}
+.stage_0 {
+    &.circle {
+        opacity: 1;
+        background: rgba(var(--primary), 0.3);
+    
+        &::before {
+            background: rgba(var(--primary), 0.15);
+        }
+        &::after {
+            background: var(--primary-radial);
+        }
+    }
+    .circle_0 {
+        opacity: 1;
+    }
+    .text {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.circle_0 {
+    svg {
+        position: relative;
+        bottom: -25%;
+    }
+}
+
+.stage_1,
+.stage_2 {
+    &.circle {
+        opacity: 1;
+        background: rgba(var(--role-sm), 0.3);
+        transform: translate(-10%, -65%);
+    
+        &::before {
+            background: rgba(var(--role-sm), 0.15);
+        }
+        &::after {
+            background: var(--role-sm-radial);
+        }
+    }
+}
+
+.circle_1 {
+    position: relative;
+    opacity: 1;
+
+    .ScrumMaster {
+        position: absolute;
+
+        &.po {
+            bottom: 22%;
+            right: -16%;
+            z-index: 2;
+        }
+        &.sm {
+            bottom: 0%;
+            left: 28%;
+            z-index: 3;
+        }
+        &.gg {
+            bottom: 40%;
+            left: 18%;
+            z-index: 1;
+        }
+        &.ee {
+            bottom: 20%;
+            left: -14%;
+            z-index: 2;
+        }
+    }
+}
+
+.stage_2 {
+    &.circle {
+        opacity: 1;
+        transform: translate(-100%, -65%);
+    }
+    .circle_2 {
+        @include flex();
+        opacity: 1;
+        z-index: 30;
+
+        svg {
+            width: 80%;
+        }
+
+        .point {
+            @include position(absolute, initial, 47%, 49%);
+            @include flex();
+            background: rgba(var(--primary), 0.9);
+            font-size: 44px;
+            border-radius: 50%;
+            width: 22%;
+            height: 22%;
+            line-height: 1;
+        }
+
+        .tramLimit {
+            --bg: var(--role-sm-dark);
+            top: -1%;
+            right: 25%;
+        }
+        .storyPoint {
+            --bg: var(--role-sm-dark);
+            bottom: 0%;
+            left: 26%;
+
+            &::before {
+                top: -180%;
+            }
+            &::after {
+                height: 180%;
+                top: -180%;
+            }
+        }
+    }   
+    .text {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.stage_3.circle {
+    opacity: 0;
+    transform: translate(-100%, -65%);
+
+    .circle_2 {
+        @include flex();
+    }
+    svg {
+        width: 80%;
+    }
+}
+
+.store {
+    transition: 0.5s;
+    opacity: 0;
+
+    svg {
+        position: absolute;
+        transition: 0.5s;
+        filter: url(#noise) blur(1px);
+    }
+
+    $top: 36%;
+    $left: 26%;
+    --space: 200px;
+
+    .storeSpine {
+        top: 25%;
+        left: $left;
+        width: 54px;
+    }
+    .storeCover {
+        width: 184px;
+        top: 36%;
+        left: $left + 1%;
+        transition-delay: 0.4s;
+
+        &::after {
+            @include flex();
+            content: attr(data-number);
+            position: absolute;
+            background: rgba(var(--primary), 0.9);
+            font-size: 44px;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            line-height: 1;
+            opacity: 0;
+            transition: 0.3s;
+            filter: url(#noise) blur(0.8px);
+        }
+
+        &_1::after {
+            top: calc($top + 56px);
+            left: calc($left + 88px);
+            transition-delay: 0.4s;
+        }
+        &_2::after {
+            top: calc($top + 56px);
+            left: calc($left + 88px + (var(--space)));
+            transition-delay: 0.8s;
+        }
+        &_3::after {
+            top: calc($top + 56px);
+            left: calc($left + 88px + (var(--space) * 2));
+            transition-delay: 1.2s;
+        }
+        &_4::after {
+            top: calc($top + 56px + (var(--space)));
+            left: calc($left + 88px + (var(--space) * -0.5));
+            transition-delay: 1.6s;
+        }
+        &_5::after {
+            top: calc($top + 56px + (var(--space)));
+            left: calc($left + 88px + (var(--space) * 0.5));
+            transition-delay: 2s;
+        }
+        &_6::after {
+            top: calc($top + 56px + (var(--space)));
+            left: calc($left + 88px + (var(--space) * 1.5));
+            background: rgba(var(--role-team2), 0.9);
+            transition-delay: 2.4s;
+        }
+        &_7::after {
+            top: calc($top + 56px + (var(--space)));
+            left: calc($left + 88px + (var(--space)) * 2.5);
+            background: rgba(red, 0.9);
+            transition-delay: 2.8s;
+        }
+    }
+    .clock {
+        width: 144px;
+        top: 32%;
+        left: calc($left + 1% + (var(--space) * -1));
+
+        path {
+            stroke: var(--role-team1-default);
+            fill: var(--bg-dark);
+        }
+
+        &_item {
+            width: 74px;
+        }
+    }
+    .show.storeCover {
+        &_2 {
+            top: $top;
+            left: calc($left + 1% + (var(--space)));
+            transition-delay: 0.8s;
+        }
+        &_3 {
+            top: $top;
+            left: calc($left + 1% + (var(--space) * 2));
+            transition-delay: 1.2s;
+        }
+        &_4 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space) * -0.5));
+            transition-delay: 1.6s;
+        }
+        &_5 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space) * 0.5));
+            transition-delay: 2s;
+        }
+        &_6 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space) * 1.5));
+            transition-delay: 2.4s;
+        }
+        &_7 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space)) * 2.5);
+            transition-delay: 2.8s;
+        }
+    }
+    .clock_item {
+        opacity: 0;
+        transform: translate(175%, -30%);
+
+        path {
+            stroke: var(--role-team1-default);
+            fill: var(--bg-dark);
+            stroke-width: 1.5;
+        }
+
+        &_1 {
+            top: $top;
+            left: calc($left + 1%);
+            transition-delay: 0.4s;
+        }
+        &_2 {
+            top: $top;
+            left: calc($left + 1% + (var(--space)));
+            transition-delay: 0.8s;
+        }
+        &_3 {
+            top: $top;
+            left: calc($left + 1% + (var(--space) * 2));
+            transition-delay: 1.2s;
+        }
+        &_4 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space) * -0.5));
+            transition-delay: 1.6s;
+        }
+        &_5 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space) * 0.5));
+            transition-delay: 2s;
+        }
+        &_6 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space) * 1.5));
+            transition-delay: 2.4s;
+
+            path {
+                stroke: var(--role-team2-default);
+                transition-delay: 2.4s;
+            }
+        }
+        &_7 {
+            top: calc($top + (var(--space)));
+            left: calc($left + 1% + (var(--space)) * 2.35);
+            width: 86px;
+            transition-delay: 2.8s;
+
+            path {
+                stroke: var(--danger);
+                stroke-width: 2;
+                transition-delay: 2.8s;
+            }
+        }
+    }
+
+    &.stage_3 {
+        opacity: 1;
+        .storeSpine {
+            transform: translate(30%, 50%);
+        }
+    }
+    &.stage_4 {
+        opacity: 1;
+
+        .clock_item {
+            opacity: 1;
+        }
+
+        .clock {
+            opacity: 0;
+        }
+
+        .storeSpine {
+            opacity: 0;
+            transform: translate(30%, 50%);
+        }
+        .storeCover::after {
+            opacity: 1;
+        }
+
+        .storeCover_6 path {
+            stroke: var(--role-team2-default);
+        }
+        .storeCover_7 path {
+            stroke: var(--danger);
+        }
+    }
+}

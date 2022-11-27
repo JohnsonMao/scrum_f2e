@@ -5,7 +5,9 @@
     border-radius: 40px;
     flex: 1;
     transform: scale(0.01);
-    transform-origin: left;
+    transform-origin: right;
+    pointer-events: none;
+    z-index: 30;
 
     &.large {
         padding: 100px 84px;
@@ -17,11 +19,10 @@
     }
 
     &.po {
-        --ani-bg: var(--primary-default);
-
         background-image: var(--role-po-linear);
         border: 2px solid var(--primary-default);
         box-shadow: var(--role-po-box-shadow);
+        transform-origin: left;
 
         .chatBox__name {
             background: var(--primary-default);
@@ -35,6 +36,66 @@
         .chatBox__next path {
             stroke: var(--primary-default);
             fill: var(--primary-default);
+        }
+    }
+
+    &.sm {
+        background-image: var(--role-sm-linear);
+        border: 2px solid var(--role-sm-default);
+        box-shadow: var(--role-po-box-shadow);
+
+        .chatBox__name {
+            background: var(--role-sm-default);
+            color: var(--bg-dark);
+
+            &::before {
+                background: var(--role-sm-dark);
+                box-shadow: var(--role-po-box-shadow);
+            }
+        }
+        .chatBox__next path {
+            stroke: var(--role-sm-default);
+            fill: var(--role-sm-default);
+        }
+    }
+
+    &.ee {
+        background-image: var(--role-team1-linear);
+        border: 2px solid var(--role-team1-default);
+        box-shadow: var(--role-po-box-shadow);
+
+        .chatBox__name {
+            background: var(--role-team1-default);
+            color: var(--bg-dark);
+
+            &::before {
+                background: var(--role-team-dark);
+                box-shadow: var(--role-po-box-shadow);
+            }
+        }
+        .chatBox__next path {
+            stroke: var(--role-team1-default);
+            fill: var(--role-team1-default);
+        }
+    }
+
+    &.gg {
+        background-image: var(--role-team2-linear);
+        border: 2px solid var(--role-team2-default);
+        box-shadow: var(--role-po-box-shadow);
+
+        .chatBox__name {
+            background: var(--role-team2-default);
+            color: var(--bg-dark);
+
+            &::before {
+                background: var(--role-team-dark);
+                box-shadow: var(--role-po-box-shadow);
+            }
+        }
+        .chatBox__next path {
+            stroke: var(--role-team2-default);
+            fill: var(--role-team2-default);
         }
     }
 

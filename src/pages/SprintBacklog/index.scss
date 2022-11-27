@@ -1,0 +1,53 @@
+.sb {
+    &_lists {
+        @include flex(flex-start, flex-start);
+        gap: 24px;
+        opacity: 0;
+        transition: 0.5s;
+
+        ul {
+            @include flex(center, stretch, column);
+            margin: 24px 32px;
+            min-height: 100px;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .backlog__item,
+        .sprint__item {
+            @include flex(space-between, center);
+            padding: 10px 20px;
+            border: 2px dashed rgba(#fff, 0.5);
+            border-radius: 20px;
+            background: rgba(var(--dark), 0.6);
+            gap: 8px;
+
+            span{
+                --n-bg: var(--primary-default);
+
+                &:first-child {
+                    @include flex();
+                    background: var(--n-bg);
+                    border-radius: 50%;
+                    height: 34px;
+                    flex: 0 0 34px;
+                }
+                &:last-child {
+                    flex: 9;
+                }
+            }
+        }
+        .sprint__item span {
+            --n-bg: var(--role-team2-default);
+        }
+    }
+}
+.eeGoOut {
+    display: none;
+}
+
+.stage_1 {
+    &.sb_lists {
+        opacity: 1;
+    }
+}

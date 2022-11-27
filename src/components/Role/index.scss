@@ -1,6 +1,10 @@
 .role {
     position: relative;
-    flex: 0 0 20%;
+    z-index: 29;
+    flex: 0 0 10%;
+    width: 10%;
+    min-width: 180px;
+    pointer-events: none;
 
     &__frame {
         overflow: hidden;
@@ -12,7 +16,7 @@
             height: 140%;
             background-size: contain;
             background-repeat: no-repeat;
-            animation: fadeIn 1s 0.4s forwards;
+            transition-duration: 1s;
             opacity: 0;
             z-index: 2;
         }
@@ -22,7 +26,6 @@
         position: relative;
         width: 100%;
         object-fit: cover;
-        // animation: show 0.5s 0.3s forwards ease-in;
         transform: translateY(-100%) scale(0.5, 0);
         transform-origin: top;
         z-index: 3;
@@ -35,9 +38,34 @@
         height: 100%;
         background: var(--bg-dark);
         border-radius: 50%;
-        transform: rotateX(75deg);
+        transform: rotateX(75deg) scale(0);
+        transition-duration: 0.5s;
+        transition-delay: 0.5s;
         z-index: 1;
-        animation: hole 0.5s;
+    }
+
+    &.bottomHole {
+        .role__frame::before {
+            bottom: -4px;
+        }
+        &::after {
+            top: 36%;
+        }
+        img {
+            transform-origin: bottom;
+            transform: translateY(100%) scale(0.5, 0);
+        }
+    }
+
+    &.active {
+        .role__frame::before {
+            transition-delay: 0.4s;
+            opacity: 1;
+        }
+        &::after {
+            transition-delay: 0s;
+            transform: rotateX(75deg) scale(1);
+        }
     }
 }
 
@@ -52,31 +80,4 @@
 }
 .ee .role__frame::before {
     background-image: url(../../assets/images/role_ee_light.png);
-}
-
-@keyframes hole {
-    0% {
-        transform: rotateX(75deg) scale(0);
-    }
-}
-
-@keyframes show {
-    85% {
-        transform: translateY(5%) scale(0.9, 1.1);
-    }
-    92% {
-        transform: translateY(5%) scale(1.05, 0.95);
-    }
-    100% {
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }

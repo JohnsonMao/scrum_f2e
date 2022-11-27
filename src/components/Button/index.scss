@@ -36,4 +36,9 @@
             transform: translateY(2.5%);
         }
     }
+
+    &.disabled {
+        filter: grayscale(1);
+        pointer-events: none !important;
+    }
 }

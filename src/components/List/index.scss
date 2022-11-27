@@ -3,6 +3,7 @@
     position: relative;
     width: max-content;
     border-radius: 20px;
+    max-width: 36vw;
 
     &.primary {
         .list__title {
@@ -29,7 +30,7 @@
 
     &.secondary {
         .list__title {
-            background: var(--role-team1-defalut);
+            background: var(--role-team1-default);
 
             span {
                 color: var(--role-team-dark);
@@ -52,7 +53,8 @@
 
     &__title {
         @include flex(center, center, column);
-        padding: 15px 150px;
+        padding: 15px 0;
+        width: 100%;
         border-radius: 20px 20px 0 0;
 
         h2 {

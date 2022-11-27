@@ -1,4 +1,7 @@
-
+.bgRoot {
+    @include position(fixed, 0, 0, 0, 0);
+    z-index: -10;
+}
 .bgVillage {
     position: absolute;
     top: 0;

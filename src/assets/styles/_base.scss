@@ -4,6 +4,10 @@
         url('./fonts/GenJyuuGothic-P-Medium.woff') format('woff');
 }
 
+* {
+    user-select: none;
+}
+
 body {
     font-family: GenJyuuGothic-P, sans-serif;
     font-size: var(--fz-base);
@@ -13,6 +17,7 @@ body {
     background: var(--bg-dark);
     color: var(--text-default);
     overflow: hidden;
+    overflow-y: auto;
 }
 
 h2 {
@@ -34,6 +39,10 @@ button {
     cursor: pointer;
 }
 
+svg {
+    pointer-events: none;
+}
+
 .b {
     font-weight: bold;
 }
@@ -48,4 +57,30 @@ button {
 
 .container {
     padding: 0 32px;
+}
+
+.fixedRB {
+    @include position(fixed, initial, initial, 24px, 48px);
+}
+.fixedRT {
+    @include position(fixed, initial, 24px, 24px);
+}
+.fixedLB {
+    @include position(fixed, 24px, initial, initial, 48px);
+}
+.fixedCenter {
+    @include position(fixed, 20%, 40%);
+    width: 50%;
+}
+.roleChat {
+    padding: 20px;
+
+    &__chat {
+        @include flex(center, flex-start);
+        gap: 32px;
+    }
+}
+
+.rotate180 {
+    transform: rotate(180deg);
 }

@@ -5,7 +5,7 @@
     --primary-deepdark: #005656;
     --primary-radial: radial-gradient(
         50% 50% at 50% 50%,
-        --primary-default,
+        var(--primary-default),
         transparent
     );
     --primary-linear: linear-gradient(
@@ -20,7 +20,7 @@
     --secondary-default: rgb(var(--secondary));
     --secondary-radial: radial-gradient(
         50% 50% at 50% 50%,
-        --secondary-default,
+        var(--secondary-default),
         transparent
     );
 
@@ -38,6 +38,11 @@
     --role-sm-default: rgb(var(--role-sm));
     --role-sm-dark: #4C0071;
     --role-sm-tint: #FF00F5;
+    --role-sm-radial: radial-gradient(
+        50% 50% at 50% 50%,
+        var(--role-sm-default),
+        transparent
+    );
     --role-sm-linear: linear-gradient(
         transparent,
         rgba(var(--role-sm), 0.05) 60%,
@@ -49,7 +54,7 @@
         0 0 60px rgba(var(--role-sm), 0.1);
 
     --role-team1: 255, 199, 0;
-    --role-team1-defalut: rgb(var(--role-team1));
+    --role-team1-default: rgb(var(--role-team1));
     --role-team1-linear: linear-gradient(
         transparent,
         rgba(var(--role-team1), 0.05) 60%,
