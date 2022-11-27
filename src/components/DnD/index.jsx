@@ -50,8 +50,7 @@ export const DropChild = React.forwardRef(
 export const Drag = ({ children, ...props }) => {
 	return (
 		<Draggable {...props}>
-			{(provided, s) => {
-				console.log(s)
+			{(provided) => {
 				if (React.isValidElement(children)) {
 					return React.cloneElement(children, {
 						...provided.draggableProps,

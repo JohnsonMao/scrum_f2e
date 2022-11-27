@@ -9,7 +9,7 @@ function Loading() {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			navigate('Extrance')
-		}, 1000);
+		}, 3000);
 		return () => clearTimeout(timer);
 	}, [navigate])
 

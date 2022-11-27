@@ -50,4 +50,42 @@
     &.sb_lists {
         opacity: 1;
     }
+    &.danger {
+        .sprint__item {
+            border-color: red;
+            border-width: 3px;
+        }
+        .process::after {
+            background: red;
+        }
+    }
+    .process {
+        position: relative;
+        background: var(--role-team-dark);
+        height: 20px;
+        border-radius: 10px;
+        margin: 24px 32px;
+        min-width: 354px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            background: var(--role-team1-default);
+            border: 4px solid var(--role-team-dark);
+            border-radius: inherit;
+            height: 12px;
+            width: 100%;
+            transform-origin: left;
+            transform: scaleX(var(--score));
+        }
+        &::before {
+            content: attr(data-score);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 14px;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+    }
 }

@@ -36,6 +36,9 @@ export default function ProductOwner() {
 		{ id: 4, number: 8, content: '前台職缺列表、應徵' }
 	]);
 	const [sprint, setSprint] = useState([]);
+	const [score, setScore] = useState(0);
+	const [danger, setDanger] = useState(false);
+	const MAX = 20;
 
 	useEffect(() => {
 		if (stage === 0) {
@@ -69,32 +72,43 @@ export default function ProductOwner() {
 		}
 	};
 
-	const handleDragEnd = ({ source, destination, type }) => {
+	const handleDragEnd = ({ source, destination }) => {
 		if (!destination) return;
 		const isSelf = source.droppableId === destination.droppableId;
 		const isBacklog = source.droppableId === 'backlog';
-		const item = isBacklog ? backlog[source.index] : sprint[source.index];
-        const changeSelf = (pre) => {
-            const result = pre.filter((_, i) => i !== source.index);
-            result.splice(destination.index, 0, item);
-            return result;
-        }
-        const addItemSelf = (pre) => {
-            const result = [...pre];
-            result.splice(destination.index, 0, item);
-            return result;
-        }
-        const filterSelf = () => backlog.filter((_, i) => i !== source.index);
+		const selfItem = isBacklog
+			? backlog[source.index]
+			: sprint[source.index];
+		const changeSelf = (pre) => {
+			const result = pre.filter((_, i) => i !== source.index);
+			result.splice(destination.index, 0, selfItem);
+			return result;
+		};
+		const addItemSelf = (pre) => {
+			const result = [...pre];
+			result.splice(destination.index, 0, selfItem);
+			return result;
+		};
+		const filterSelf = (items) => () =>
+			items.filter((_, i) => i !== source.index);
 
 		if (isSelf) {
-            isBacklog ? setBacklog(changeSelf) : setSprint(changeSelf);
-        } else if (isBacklog) {
+			isBacklog ? setBacklog(changeSelf) : setSprint(changeSelf);
+		} else if (isBacklog) {
+			const newScore = score + selfItem.number;
+
+			if (newScore > MAX) setDanger(true);
+			setScore(newScore);
 			setSprint(addItemSelf);
-			setBacklog(filterSelf);
+			setBacklog(filterSelf(backlog));
 		} else {
+			const newScore = score - selfItem.number;
+
+			if (newScore <= MAX) setDanger(false);
+			setScore(newScore);
 			setBacklog(addItemSelf);
-			setSprint(filterSelf);
-        }
+			setSprint(filterSelf(sprint));
+		}
 	};
 
 	return (
@@ -154,7 +168,9 @@ export default function ProductOwner() {
 						</Drop>
 					</List>
 					<List
-						className={`secondary sb_list stage_${stage}`}
+						className={`secondary sb_list stage_${stage} ${
+							danger ? 'danger' : ''
+						}`}
 						title="開發Ａ組的短衝待辦清單"
 						subtitle="Sprint Backlog"
 					>
@@ -179,6 +195,13 @@ export default function ProductOwner() {
 								))}
 							</DropChild>
 						</Drop>
+						<div
+							className="process"
+							data-score={`${score}/${MAX} (5人)`}
+							style={{
+								'--score': Math.min(score / MAX, 1).toFixed(2)
+							}}
+						></div>
 					</List>
 				</DragDropContext>
 			</div>

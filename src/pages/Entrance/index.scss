@@ -146,7 +146,6 @@
         --tint-color: var(--role-team2-default);
         --dark-color: var(--danger);
         @include position(absolute, initial, 24%, 16%);
-        animation-delay: random(30) / -10 s;
         animation-delay: -5s;
     }
 }
