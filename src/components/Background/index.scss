@@ -1,3 +1,8 @@
+.no-bg .bgRoot {
+    display: none;
+    visibility: hidden;
+}
+
 .bgRoot {
     @include position(fixed, 0, 0, 0, 0);
     z-index: -10;

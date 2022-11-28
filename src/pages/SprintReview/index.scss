@@ -1,4 +1,52 @@
-.sb {
+.review {
+    &_intro {
+        @include flex(space-between, flex-start, row);
+        margin: 0 2vw;
+        margin-top: 33vh;
+        gap: 2vw;
+
+        &__item {
+            flex: 0 0 calc(33.33% - 2vw);
+            transition-duration: 0.5s;
+            transform: translateY(200px);
+            opacity: 0;
+
+            &:nth-child(2) {
+                transition-delay: 0.25s;
+            }
+            &:nth-child(3) {
+                transition-delay: 0.5s;
+            }
+        }
+
+        &__content{
+            margin: 0 8px;
+
+            &_list {
+                margin-left: 40px;
+                list-style: disc;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .header {
+            border: 2px solid var(--role-team1-default);
+            border-radius: 20px;
+            background: rgba(var(--dark), 0.6);
+
+            h2 {
+                text-align: center;
+                color: var(--role-team1-default);
+            }
+            h3 {
+                text-align: center;
+                color: var(--primary-default);
+            }
+        }
+    }
     &_lists {
         @include flex(flex-start, flex-start);
         margin-top: 33vh;
@@ -43,28 +91,47 @@
             --n-bg: var(--role-team2-default);
         }
     }
-    &_0_button,
-    &_1_button {
+    &_1_button,
+    &_3_button {
         transition: 0.5s;
     }
-    &_1_button {
+    &_1_button,
+    &_3_button {
         pointer-events: none;
         opacity: 0;
     }
 }
-.eeGoOut {
-    display: none;
+.sprintProcess {
+    @include position(absolute, 36px, initial, initial, 24px);
+    height: 67vh;
+    width: 70vw;
+}
+
+.stage_1,
+.stage_2 {
+    .review {
+        &_intro {
+            &__item {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    }
+}
+.stage_2.review_1_button {
+    pointer-events: auto;
+    opacity: 1;
 }
 
 .stage_error,
 .stage_check,
-.stage_1 {
-    &.sb_lists,
-    &.sb_1_button {
+.stage_3 {
+    &.review_lists,
+    &.review_3_button {
         pointer-events: auto;
         opacity: 1;
     }
-    &.sb_0_button {
+    &.review_1_button {
         pointer-events: none;
         opacity: 0;
     }
@@ -108,7 +175,7 @@
     }
 }
 
-.stage_2.sb_0_button {
+.stage_4.review_3_button {
     pointer-events: none;
     opacity: 0;
 }

@@ -41,24 +41,16 @@
             background: linear-gradient(90deg, transparent, var(--primary-default));
             width: 100%;
             height: inherit;
-            animation: loading 3s infinite ease-out;
+            animation: loading 1s infinite linear;
+            transform: scaleX(var(--loading-percent));
+            transition: 0.4s;
             transform-origin: left;
         }
     }
 }
 
 @keyframes loading {
-    0% {
-        transform: scaleX(0);
-    }
     50% {
-        transform: scaleX(0.6);
         opacity: 0.5;
-    }
-    70% {
-        transform: scaleX(0.9);
-    }
-    100% {
-        transform: scaleX(1);
     }
 }

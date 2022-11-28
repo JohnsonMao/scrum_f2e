@@ -406,6 +406,7 @@
         opacity: 1;
         .storeSpine {
             transform: translate(30%, 50%);
+            opacity: 0;
         }
     }
     &.stage_4 {
@@ -429,9 +430,11 @@
 
         .storeCover_6 path {
             stroke: var(--role-team2-default);
+            transition-delay: 2.4s;
         }
         .storeCover_7 path {
             stroke: var(--danger);
+            transition-delay: 2.8s;
         }
     }
 }

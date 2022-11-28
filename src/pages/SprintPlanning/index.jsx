@@ -113,12 +113,12 @@ export default function Entrance() {
 				eeRoleRef.current.leave.current();
 				ggRoleRef.current.leave.current();
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/SprintBacklog');
                 }, 500)
                 break
 			default:
 		}
-	}, [stage, storeId, storeCoverId, clockId]);
+	}, [stage, storeId, storeCoverId, clockId, navigate]);
 
 	useEffect(() => {
 		const handleClick = () => {

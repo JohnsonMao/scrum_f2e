@@ -103,7 +103,7 @@ export default function ProductOwner() {
 	return (
 		<>
 			<div
-				className={['po-mask', mask ? 'show' : '', stage].join(' ')}
+				className={['mask', mask ? 'show' : '', stage].join(' ')}
 				onClick={closeMask}
 			>
 				<span className="b">點擊畫面任意處繼續</span>

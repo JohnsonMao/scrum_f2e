@@ -11,8 +11,11 @@ import Entrance from './pages/Entrance';
 import ProductOwner from './pages/ProductOwner';
 import SprintPlanning from './pages/SprintPlanning';
 import SprintBacklog from './pages/SprintBacklog';
+import SprintReview from './pages/SprintReview';
+import SprintRetro from './pages/SprintRetro';
+import Finish from './pages/Finish';
 import particlesJson from '@/assets/configs/particlesjs-config.json?url';
-import { ReactComponent as NoiseSvg } from '@images/noise.svg';
+import { ReactComponent as NoiseSvg } from '@images/filter_noise.svg';
 
 function App() {
 	const particlesInit = useCallback(async (engine) => {
@@ -33,6 +36,9 @@ function App() {
 				<Route path="/ProductOwner" element={<ProductOwner />} />
 				<Route path="/SprintPlanning" element={<SprintPlanning />} />
 				<Route path="/SprintBacklog" element={<SprintBacklog />} />
+				<Route path="/SprintReview" element={<SprintReview />} />
+				<Route path="/SprintRetro" element={<SprintRetro />} />
+				<Route path="/Finish" element={<Finish />} />
 				<Route path="/" element={<Loading />} />
 			</Routes>
 			<Footer />

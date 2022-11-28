@@ -53,10 +53,8 @@ export default function ProductOwner() {
 
 	const closeMask = () => {
 		setMask(false);
-		ggChatBoxRef.current.leave.current();
-		ggRoleRef.current.leave.current();
 		setTimeout(() => {
-			navigate('/SprintReview');
+			navigate('/SprintPlanning');
 		}, 1000);
 	};
 
