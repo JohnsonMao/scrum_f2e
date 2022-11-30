@@ -44,7 +44,6 @@
         @include position(fixed, 50%, 50%);
         @include flex(center, center, column);
         transform: translate(-50%, -50%);
-        z-index: -3;
         gap: 32px;
 
         button {
