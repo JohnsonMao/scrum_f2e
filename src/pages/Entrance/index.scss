@@ -25,6 +25,7 @@
         img {
             width: 100%;
             object-fit: contain;
+            animation: heart 0.6s infinite alternate-reverse ease-out;
         }
 
         h2 {
@@ -43,7 +44,7 @@
         @include position(fixed, 50%, 50%);
         @include flex(center, center, column);
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: -3;
         gap: 32px;
 
         button {
@@ -57,44 +58,44 @@
     &_l_2 {
         height: 100%;
         bottom: 0;
-        z-index: 2;
+        z-index: -4;
     }
     &_b_2 {
         width: 62%;
         left: 12%;
         bottom: 0;
-        z-index: 1;
+        z-index: -5;
     }
     &_r_2 {
         height: 100%;
         right: 0;
-        z-index: 2;
+        z-index: -4;
     }
     &_t_2 {
         width: 80%;
         left: 12%;
-        z-index: 1;
+        z-index: -5;
     }
     &_lb_1 {
         width: 60%;
         bottom: 0;
-        z-index: 4;
+        z-index: -2;
     }
     &_lt_1 {
         height: 70%;
         left: 0;
-        z-index: 4;
+        z-index: -2;
     }
     &_rb_1 {
         height: 70%;
         right: 0;
         bottom: 0;
-        z-index: 4;
+        z-index: -2;
     }
     &_t_1 {
         width: 50%;
         right: 18%;
-        z-index: 4;
+        z-index: -2;
     }
 }
 
@@ -108,21 +109,25 @@
         0 0 24px 8px var(--dark-color),
         0 0 40px 24px var(--dark-color);
     z-index: 11;
+    animation: swing 10s infinite;
 }
 
 .l {
     &_sm {
+        --direction: -1;
         --tint-color: var(--role-sm-tint);
         --dark-color: var(--role-sm-dark);
         @include position(absolute, 16%, 25%);
     }
     &_ee {
-        --tint-color: var(--role-team1-defalut);
-        --dark-color: var(--role-team1-defalut);
+        --direction: -1;
+        --tint-color: var(--role-team1-default);
+        --dark-color: var(--role-team1-default);
         @include position(absolute, 13%, 48%);
         animation-delay: -1s;
     }
     &_gg {
+        --direction: -1;
         --tint-color: var(--role-team2-default);
         --dark-color: var(--danger);
         @include position(absolute, 10%, 34%);
@@ -131,18 +136,21 @@
 }
 .r {
     &_sm {
+        --direction: 1;
         --tint-color: var(--role-sm-tint);
         --dark-color: var(--role-sm-dark);
         @include position(absolute, initial, 30%, 6%);
         animation-delay: -3s;
     }
     &_ee {
-        --tint-color: var(--role-team1-defalut);
-        --dark-color: var(--role-team1-defalut);
+        --direction: 1;
+        --tint-color: var(--role-team1-default);
+        --dark-color: var(--role-team1-default);
         @include position(absolute, initial, 42%, 12%);
         animation-delay: -4s;
     }
     &_gg {
+        --direction: 1;
         --tint-color: var(--role-team2-default);
         --dark-color: var(--danger);
         @include position(absolute, initial, 24%, 16%);
@@ -212,5 +220,31 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(0deg) scale(0.8) translate(calc(-200px * var(--direction)), 200px);
+        opacity: 0;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2) translate(0, 0);
+        opacity: 0.99;
+    }
+    100% {
+        transform: rotate(360deg) scale(0.8) translate(calc(-100px * var(--direction)), 200px);
+        opacity: 0;
+    }
+}
+
+@keyframes heart {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    100% {
+        transform: scale(1.05);
+        filter: brightness(1.1);
     }
 }

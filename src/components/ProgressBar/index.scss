@@ -2,6 +2,7 @@
     @include position(fixed, 0, 0, 0);
     background: var(--primary-dark);
     height: 12px;
+    z-index: -6;
     
     &::after {
         @include position(absolute);
@@ -13,4 +14,8 @@
         transform-origin: left;
         transform: scaleX(var(--percent));
     }
+}
+
+.no-bg .progress__bar {
+    display: none;
 }

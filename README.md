@@ -43,3 +43,10 @@ git clone https://github.com/JohnsonMao/scrum_f2e.git
 npm install
 npm start
 ```
+
+### 心得
+常常為了細節拖到完成速度，一不小心 scss 寫得很髒，Svg 真好玩，又有新想法，想重構
+
+### 重構清單
+- [] 使用 Linaria 重構樣式，把樣式與畫面狀態分離
+- [] 把動畫效果狀態提升，改成由 props 來產生動畫，而不是 ref 直接命令
