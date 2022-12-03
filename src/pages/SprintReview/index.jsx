@@ -76,6 +76,7 @@ export default function ProductOwner() {
 	const [sprint, setSprint] = useState([]);
 	const [score, setScore] = useState(0);
 	const [danger, setDanger] = useState(false);
+	const [isClickTime, setIsClickTime] = useState(false);
 	const MAX = 20;
 
 	const handleStage = useCallback((s) => {
@@ -105,13 +106,9 @@ export default function ProductOwner() {
 	useEffect(() => {
 		if (stage === 0) {
 			eeChatBoxRef.current.join.current();
-			eeRoleRef.current.join.current({
-				complete: () => {
-					handleStage(1);
-				}
-			});
+			eeRoleRef.current.join.current();
 		}
-	}, [stage, handleStage]);
+	}, [stage]);
 
 	const closeMask = () => {
 		setMask(false);

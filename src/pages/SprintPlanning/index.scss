@@ -132,25 +132,26 @@
 
     .ScrumMaster {
         position: absolute;
+        min-width: 50%;
 
         &.po {
-            bottom: 22%;
-            right: -16%;
+            bottom: 28%;
+            right: -14%;
             z-index: 2;
         }
         &.sm {
-            bottom: 0%;
-            left: 28%;
+            bottom: 8%;
+            left: 36%;
             z-index: 3;
         }
         &.gg {
-            bottom: 40%;
-            left: 18%;
+            bottom: 38%;
+            left: 16%;
             z-index: 1;
         }
         &.ee {
-            bottom: 20%;
-            left: -14%;
+            bottom: 22%;
+            left: -10%;
             z-index: 2;
         }
     }

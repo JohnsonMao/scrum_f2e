@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd';
 import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
 import Button from '@/components/Button';
 import List from '@/components/List';
+import Mask from '@/components/Mask';
 import { Drop, DropChild, Drag } from '@/components/DnD';
 import { ReactComponent as JiraSvg } from '@images/jira.svg';
 import { ReactComponent as HandSvg } from '@images/hand.svg';
 import './index.scss';
-import { useNavigate } from 'react-router-dom';
 
 export default function ProductOwner() {
 	const chatBoxRef = useRef(null);
@@ -48,12 +49,12 @@ export default function ProductOwner() {
 				setDemo(true);
 				setTimeout(() => {
 					setMask(true);
-				}, 2000)
+				}, 2000);
 				break;
 			case 'po_5':
 				setTimeout(() => {
 					setMask(true);
-				}, 1000)
+				}, 1000);
 				break;
 			default:
 		}
@@ -72,7 +73,7 @@ export default function ProductOwner() {
 				roleRef.current.leave.current();
 				setTimeout(() => {
 					navigate('/SprintPlanning');
-				}, 1000)
+				}, 1000);
 				break;
 			default:
 				handleStage('po_2');
@@ -108,6 +109,7 @@ export default function ProductOwner() {
 			>
 				<span className="b">點擊畫面任意處繼續</span>
 			</div>
+			<Mask show={true} text="點擊畫面任意處繼續" />
 			<div className="roleChat">
 				<div className="roleChat__chat">
 					<Role ref={roleRef} role="po" />
@@ -159,7 +161,7 @@ export default function ProductOwner() {
 									draggableId={`backlog_${item.id}`}
 									index={index}
 								>
-									<li className='backlog__item'>
+									<li className="backlog__item">
 										<span>{item.content}</span>
 									</li>
 								</Drag>
