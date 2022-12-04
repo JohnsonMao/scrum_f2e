@@ -1,8 +1,0 @@
-.footer {
-    @include position(fixed, 0, initial, 0, 0);
-    @include flex();
-    font-size: 14px;
-    color: var(--primary-dark);
-    background-color: rgba(var(--dark), 80%);
-    z-index: 10;
-}

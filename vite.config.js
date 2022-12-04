@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgrPlugin from 'vite-plugin-svgr';
-import autoprefixer from 'autoprefixer';
 import linaria from '@linaria/vite';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
@@ -34,20 +33,6 @@ export default defineConfig(({ mode }) => {
 			}
 		},
 		css: {
-			postcss: {
-				plugins: [
-					autoprefixer({
-						overrideBrowserslist: [
-							'Android 4.1',
-							'IOS 7.1',
-							'Chrome > 40',
-							'ff > 31',
-							'ie 11',
-							'> 1%'
-						]
-					})
-				]
-			},
 			preprocessorOptions: {
 				scss: {
 					additionalData: '@import "@/assets/styles/inject.scss";'
