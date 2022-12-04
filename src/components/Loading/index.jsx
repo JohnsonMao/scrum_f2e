@@ -26,6 +26,7 @@ function Loading() {
 	useEffect(() => {
 		if (isFirst.current) {
 			isFirst.current = false;
+			document.body.classList.add('no-bg');
 
 			preloadImages(
 				imgList,
@@ -33,7 +34,8 @@ function Loading() {
 				() => {
 					setTimeout(() => {
 						next();
-						// navigate('Extrance');
+						document.body.classList.remove('no-bg');
+						navigate('Extrance');
 					}, 600);
 				}
 			);
