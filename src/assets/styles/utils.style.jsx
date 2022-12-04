@@ -13,3 +13,11 @@ export const fixedFullScreen = css`
     right: 0;
     bottom: 0;
 `
+
+export const rotate180 = css`
+    transform: rotate(180deg);
+`
+
+export const bold = css`
+    font-weight: bold;
+`

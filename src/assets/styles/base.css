@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'GenJyuuGothic-P';
+    src: url('./fonts/GenJyuuGothic-P-Medium.woff2') format('woff2'),
+        url('./fonts/GenJyuuGothic-P-Medium.woff') format('woff');
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+	vertical-align: baseline;
+}
+
+html {
+    color-scheme: dark light;
+}
+
+body {
+    font-family: GenJyuuGothic-P, sans-serif;
+    font-size: 20px;
+    min-height: 100vh;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    background: var(--bg-dark);
+    color: var(--text-default);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+img, picture, svg, video {
+    display: block;
+    max-width: 100%;
+}
+
+h2 {
+    line-height: 1.5;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+button {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+svg {
+    pointer-events: none;
+}
+
+.jira {
+    margin-bottom: -6px;
+    width: 90px;
+    height: auto;
+}
+
+.confluence {
+    margin-bottom: -6px;
+    width: 200px;
+    height: auto;
+}

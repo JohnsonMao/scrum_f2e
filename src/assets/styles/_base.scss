@@ -55,10 +55,6 @@ svg {
     font-size: var(--fz-s);
 }
 
-.container {
-    padding: 0 32px;
-}
-
 .fixedRB {
     @include position(fixed, initial, initial, 24px, 48px);
 }
