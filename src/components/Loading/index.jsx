@@ -35,12 +35,12 @@ function Loading() {
 					setTimeout(() => {
 						next();
 						document.body.classList.remove('no-bg');
-						navigate('Extrance');
+						navigate('/Entrance');
 					}, 600);
 				}
 			);
 		}
-	}, [navigate]);
+	}, [navigate, next]);
 
 	return (
 		<LoadingStyle className={cx(flexCenter)}>

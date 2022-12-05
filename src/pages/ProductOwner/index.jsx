@@ -109,7 +109,7 @@ export default function ProductOwner() {
 			>
 				<span className="b">點擊畫面任意處繼續</span>
 			</div>
-			<Mask show={true} text="點擊畫面任意處繼續" />
+			{/* <Mask show={true} text="點擊畫面任意處繼續" /> */}
 			<div className="roleChat">
 				<div className="roleChat__chat">
 					<Role ref={roleRef} role="po" />
