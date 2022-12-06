@@ -1,5 +1,5 @@
 import { createHashRouter } from 'react-router-dom';
-import Loading from '@/components/Loading';
+import Loading from '@/pages/Loading';
 import Entrance from '@/pages/Entrance';
 import ProductOwner from '@/pages/ProductOwner';
 import SprintPlanning from '@/pages/SprintPlanning';

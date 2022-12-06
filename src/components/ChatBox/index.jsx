@@ -5,10 +5,11 @@ import React, {
 	useRef
 } from 'react';
 import dynamics from 'dynamics.js';
-import { ReactComponent as TriangleSvg } from '@images/triangle.svg';
+import { color } from '@styles/setting.style.jsx';
+import { ChatBoxStyle, NextArrow } from './ChatBox.style';
 import './index.scss';
 
-function CheckBox({ text, name, className, slot }, ref) {
+function CheckBox({ text, name, className, slot, transformOrigin }, ref) {
 	const SLOT_KEY = '_SLOT_';
 	const HEIGHTLIGHT_KEY = '_HEIGHTLIGHT_';
 	const hasSlot = typeof text === 'string' && text.includes(SLOT_KEY);
@@ -17,20 +18,86 @@ function CheckBox({ text, name, className, slot }, ref) {
 		: text?.split(HEIGHTLIGHT_KEY) || [];
 
 	const id = useId();
+	const animation = useRef({});
 	const join = useRef(null);
 	const leave = useRef(null);
 	const toggle = useRef(null);
 
-	useImperativeHandle(ref, () => ({ join, leave, toggle }));
+	useImperativeHandle(ref, () => ({ join, leave, toggle, animation }));
 
 	useLayoutEffect(() => {
 		const el = document.getElementById(id);
 		const colorMap = {
-			PO: 'rgb(0, 255, 224)',
-			MM: 'rgb(211, 85, 255)',
-			GG: 'rgb(255, 199, 0)',
-			EE: 'rgb(255, 122, 0)'
-		}
+			PO: color.primary,
+			MM: color.roleSm,
+			GG: color.roleTeam1,
+			EE: color.roleTeam2
+		};
+		const initProps = {
+			scaleX: 0,
+			scaleY: 0.01
+		};
+		const processProps = {
+			backgroundColor: colorMap[name] || colorMap.PO,
+			scaleX: 1,
+			scaleY: 0.01
+		};
+		const finishProps = {
+			backgroundColor: 'rgba(10, 13, 19, 0.6)',
+			scaleX: 1,
+			scaleY: 1
+		};
+
+		animation.current.join = (param) => {
+			const complete = param?.complete;
+			const delay = param?.delay || 800;
+
+			dynamics.animate(el, processProps, {
+				type: dynamics.linear,
+				friction: 400,
+				duration: 400,
+				delay,
+				complete: () => {
+					dynamics.animate(el, finishProps, {
+						type: dynamics.spring,
+						friction: 400,
+						duration: 1200,
+						complete: complete && complete()
+					});
+				}
+			});
+		};
+
+		animation.current.toggle = () => {
+			dynamics.animate(el, processProps, {
+				type: dynamics.easeOut,
+				friction: 100,
+				duration: 100,
+				complete: () => {
+					dynamics.animate(el, initProps, {
+						type: dynamics.easeOut,
+						friction: 100,
+						duration: 100,
+						complete: () => animation.current.join({ delay: 0 })
+					});
+				}
+			});
+		};
+
+		animation.current.leave = () => {
+			dynamics.animate(el, processProps, {
+				type: dynamics.linear,
+				friction: 200,
+				duration: 400,
+				complete: () => {
+					dynamics.animate(el, initProps, {
+						type: dynamics.easeOut,
+						friction: 200,
+						duration: 200
+					});
+				}
+			});
+		};
 
 		join.current = (joinParam) => {
 			const complete = joinParam?.complete;
@@ -131,9 +198,13 @@ function CheckBox({ text, name, className, slot }, ref) {
 	}, [id, name]);
 
 	return (
-		<p id={id} className={['chatBox', className].join(' ')}>
-			<i className="chatBox__name">{name}</i>
-			<span className="chatBox__text">
+		<ChatBoxStyle
+			id={id}
+			transformOrigin={transformOrigin}
+			className={`${name.toLowerCase()} ${className}`}
+		>
+			<i className="name">{name}</i>
+			<span className="text">
 				{textArray.map((str, index) =>
 					hasSlot ? (
 						<Slot key={index} str={str} element={slot[index]} />
@@ -142,8 +213,8 @@ function CheckBox({ text, name, className, slot }, ref) {
 					)
 				)}
 			</span>
-			<TriangleSvg className="chatBox__next" width="32px" />
-		</p>
+			<NextArrow />
+		</ChatBoxStyle>
 	);
 }
 

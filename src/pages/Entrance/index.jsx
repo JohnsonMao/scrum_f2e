@@ -15,14 +15,16 @@ export default function Entrance() {
 	const [stage, setStage] = useState('hello');
 	const chatBoxRef = useRef(null);
 	const handleClick = (action) => {
+		const chatBoxAni = chatBoxRef.current.animation.current;
+
 		setStage(action);
 		if (action === 'go') {
-			chatBoxRef.current.leave.current();
+			chatBoxAni.leave();
 			setTimeout(() => {
 				navigate('/ProductOwner');
 			}, 600);
 		} else {
-			chatBoxRef.current.join.current();
+			chatBoxAni.join();
 		}
 	};
 	const fileName = (path) => /\/([^/]+).png$/.exec(path)?.[1] || '';

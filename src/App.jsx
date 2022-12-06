@@ -4,12 +4,12 @@ import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
 
 import particlesJson from '@/assets/configs/particlesjs-config.json?url';
-import { ReactComponent as NoiseSvg } from '@images/filter_noise.svg';
 import router from './router';
 import Background from './components/Background';
 import ProgressBar from './components/ProgressBar';
 import Footer from './components/Footer';
 import { ProgressProvider } from './contexts/Progress';
+import { ReactComponent as NoiseSvg } from '@images/filter_noise.svg';
 
 function App() {
 	const particlesInit = useCallback(async (engine) => {

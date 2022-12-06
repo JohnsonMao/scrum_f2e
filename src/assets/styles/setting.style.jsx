@@ -1,6 +1,3 @@
-export const alpha = (value) =>
-	('0' + (~~((value / 100) * 255)).toString(16)).slice(-2);
-
 export const color = {
 	primary: '#00FFE0',
 	primaryDark: '#008D96',
@@ -17,6 +14,9 @@ export const color = {
 	textTint: '#00FFE0',
 	danger: '#FF0000'
 };
+
+export const alpha = (value) =>
+	('0' + (~~((value / 100) * 255)).toString(16)).slice(-2);
 
 export const fontSize = {
 	small: '16px',
