@@ -37,19 +37,21 @@ export default function ProductOwner() {
 	const [backlog, setBacklog] = useState([]);
 
 	useEffect(() => {
-		chatBoxRef.current.join.current({ complete: () => setMask(true) });
+		chatBoxRef.current.animation.current.join({
+			complete: () => setMask(true)
+		});
 		roleRef.current.join.current();
 	}, []);
 
 	const handleStage = (s) => {
-		chatBoxRef.current.toggle.current();
+		chatBoxRef.current.animation.current.toggle();
 		setStage(s);
 		switch (s) {
 			case 'po_3':
 				setDemo(true);
 				setTimeout(() => {
 					setMask(true);
-				}, 2000);
+				}, 1000);
 				break;
 			case 'po_5':
 				setTimeout(() => {

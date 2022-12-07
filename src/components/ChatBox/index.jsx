@@ -7,9 +7,8 @@ import React, {
 import dynamics from 'dynamics.js';
 import { color } from '@styles/setting.style.jsx';
 import { ChatBoxStyle, NextArrow } from './ChatBox.style';
-import './index.scss';
 
-function CheckBox({ text, name, className, slot, transformOrigin }, ref) {
+function CheckBox({ text, name, nextArrow, slot }, ref) {
 	const SLOT_KEY = '_SLOT_';
 	const HEIGHTLIGHT_KEY = '_HEIGHTLIGHT_';
 	const hasSlot = typeof text === 'string' && text.includes(SLOT_KEY);
@@ -62,41 +61,34 @@ function CheckBox({ text, name, className, slot, transformOrigin }, ref) {
 						type: dynamics.spring,
 						friction: 400,
 						duration: 1200,
-						complete: complete && complete()
+						complete
+					});
+				}
+			});
+		};
+
+		animation.current.leave = (param) => {
+			const complete = param?.complete;
+
+			dynamics.animate(el, processProps, {
+				type: dynamics.linear,
+				friction: 100,
+				duration: 180,
+				complete: () => {
+					dynamics.animate(el, initProps, {
+						type: dynamics.easeOut,
+						friction: 100,
+						duration: 180,
+						complete
 					});
 				}
 			});
 		};
 
 		animation.current.toggle = () => {
-			dynamics.animate(el, processProps, {
-				type: dynamics.easeOut,
-				friction: 100,
-				duration: 100,
-				complete: () => {
-					dynamics.animate(el, initProps, {
-						type: dynamics.easeOut,
-						friction: 100,
-						duration: 100,
-						complete: () => animation.current.join({ delay: 0 })
-					});
-				}
-			});
-		};
-
-		animation.current.leave = () => {
-			dynamics.animate(el, processProps, {
-				type: dynamics.linear,
-				friction: 200,
-				duration: 400,
-				complete: () => {
-					dynamics.animate(el, initProps, {
-						type: dynamics.easeOut,
-						friction: 200,
-						duration: 200
-					});
-				}
-			});
+			animation.current.leave({
+				complete: () => animation.current.join({ delay: 0 })
+			})
 		};
 
 		join.current = (joinParam) => {
@@ -198,13 +190,9 @@ function CheckBox({ text, name, className, slot, transformOrigin }, ref) {
 	}, [id, name]);
 
 	return (
-		<ChatBoxStyle
-			id={id}
-			transformOrigin={transformOrigin}
-			className={`${name.toLowerCase()} ${className}`}
-		>
+		<ChatBoxStyle id={id} role={name.toLowerCase()}>
 			<i className="name">{name}</i>
-			<span className="text">
+			<p className="text">
 				{textArray.map((str, index) =>
 					hasSlot ? (
 						<Slot key={index} str={str} element={slot[index]} />
@@ -212,8 +200,8 @@ function CheckBox({ text, name, className, slot, transformOrigin }, ref) {
 						<HeightLight key={index} index={index} str={str} />
 					)
 				)}
-			</span>
-			<NextArrow />
+			</p>
+			{nextArrow !== false && <NextArrow />}
 		</ChatBoxStyle>
 	);
 }

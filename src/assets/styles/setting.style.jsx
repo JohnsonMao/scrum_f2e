@@ -87,3 +87,34 @@ export const roleTeam2Linear = linear(
 	[20, 80],
 	[60, 100]
 );
+
+export const role = {
+	po: {
+		color: color.primary,
+		darkColor: color.primaryDeepdark,
+		boxShadow: boxShadow(color.primary),
+		linear: rolePoLinear,
+		transformOrigin: 'left'
+	},
+	sm: {
+		color: color.roleSm,
+		darkColor: color.roleSmDark,
+		boxShadow: boxShadow(color.roleSm),
+		linear: roleSmLinear,
+		transformOrigin: 'right'
+	},
+	ee: {
+		color: color.roleTeam1,
+		darkColor: color.roleTeamDark,
+		boxShadow: boxShadow(color.roleTeam1),
+		linear: roleTeam1Linear,
+		transformOrigin: 'right'
+	},
+	gg: {
+		color: color.roleTeam2,
+		darkColor: color.roleTeamDark,
+		boxShadow: boxShadow(color.roleTeam2),
+		linear: roleTeam2Linear,
+		transformOrigin: 'right'
+	}
+}
