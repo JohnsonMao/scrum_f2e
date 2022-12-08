@@ -1,12 +1,17 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cx } from '@linaria/core';
 import ChatBox from '@/components/ChatBox';
 import Button from '@/components/Button';
 import LogoPng from '@images/logo.png';
-import { fixedFullScreen, flexCenter, flexColumn, positionCenter } from '@styles/utils.style';
-import { MainStyle, LeafStyle, LogoStyle } from './Main.style';
-// import './index.scss';
+import {
+	fixedFullScreen,
+	flexCenter,
+	flexColumn,
+	positionCenter,
+	positionCenterX
+} from '@styles/utils.style';
+import { MainStyle, LeafStyle, LogoStyle, LightPoint } from './Main.style';
 
 export default function Entrance() {
 	const leafImages = import.meta.glob('/src/assets/images/bg_leaf*.png', {
@@ -15,49 +20,59 @@ export default function Entrance() {
 	});
 
 	const navigate = useNavigate();
-	const [stage, setStage] = useState('hello');
+	const [stage, setStage] = useState(0);
 	const chatBoxRef = useRef(null);
+	const buttonRef = useRef([]);
+	const text =
+		'呦呼 ， 歡迎進入 _HEIGHTLIGHT_「SCRUM 新手村」_HEIGHTLIGHT_ ， 在正式加入專案開發之前 ，需要請你先了解 Scrum 的流程與精神 ！\n\n請接受挑戰任務 ， 成功通過 Scrum 新手村的挑戰任務吧～';
+
+	const fileName = (path) => /\/([^/]+).png$/.exec(path)?.[1] || '';
+
 	const handleClick = (action) => {
 		const chatBoxAni = chatBoxRef.current.animation.current;
 
 		setStage(action);
-		if (action === 'go') {
-			chatBoxAni.leave();
-			setTimeout(() => {
-				navigate('/ProductOwner');
-			}, 600);
-		} else {
-			chatBoxAni.join();
+		switch (action) {
+			case 1:
+				chatBoxAni.join();
+				break;
+			case 2:
+				chatBoxAni.leave();
+				setTimeout(() => {
+					navigate('/ProductOwner');
+				}, 600);
+				break;
+			default:
 		}
 	};
-	const fileName = (path) => /\/([^/]+).png$/.exec(path)?.[1] || '';
 
-	const text =
-		'呦呼 ， 歡迎進入 _HEIGHTLIGHT_「SCRUM 新手村」_HEIGHTLIGHT_ ， 在正式加入專案開發之前 ，需要請你先了解 Scrum 的流程與精神 ！\n\n請接受挑戰任務 ， 成功通過 Scrum 新手村的挑戰任務吧～';
+	useEffect(() => {
+		if (stage === 0) {
+			const buttonAni0 = buttonRef.current[0].animation.current;
+			buttonAni0.join();
+		}
+	}, [stage])
 
 	return (
-		// <MainStyle className={['entrance', stage].join(' ')}>
 		<MainStyle className={cx(fixedFullScreen)}>
 			{Object.keys(leafImages).map((imgKey) => (
-				<LeafStyle
-					key={imgKey}
-					className={['entrance__leaf', fileName(imgKey)].join(' ')}
-				>
+				<LeafStyle key={imgKey} className={cx(fileName(imgKey))}>
 					<img src={leafImages[imgKey]} alt="Leaf" />
 				</LeafStyle>
 			))}
-			<LogoStyle className={cx(fixedFullScreen)}>
-				<i className="lightPoint l_sm"></i>
-				<i className="lightPoint l_ee"></i>
-				<i className="lightPoint l_gg"></i>
-				<i className="lightPoint r_sm"></i>
-				<i className="lightPoint r_ee"></i>
-				<i className="lightPoint r_gg"></i>
-				<img className={cx(positionCenter)} src={LogoPng} alt="Scrum 新手村" />
-				<h2 className={cx(positionCenter)}>深入敏捷の村一探究竟</h2>
+			<LogoStyle className={cx(positionCenter)}>
+				<LightPoint className="l_sm"></LightPoint>
+				<LightPoint className="l_ee"></LightPoint>
+				<LightPoint className="l_gg"></LightPoint>
+				<LightPoint className="r_sm"></LightPoint>
+				<LightPoint className="r_ee"></LightPoint>
+				<LightPoint className="r_gg"></LightPoint>
+				<img src={LogoPng} alt="Scrum 新手村" />
+				<h2 className={cx(positionCenterX)}>深入敏捷の村一探究竟</h2>
 				<Button
-					className={cx(positionCenter)}
-					onClick={() => handleClick('join')}
+					ref={(el) => buttonRef.current[0] = el}
+					className={cx(positionCenterX)}
+					onClick={() => handleClick(1)}
 					text="進入村莊"
 				/>
 			</LogoStyle>
@@ -69,8 +84,8 @@ export default function Entrance() {
 					nextArrow={false}
 				/>
 				<Button
-					as="button"
-					onClick={() => handleClick('go')}
+					ref={(el) => buttonRef.current[1] = el}
+					onClick={() => handleClick(2)}
 					text="接受挑戰"
 				/>
 			</div>

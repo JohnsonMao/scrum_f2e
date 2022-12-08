@@ -4,9 +4,9 @@ import { color } from '@styles/setting.style';
 
 export const PillShape = styled(PillSvg)`
 	position: absolute;
-	top: ${(props) => (props.cover ? '-64%' : '-54%')};
-	width: 200%;
-	height: 200%;
+	top: ${(props) => (props.cover ? '-30px' : '-26px')};
+	width: 100%;
+	height: auto;
 	z-index: ${(props) => (props.cover ? -1 : -2)};
 	filter: ${(props) =>
 		props.cover ? '' : `drop-shadow(0 2px 2px ${color.primaryDark})`};
@@ -20,15 +20,28 @@ export const PillShape = styled(PillSvg)`
 
 export const ButtonStyle = styled.button`
 	position: relative;
-	padding: 12px 48px;
-	pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
+	padding: 12px 60px;
+	border-radius: 36px;
+	pointer-events: none;
+	opacity: 0;
 	filter: ${(props) => (props.disabled ? 'grayscale(1)' : '')};
+	
+	&.show {
+		pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
+		opacity: 1;
+	}
 
 	> * {
 		pointer-events: none;
 	}
 
-	&:active ${PillShape}:first-child {
-		transform: translateY(3%);
+	.buttonText {
+		transition: 0.3s;
+	}
+
+	&:active {
+		${PillShape}:first-child, .buttonText {
+			transform: translateY(3px);
+		}
 	}
 `;

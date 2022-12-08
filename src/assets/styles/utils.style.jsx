@@ -7,15 +7,21 @@ export const flexCenter = css`
 `;
 
 export const flexColumn = css`
-    flex-direction: column;
-`
+	flex-direction: column;
+`;
 
 export const positionCenter = css`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
+export const positionCenterX = css`
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+`;
 
 export const fixedFullScreen = css`
 	position: fixed;
