@@ -52,7 +52,7 @@ export const LeafStyle = styled.div`
 `;
 
 export const LogoStyle = styled.div`
-	width: 100%;
+	width: 80%;
 	height: 80vh;
 	transition: 1s;
 
@@ -69,16 +69,19 @@ export const LogoStyle = styled.div`
 		position: absolute;
 		top: -10%;
 		animation: light 0.6s infinite alternate-reverse ease-in;
+		z-index: 1;
 	}
 
 	h2 {
 		top: 66%;
 		text-shadow: 2px 1px 3px ${color.primary}, 2px -1px 3px ${color.primary};
 		animation: light 0.6s infinite alternate-reverse ease-in;
+		z-index: 2;
 	}
 
 	button {
 		top: 76%;
+		z-index: 3;
 	}
 `;
 
@@ -98,69 +101,72 @@ export const LightPoint = styled.i`
 	z-index: 11;
 	animation: swing 10s infinite;
 
+	&.sm {
+		--tint-color: ${color.roleSmTint};
+		--dark-color: ${color.roleSmDark};
+	}
+
+	&.ee {
+		--tint-color: ${color.roleTeam1};
+		--dark-color: ${color.roleTeam1};
+	}
+
+	&.gg {
+		--tint-color: ${color.roleTeam2};
+		--dark-color: ${color.danger};
+	}
+
 	&.l {
 		&_sm {
 			--direction: -1;
-			--tint-color: var(--role-sm-tint);
-			--dark-color: var(--role-sm-dark);
 			left: 20%;
-			top: 22%;
+			top: 18%;
 		}
 		&_ee {
 			--direction: -1;
-			--tint-color: var(--role-team1-default);
-			--dark-color: var(--role-team1-default);
 			left: 18%;
-			top: 45%;
-			animation-delay: -1s;
+			top: 40%;
+			animation-delay: -2s;
 		}
 		&_gg {
 			--direction: -1;
-			--tint-color: var(--role-team2-default);
-			--dark-color: var(--danger);
 			left: 15%;
-			top: 30%;
-			animation-delay: -2s;
+			top: 26%;
+			animation-delay: -4s;
 		}
 	}
 	&.r {
 		&_sm {
 			--direction: 1;
-			--tint-color: var(--role-sm-tint);
-			--dark-color: var(--role-sm-dark);
-			top: 30%;
+			top: 26%;
 			right: 12%;
 			animation-delay: -3s;
 		}
 		&_ee {
 			--direction: 1;
-			--tint-color: var(--role-team1-default);
-			--dark-color: var(--role-team1-default);
-			top: 42%;
+			top: 38%;
 			right: 18%;
-			animation-delay: -4s;
+			animation-delay: -5s;
 		}
 		&_gg {
 			--direction: 1;
-			--tint-color: var(--role-team2-default);
-			--dark-color: var(--danger);
-			top: 24%;
+			top: 20%;
 			right: 22%;
-			animation-delay: -5s;
+			animation-delay: -1s;
 		}
 	}
 
 	@keyframes swing {
 		0% {
-			transform: rotate(0deg) scale(0.8) translate(calc(-200px * var(--direction)), 200px);
+			transform: rotate(0deg) scale(0.8) translate(calc(-40px * var(--direction)), 40px);
 			opacity: 0;
 		}
 		50% {
 			transform: rotate(180deg) scale(1.2) translate(0, 0);
-			opacity: 0.99;
+			opacity: 0.9;
 		}
 		100% {
-			transform: rotate(360deg) scale(0.8) translate(calc(-200px * var(--direction)), 200px);
+			transform: rotate(360deg) scale(0.8) translate(calc(-40px * var(--direction)), 40px);
 			opacity: 0;
 		}
 	}

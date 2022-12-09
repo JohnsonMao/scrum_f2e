@@ -30,11 +30,18 @@ export default function Entrance() {
 
 	const handleClick = (action) => {
 		const chatBoxAni = chatBoxRef.current.animation.current;
+		const buttonAni0 = buttonRef.current[0].animation.current;
+		const buttonAni1 = buttonRef.current[1].animation.current;
 
 		setStage(action);
 		switch (action) {
 			case 1:
 				chatBoxAni.join();
+				buttonAni0.leave({
+					complete: () => {
+						buttonAni1.join();
+					}
+				});
 				break;
 			case 2:
 				chatBoxAni.leave();
@@ -51,44 +58,48 @@ export default function Entrance() {
 			const buttonAni0 = buttonRef.current[0].animation.current;
 			buttonAni0.join();
 		}
-	}, [stage])
+	}, [stage]);
 
 	return (
-		<MainStyle className={cx(fixedFullScreen)}>
+		<>
 			{Object.keys(leafImages).map((imgKey) => (
 				<LeafStyle key={imgKey} className={cx(fileName(imgKey))}>
 					<img src={leafImages[imgKey]} alt="Leaf" />
 				</LeafStyle>
 			))}
-			<LogoStyle className={cx(positionCenter)}>
-				<LightPoint className="l_sm"></LightPoint>
-				<LightPoint className="l_ee"></LightPoint>
-				<LightPoint className="l_gg"></LightPoint>
-				<LightPoint className="r_sm"></LightPoint>
-				<LightPoint className="r_ee"></LightPoint>
-				<LightPoint className="r_gg"></LightPoint>
-				<img src={LogoPng} alt="Scrum 新手村" />
-				<h2 className={cx(positionCenterX)}>深入敏捷の村一探究竟</h2>
-				<Button
-					ref={(el) => buttonRef.current[0] = el}
-					className={cx(positionCenterX)}
-					onClick={() => handleClick(1)}
-					text="進入村莊"
-				/>
-			</LogoStyle>
-			<div className={cx(fixedFullScreen, flexCenter, flexColumn)}>
-				<ChatBox
-					ref={chatBoxRef}
-					text={text}
-					name="（謎之音）"
-					nextArrow={false}
-				/>
-				<Button
-					ref={(el) => buttonRef.current[1] = el}
-					onClick={() => handleClick(2)}
-					text="接受挑戰"
-				/>
-			</div>
-		</MainStyle>
+			<MainStyle className={cx(fixedFullScreen)}>
+				<LogoStyle className={cx(positionCenter)}>
+					<LightPoint className="sm l_sm"></LightPoint>
+					<LightPoint className="ee l_ee"></LightPoint>
+					<LightPoint className="gg l_gg"></LightPoint>
+					<LightPoint className="sm r_sm"></LightPoint>
+					<LightPoint className="ee r_ee"></LightPoint>
+					<LightPoint className="gg r_gg"></LightPoint>
+					<img src={LogoPng} alt="Scrum 新手村" />
+					<h2 className={cx(positionCenterX)}>
+						深入敏捷の村一探究竟
+					</h2>
+					<Button
+						ref={(el) => (buttonRef.current[0] = el)}
+						className={cx(positionCenterX)}
+						onClick={() => handleClick(1)}
+						text="進入村莊"
+					/>
+				</LogoStyle>
+				<div className={cx(fixedFullScreen, flexCenter, flexColumn)}>
+					<ChatBox
+						ref={chatBoxRef}
+						text={text}
+						name="（謎之音）"
+						nextArrow={false}
+					/>
+					<Button
+						ref={(el) => (buttonRef.current[1] = el)}
+						onClick={() => handleClick(2)}
+						text="接受挑戰"
+					/>
+				</div>
+			</MainStyle>
+		</>
 	);
 }
