@@ -5,12 +5,12 @@ import React, {
 	useRef
 } from 'react';
 import dynamics from 'dynamics.js';
+import { cx } from '@linaria/core';
 import { color } from '@styles/setting.style.jsx';
 import { ChatBoxStyle, NextArrow } from './ChatBox.style';
-import { cx } from '@linaria/core';
 
 function CheckBox(
-	{ name, text, nextArrow, aniType, aniDelay, aniCallback, className, slot },
+	{ name, text, nextArrow, aniType, aniDelay, aniCallback, maxHeight, className, slot },
 	ref
 ) {
 	const SLOT_KEY = '_SLOT_';
@@ -71,8 +71,8 @@ function CheckBox(
 		const leave = (complete) => {
 			dynamics.animate(el, processProps, {
 				type: dynamics.linear,
-				friction: 100,
-				duration: 180,
+				friction: 50,
+				duration: 100,
 				complete: () => {
 					dynamics.animate(el, initProps, {
 						type: dynamics.easeOut,
@@ -84,6 +84,8 @@ function CheckBox(
 			});
 		};
 
+		toggle.current = () => leave(() => join(0));
+
 		switch (aniType) {
 			case 'join':
 				join(aniDelay, aniCallback);
@@ -91,12 +93,13 @@ function CheckBox(
 			case 'leave':
 				leave(aniCallback);
 				break;
-			case 'toggle':
-				leave(() => join(0));
-				break;
 			default:
 		}
 	}, [id, name, aniType, aniDelay, aniCallback]);
+
+	useLayoutEffect(() => {
+		if (text && aniType === 'toggle') toggle.current();
+	}, [text, aniType])
 
 	useLayoutEffect(() => {
 		const el = document.getElementById(id);
@@ -267,6 +270,7 @@ function CheckBox(
 		<ChatBoxStyle
 			id={id}
 			role={name.toLowerCase()}
+			maxHeight={maxHeight}
 			className={cx(className)}
 		>
 			<i className="name">{name}</i>

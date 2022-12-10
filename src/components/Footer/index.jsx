@@ -1,10 +1,9 @@
-import { bold } from '@styles/utils.style';
 import FooterStyle from './Footer.style';
 
 function Footer() {
 	return (
 		<FooterStyle>
-			<span className={bold}>
+			<span>
 				©
 				<a
 					href="https://2022.thef2e.com/"

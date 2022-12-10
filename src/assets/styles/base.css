@@ -30,11 +30,10 @@ body {
     color: var(--text-default);
     overflow: hidden;
     overflow-y: auto;
-    user-select: none;
 }
 
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 
 img, picture, svg, video {
@@ -42,6 +41,7 @@ img, picture, svg, video {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
+    user-select: none;
 }
 
 h2 {
@@ -67,14 +67,39 @@ svg {
     pointer-events: none;
 }
 
-.jira {
+::selection {
+    background: #CEFC;
+    color: #000;
+}
+
+.logo_svg {
+    display: inline-block;
     margin-bottom: -6px;
-    width: 90px;
     height: auto;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.logo_svg:hover path {
+    fill: #00EEF0;
+}
+
+.jira {
+    width: 90px;
 }
 
 .confluence {
-    margin-bottom: -6px;
     width: 200px;
-    height: auto;
+}
+
+.fz_s {
+    font-size: 16px;
+}
+
+.fz_l {
+    font-size: 24px;
+}
+
+.h2 {
+    font-size: 32px;
 }

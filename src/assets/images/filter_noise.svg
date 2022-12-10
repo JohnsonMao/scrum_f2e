@@ -1,4 +1,4 @@
-<svg width="0" style='position: absolute'>
+<svg style='position: absolute; width: 0; height: 0'>
     <filter id="noise">
         <feTurbulence id="turbulence" type="fractalNoise" baseFrequency=".95" numOctaves="10" />
         <feDisplacementMap in="SourceGraphic" scale="5" />

@@ -13,6 +13,15 @@ const MaskStyle = styled.div`
 		border: 2px solid ${color.primary};
 		border-radius: 28px;
 		color: ${color.primary};
+		user-select: none;
+		animation: click 1s infinite steps(2);
+	}
+
+	@keyframes click {
+		100% {
+			border-color: ${color.text};
+			color: ${color.text}
+		}
 	}
 `;
 

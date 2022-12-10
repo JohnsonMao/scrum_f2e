@@ -2,14 +2,14 @@ import { cx } from '@linaria/core';
 import { flexCenter, fixedFullScreen } from '@styles/utils.style';
 import MaskStyle from './Mask.style';
 
-function Mask({ show, handleClose, text }) {
+function Mask({ show, onClick, text }) {
 	return (
 		<MaskStyle
             show={show}
 			className={cx(flexCenter, fixedFullScreen)}
-			onClick={handleClose}
+			onClick={onClick}
 		>
-			{text && <span className="b">{text}</span>}
+			{text && <span>{text}</span>}
 		</MaskStyle>
 	);
 }

@@ -23,6 +23,13 @@ export const positionCenterX = css`
 	transform: translateX(-50%);
 `;
 
+export const fixedRB = css`
+	--position: fixed;
+	position: fixed;
+	right: 1.5rem;
+	bottom: 3rem;
+`
+
 export const fixedFullScreen = css`
 	position: fixed;
 	top: 0;
@@ -31,23 +38,8 @@ export const fixedFullScreen = css`
 	bottom: 0;
 `;
 
-export const rotate180 = css`
-	transform: rotate(180deg);
-`;
-
-export const bold = css`
-	font-weight: bold;
-`;
-
-export const fadeIn = css`
-	animation: fadeIn 1s;
-
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
-`;
+export const roleChat = css`
+	display: flex;
+	padding: 2rem 1rem;
+	gap: 2rem;
+`

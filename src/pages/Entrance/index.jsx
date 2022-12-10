@@ -43,9 +43,8 @@ export default function Entrance() {
 
 	const fileName = (path) => /\/([^/]+).png$/.exec(path)?.[1] || '';
 
-	const handleClick = (action) => {
-		setStage(action);
-		switch (action) {
+	useEffect(() => {
+		switch (stage) {
 			case 1:
 				setButtonState((pre) => {
 					const buttons = [...pre];
@@ -76,7 +75,7 @@ export default function Entrance() {
 				break;
 			default:
 		}
-	};
+	}, [stage, navigate])
 
 	return (
 		<>
@@ -102,7 +101,7 @@ export default function Entrance() {
 						<div className={cx(positionCenterX, 'content')}>
 							<h2>深入敏捷の村一探究竟</h2>
 							<Button
-								onClick={() => handleClick(1)}
+								onClick={() => setStage(1)}
 								{...buttonState[0]}
 							/>
 						</div>
@@ -111,7 +110,7 @@ export default function Entrance() {
 				<div className={cx(fixedFullScreen, flexCenter, flexColumn, 'welcome')}>
 					<ChatBox className="welcome__text" {...chatBoxState} />
 					<Button
-						onClick={() => handleClick(2)}
+						onClick={() => setStage(2)}
 						{...buttonState[1]}
 					/>
 				</div>

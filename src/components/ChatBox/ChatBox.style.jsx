@@ -48,6 +48,7 @@ export const ChatBoxStyle = styled.div`
 		color: ${color.bgDark};
 		text-transform: uppercase;
 		pointer-events: auto;
+		user-select: none;
 
 		&::before {
 			content: ' ';

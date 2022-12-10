@@ -5,8 +5,8 @@ import { color } from '@styles/setting.style';
 export const PillShape = styled(PillSvg)`
 	position: absolute;
 	top: ${(props) => (props.cover ? '-30px' : '-26px')};
-	width: 100%;
-	height: auto;
+	width: auto;
+	height: 105px;
 	z-index: ${(props) => (props.cover ? -1 : -2)};
 	filter: ${(props) =>
 		props.cover ? '' : `drop-shadow(0 2px 2px ${color.primaryDark})`};
@@ -19,7 +19,7 @@ export const PillShape = styled(PillSvg)`
 `;
 
 export const ButtonStyle = styled.button`
-	position: relative;
+	position: var(--position, relative);
 	padding: 12px 60px;
 	border-radius: 36px;
 	pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};

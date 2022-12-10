@@ -1,13 +1,3 @@
-.po_2_button {
-    @include init(1.5s);
-}
-.po_2.po_2_button {
-    @include show();
-}
-.po_3.po_2_button {
-    @include init();
-}
-
 .po_3_list {
     @include init(1.5s);
     margin: 0 auto;
@@ -139,18 +129,4 @@
         right: 47%;
         bottom: 47%;
     }
-}
-
-.po_3_button {
-    @include init(1.5s);
-}
-.po_3.po_3_button {
-    @include show();
-}
-.po_4.po_3_button {
-    @include show();
-    transition-delay: 0s;
-}
-.po_5.po_3_button {
-    @include init();
 }

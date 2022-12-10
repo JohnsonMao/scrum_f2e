@@ -18,13 +18,6 @@ export const color = {
 export const alpha = (value) =>
 	('0' + (~~((value / 100) * 255)).toString(16)).slice(-2);
 
-export const fontSize = {
-	small: '16px',
-	default: '20px',
-	large: '24px',
-	h2: '32px'
-}
-
 export const boxShadow = (color) => `
 	0 0 20px ${color + alpha(30)},
 	0 0 40px ${color + alpha(20)},
@@ -116,5 +109,20 @@ export const role = {
 		boxShadow: boxShadow(color.roleTeam2),
 		linear: roleTeam2Linear,
 		transformOrigin: 'right'
+	}
+}
+
+export const listStyle = {
+	primary: {
+		header: color.primary,
+		dark: color.primaryDark,
+		bg: color.primary,
+		radial: radial(color.primary)
+	},
+	secondary: {
+		header: color.roleTeam1,
+		dark: color.roleTeamDark,
+		bg: color.roleTeam2,
+		radial: radial(color.roleTeam2)
 	}
 }
