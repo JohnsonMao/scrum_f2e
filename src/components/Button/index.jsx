@@ -5,7 +5,7 @@ import { cx } from '@linaria/core';
 import { flexCenter } from '@styles/utils.style';
 import { ButtonStyle, PillShape } from './Button.style';
 
-function Button({ onClick, text, disabled, className }, ref) {
+function Button({ onClick, text, disabled, className, aniType, aniDelay, aniCallback }, ref) {
 	const id = useId();
 	const textRef = useRef(null);
 
@@ -24,6 +24,52 @@ function Button({ onClick, text, disabled, className }, ref) {
 			mouseOutAni.current && mouseOutAni.current();
 		}
 	};
+	
+	useLayoutEffect(() => {
+		const el = document.getElementById(id);
+
+		const join = (delay = 800, complete) => {
+			const prop = { scale: 1 };
+			const options = {
+				type: dynamics.spring,
+				friction: 240,
+				duration: 800,
+				delay,
+				complete: () => {
+					// setShow('show');
+					complete && complete();
+				}
+			}
+
+			dynamics.animate(el, prop, options);
+		};
+
+		const leave = (complete) => {
+			const props = { scale: 0 };
+			const options = {
+				type: dynamics.easeIn,
+				friction: 400,
+				duration: 400,
+				complete: () => {
+					// setShow('');
+					complete && complete();
+				}
+			}
+
+			dynamics.animate(el, props, options);
+		};
+
+		switch (aniType) {
+			case 'join':
+				join(aniDelay, aniCallback);
+				break;
+			case 'leave':
+				leave(aniCallback);
+				break;
+			default:
+		}
+	}, [id, aniType, aniDelay, aniCallback]);
+
 
 	useLayoutEffect(() => {
 		const el = document.getElementById(id);

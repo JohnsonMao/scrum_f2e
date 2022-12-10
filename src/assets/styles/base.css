@@ -30,6 +30,7 @@ body {
     color: var(--text-default);
     overflow: hidden;
     overflow-y: auto;
+    user-select: none;
 }
 
 ol, ul {

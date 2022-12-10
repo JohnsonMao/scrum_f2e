@@ -4,49 +4,67 @@ import { color } from '@styles/setting.style';
 export const LeafStyle = styled.div`
 	position: fixed;
 	transition: 1s;
+	pointer-events: none;
 
 	&.bg_leaf {
 		&_l_2 {
 			height: 100%;
 			bottom: 0;
 			z-index: -4;
+			transform: ${(props) =>
+				props.stage < 2 ? '' : 'translate(-100%, 0)'};
 		}
 		&_b_2 {
 			width: 62%;
 			left: 12%;
 			bottom: 0;
 			z-index: -5;
+			transform: ${(props) =>
+				props.stage < 2 ? '' : 'translate(0, 100%)'};
 		}
 		&_r_2 {
 			height: 100%;
 			right: 0;
 			z-index: -4;
+			transform: ${(props) =>
+				props.stage < 2 ? '' : 'translate(100%, 0)'};
 		}
 		&_t_2 {
 			width: 80%;
 			left: 12%;
 			z-index: -5;
+			transform: ${(props) =>
+				props.stage < 2 ? '' : 'translate(0, -100%)'};
 		}
+
 		&_lb_1 {
 			width: 60%;
 			bottom: 0;
 			z-index: -2;
+			transform: ${(props) =>
+				props.stage < 1 ? '' : 'translate(-100%, 100%)'};
 		}
 		&_lt_1 {
 			height: 70%;
 			left: 0;
 			z-index: -2;
+			transform: ${(props) =>
+				props.stage < 1 ? '' : 'translate(-100%, -100%)'};
 		}
 		&_rb_1 {
 			height: 70%;
 			right: 0;
 			bottom: 0;
 			z-index: -2;
+			transform: ${(props) =>
+				props.stage < 1 ? '' : 'translate(100%, 100%)'};
 		}
 		&_t_1 {
 			width: 50%;
 			right: 18%;
 			z-index: -2;
+			transform: ${(props) =>
+				props.stage < 1 ? '' : 'translate(0, -100%)'};
 		}
 	}
 `;
@@ -72,22 +90,35 @@ export const LogoStyle = styled.div`
 		z-index: 1;
 	}
 
-	h2 {
+	.content {
 		top: 66%;
-		text-shadow: 2px 1px 3px ${color.primary}, 2px -1px 3px ${color.primary};
-		animation: light 0.6s infinite alternate-reverse ease-in;
 		z-index: 2;
 	}
 
+	h2 {
+		margin-bottom: 1rem;
+		text-shadow: 2px 1px 3px ${color.primary}, 2px -1px 3px ${color.primary};
+		animation: light 0.6s infinite alternate-reverse ease-in;
+	}
+
 	button {
-		top: 76%;
-		z-index: 3;
+		margin: 0 auto;
 	}
 `;
 
 export const MainStyle = styled.main`
 	overflow: hidden;
 	pointer-events: none;
+
+	.welcome {
+		gap: 1.5rem;
+
+		&__text {
+			margin: 0 1rem;
+			flex: 0;
+			max-width: 768px;
+		}
+	}
 `;
 
 export const LightPoint = styled.i`
@@ -158,7 +189,8 @@ export const LightPoint = styled.i`
 
 	@keyframes swing {
 		0% {
-			transform: rotate(0deg) scale(0.8) translate(calc(-40px * var(--direction)), 40px);
+			transform: rotate(0deg) scale(0.8)
+				translate(calc(-40px * var(--direction)), 40px);
 			opacity: 0;
 		}
 		50% {
@@ -166,58 +198,9 @@ export const LightPoint = styled.i`
 			opacity: 0.9;
 		}
 		100% {
-			transform: rotate(360deg) scale(0.8) translate(calc(-40px * var(--direction)), 40px);
+			transform: rotate(360deg) scale(0.8)
+				translate(calc(-40px * var(--direction)), 40px);
 			opacity: 0;
 		}
 	}
 `;
-
-// .join,
-// .go {
-//     .bg_leaf {
-//         &_lb_1 {
-//             transform: translate(-100%, 100%);
-//         }
-//         &_lt_1 {
-//             transform: translate(-100%, -100%);
-//         }
-//         &_rb_1 {
-//             transform: translate(100%, 100%);
-//         }
-//         &_t_1 {
-//             transform: translate(0, -100%);
-//         }
-//     }
-//     .entrance__logo {
-//         opacity: 0;
-//         pointer-events: none;
-//     }
-// }
-
-// .join {
-//     .entrance__chat button {
-//         opacity: 1;
-//     }
-// }
-
-// .go {
-//     .bg_leaf {
-//         &_l_2 {
-//             transform: translate(-100%, 0);
-//         }
-//         &_b_2 {
-//             transform: translate(0, 100%);
-//         }
-//         &_r_2 {
-//             transform: translate(100%, 0);
-//         }
-//         &_t_2 {
-//             transform: translate(0, -100%);
-//         }
-//     }
-//     .entrance__chat button {
-//         transition: 1s;
-//         opacity: 0;
-//         pointer-events: none;
-//     }
-// }

@@ -9,6 +9,7 @@ export const NextArrow = styled(TriangleSvg)`
 	right: 40px;
 	bottom: 40px;
 	width: 32px;
+	height: auto;
 	animation: next 0.35s infinite alternate ease-in;
 
 	@keyframes next {
@@ -46,6 +47,7 @@ export const ChatBoxStyle = styled.div`
 		background: ${(props) => role[props.role]?.color || role.po.color};
 		color: ${color.bgDark};
 		text-transform: uppercase;
+		pointer-events: auto;
 
 		&::before {
 			content: ' ';
@@ -67,6 +69,11 @@ export const ChatBoxStyle = styled.div`
 	}
 
 	.text {
+		pointer-events: auto;
+		overflow-y: auto;
+		max-height: ${props => props.maxHeight || 'initial'};
+		user-select: auto;
+
 		.heightlight {
 			color: ${color.textTint};
 		}

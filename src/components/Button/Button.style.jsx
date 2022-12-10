@@ -22,15 +22,10 @@ export const ButtonStyle = styled.button`
 	position: relative;
 	padding: 12px 60px;
 	border-radius: 36px;
-	pointer-events: none;
-	opacity: 0;
+	pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
+	transform: scale(0);
 	filter: ${(props) => (props.disabled ? 'grayscale(1)' : '')};
 	
-	&.show {
-		pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
-		opacity: 1;
-	}
-
 	> * {
 		pointer-events: none;
 	}
