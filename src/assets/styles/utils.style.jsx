@@ -25,11 +25,24 @@ export const positionCenterX = css`
 	transform: translateX(-50%);
 `;
 
+export const fixedCenterX = css`
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+`;
+
 export const fixedRB = css`
 	--position: fixed;
 	position: fixed;
 	right: 1.5rem;
 	bottom: 3rem;
+`
+
+export const fixedRT = css`
+	--position: fixed;
+	position: fixed;
+	right: 0;
+	top: 2rem;
 `
 
 export const fixedFullScreen = css`
@@ -41,16 +54,19 @@ export const fixedFullScreen = css`
 `;
 
 export const roleChat = css`
+	position: var(--position, sticky);
+	top: 0;
+	bottom: 0;
 	display: flex;
 	padding: 2rem 1rem;
 	gap: 2rem;
 	height: 38vh;
 
 	${RoleStyle} {
-		flex: 0.15;
+		flex: 0 0 15%;
 	}
 
 	${ChatBoxStyle} {
-		flex: 0.85;
+		flex: 1 1 85%;
 	}
 `

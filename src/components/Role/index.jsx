@@ -50,7 +50,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 		const leave = (complete) => {
 			const props = {
 				scale: 0.5,
-				translateY: -150
+				translateY: name === 'sm' ? 150 : -150
 			};
 			const options = {
 				type: dynamics.bezier,
@@ -77,7 +77,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 				break;
 			default:
 		}
-	}, [id, aniType, aniDelay, aniCallback]);
+	}, [id, name, aniType, aniDelay, aniCallback]);
 
 	useLayoutEffect(() => {
 		const el = document.getElementById(id);

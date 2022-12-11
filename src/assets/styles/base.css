@@ -92,14 +92,19 @@ svg {
     width: 200px;
 }
 
-.fz_s {
+.fz-s {
     font-size: 16px;
 }
 
-.fz_l {
+.fz-l {
     font-size: 24px;
 }
 
 .h2 {
     font-size: 32px;
+}
+
+.d-none {
+    display: none;
+    visibility: hidden;
 }

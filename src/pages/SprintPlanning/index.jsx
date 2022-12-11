@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, useId } from 'react';
+import React, { useEffect, useState, useId } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { cx } from '@linaria/core';
 import Vivus from 'vivus';
 import { ReactComponent as SprintSmSvg } from '@images/sprint_sm.svg';
 import { ReactComponent as StoreSvg } from '@images/store.svg';
@@ -11,31 +12,71 @@ import { ReactComponent as Clock3Svg } from '@images/clock_3.svg';
 import { ReactComponent as Clock4Svg } from '@images/clock_4.svg';
 import { ReactComponent as Clock5Svg } from '@images/clock_5.svg';
 import { ReactComponent as BombSvg } from '@images/bomb.svg';
+import {
+	roleChat,
+	fixedRT,
+	flexCenter,
+	fixedCenterX
+} from '@styles/utils.style';
 import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
-import './index.scss';
+import Transition from '@/components/Transition';
+import { Circle, MainStyle, StoriesStyle, StoryStyle } from './Main.style';
 
 export default function Entrance() {
 	const navigate = useNavigate();
 	const [isClickTime, setIsClickTime] = useState(false);
 	const [stage, setStage] = useState(0);
+	const [poRole, setPoRole] = useState({
+		aniType: '',
+		name: 'po'
+	});
+	const [poChatBox, setPoChatBox] = useState({
+		aniType: 'join',
+		name: 'po',
+		text: '產品待辦清單好了之後 ， 我們來召集 ScrumMaster 和開發團隊共同召開_HEIGHTLIGHT_短衝規劃會議（Sprint Planning）_HEIGHTLIGHT_ 。 短衝即是一個迭代 ， 具有固定時間限制 ， 我們會在這個會議中 ， 決定要完成哪些工作事項來達到商業需求 ， 列出短衝待辦清單 （Sprint Backlog） ， 並由開發團隊在接下來的產品開發週期裡執行 。'
+	});
+	const [smRole, setSmRole] = useState({
+		aniType: '',
+		name: 'sm'
+	});
+	const [smChatBox, setSmChatBox] = useState({
+		aniType: '',
+		name: 'sm'
+	});
+	const [eeRole, setEeRole] = useState({
+		aniType: '',
+		name: 'ee'
+	});
+	const [eeChatBox, setEeChatBox] = useState({
+		aniType: '',
+		name: 'ee'
+	});
+	const [ggRole, setGgRole] = useState({
+		aniType: '',
+		name: 'gg'
+	});
+	const [roles, setRoles] = useState({
+		po: '',
+		sm: '',
+		ee: '',
+		gg: ''
+	});
 	const sprintSmId = useId();
 	const storeId = useId();
 	const storeCoverId = useId();
 	const clockId = useId();
-	const poChatBoxRef = useRef(null);
-	const poRoleRef = useRef(null);
-	const smChatBoxRef = useRef(null);
-	const smRoleRef = useRef(null);
-	const eeChatBoxRef = useRef(null);
-	const eeRoleRef = useRef(null);
-	const ggRoleRef = useRef(null);
-	const rolesRef = useRef({});
-	const [storesReady, setStoreReady] = useState(false);
+	const [storiesClassName, setStoriesClassName] = useState('');
 	const fibonacci = [1, 2, 3, 5, 8, 13, 21];
-
-	const poText =
-		'產品待辦清單好了之後 ， 我們來召集 ScrumMaster 和開發團隊共同召開_HEIGHTLIGHT_短衝規劃會議（Sprint Planning）_HEIGHTLIGHT_ 。 短衝即是一個迭代 ， 具有固定時間限制 ， 我們會在這個會議中 ， 決定要完成哪些工作事項來達到商業需求 ， 列出短衝待辦清單 （Sprint Backlog） ， 並由開發團隊在接下來的產品開發週期裡執行 。';
+	const clocks = [
+		<Clock1Svg />,
+		<Clock2Svg />,
+		<Clock3Svg />,
+		<Clock4Svg />,
+		<Clock5Svg />,
+		<Clock1Svg />,
+		<BombSvg />
+	];
 
 	const smText = {
 		1: '哦哦 ， 你是新來的前端吧 ！ 我是這次的 _HEIGHTLIGHT_ScrumMaster MM_HEIGHTLIGHT_ ， 我的工作主要是促成開發團隊成員協作 、 引導團隊進行自省會議 ， 提升團隊成員對 Scrum 瞭解 。',
@@ -47,26 +88,39 @@ export default function Entrance() {
 	};
 
 	useEffect(() => {
-		if (stage === 0) {
-			poChatBoxRef.current.join.current();
-			poRoleRef.current.join.current();
-			smRoleRef.current.join.current();
-			const svg = new Vivus(sprintSmId, {
-				type: 'oneByOne',
-				duration: 50
-			});
-			svg.play();
-		}
-	}, [stage, sprintSmId]);
-
-	useEffect(() => {
 		switch (stage) {
+			case 0:
+				{
+					setPoRole((pre) => ({
+						...pre,
+						aniType: 'join'
+					}));
+					setSmRole((pre) => ({
+						...pre,
+						aniType: 'join'
+					}));
+					const svg = new Vivus(sprintSmId, {
+						type: 'oneByOne',
+						duration: 50
+					});
+					svg.play();
+				}
+				break;
 			case 1:
-				smChatBoxRef.current.join.current();
-				poChatBoxRef.current.leave.current();
-				Object.values(rolesRef.current).forEach((role) => {
-					role.join.current();
-				});
+				setPoChatBox((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				setSmChatBox((pre) => ({
+					...pre,
+					aniType: 'join'
+				}));
+				setRoles((pre) =>
+					Object.keys(pre).reduce((obj, name) => {
+						obj[name] = 'join';
+						return obj;
+					}, {})
+				);
 				break;
 			case 2:
 				{
@@ -75,17 +129,47 @@ export default function Entrance() {
 						duration: 50
 					});
 					svg.play();
-					poRoleRef.current.leave.current();
-					eeRoleRef.current.join.current();
-					smChatBoxRef.current.toggle.current();
-					setTimeout(ggRoleRef.current.join.current, 400);
-					Object.values(rolesRef.current).forEach((role) => {
-						role.leave.current();
-					});
+					setPoRole((pre) => ({
+						...pre,
+						aniType: 'leave'
+					}));
+					setSmChatBox((pre) => ({
+						...pre,
+						aniType: 'toggle'
+					}));
+					setEeRole((pre) => ({
+						...pre,
+						aniType: 'join'
+					}));
+					setGgRole((pre) => ({
+						...pre,
+						aniType: 'join',
+						aniDelay: 800
+					}));
+					setRoles((pre) =>
+						Object.keys(pre).reduce((obj, name) => {
+							obj[name] = 'leave';
+							return obj;
+						}, {})
+					);
 				}
 				break;
 			case 3:
-				{
+				setSmChatBox((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				setSmRole((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				setStoriesClassName('ready');
+				setEeChatBox((pre) => ({
+					...pre,
+					aniType: 'join',
+					aniCallback: () => {}
+				}));
+				setTimeout(() => {
 					const storeSvgVivus = new Vivus(storeCoverId, {
 						type: 'oneByOne',
 						duration: 50
@@ -93,32 +177,40 @@ export default function Entrance() {
 					const clockSvgVivus = new Vivus(clockId, {
 						duration: 50
 					});
-					smChatBoxRef.current.leave.current();
-					smRoleRef.current.leave.current();
-					eeChatBoxRef.current.join.current({
-						complete: () => {
-							clockSvgVivus.play();
-							storeSvgVivus.play(1, () => {
-								setStoreReady(true);
-							});
-						}
+					clockSvgVivus.play(1, () => {
+						storeSvgVivus.play(1, () => {
+							setStoriesClassName('ready expand');
+						});
 					});
-				}
+				}, 300);
 				break;
 			case 4:
-				eeChatBoxRef.current.toggle.current();
+				setEeChatBox((pre) => ({
+					...pre,
+					aniType: 'toggle'
+				}));
+				setStoriesClassName('expand check');
 				break;
-            case 5:
-				eeChatBoxRef.current.leave.current();
-				eeRoleRef.current.leave.current();
-				ggRoleRef.current.leave.current();
-                setTimeout(() => {
-                    navigate('/SprintBacklog');
-                }, 500)
-                break
+			case 5:
+				setEeChatBox((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				setEeRole((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				setGgRole((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				setTimeout(() => {
+					navigate('/SprintBacklog');
+				}, 500);
+				break;
 			default:
 		}
-	}, [stage, storeId, storeCoverId, clockId, navigate]);
+	}, [stage, sprintSmId, storeId, storeCoverId, clockId, navigate]);
 
 	useEffect(() => {
 		const handleClick = () => {
@@ -141,105 +233,71 @@ export default function Entrance() {
 	}, [isClickTime]);
 
 	return (
-		<>
-			<div className="roleChat">
-				<div className="roleChat__chat">
-					<Role ref={poRoleRef} role="po" />
-					<ChatBox
-						ref={poChatBoxRef}
-						text={poText}
-						name="PO"
-						className="po"
-					/>
-				</div>
+		<MainStyle>
+			<div className={roleChat}>
+				<Role {...poRole} />
+				<ChatBox {...poChatBox} />
 			</div>
-			<div className="roleChat roleChatSm fixedRB">
-				<div className="roleChat__chat">
-					<ChatBox
-						ref={smChatBoxRef}
-						text={smText?.[stage] || ''}
-						name="MM"
-						className="sm"
-					/>
-					<Role ref={smRoleRef} role="sm" className="bottomHole" />
-				</div>
+			<div className={cx(roleChat, 'order-1')}>
+				<ChatBox text={smText[stage]} {...smChatBox} />
+				<Role {...smRole} />
 			</div>
-			<div className="roleChat fixedRT">
-				<div className="roleChat__chat">
-					<ChatBox
-						ref={eeChatBoxRef}
-						text={eeText?.[stage] || ''}
-						name="EE"
-						className="ee"
-					/>
-					<Role ref={eeRoleRef} role="ee" />
-					<Role ref={ggRoleRef} role="gg" />
-				</div>
+			<div className={cx(roleChat, fixedRT)}>
+				<ChatBox text={eeText[stage]} {...eeChatBox} />
+				<Role {...eeRole} />
+				<Role {...ggRole} />
 			</div>
-			<div className={`circle stage_${stage}`}>
-				<div className="circle_0">
-					<span className="fz-s text sprint">Sprint</span>
-					<span className="fz-s text sprintBacklog">
-						Sprint Backlog
-					</span>
-					<SprintSmSvg id={sprintSmId} />
-				</div>
-				<div className="circle_1">
-					<Role
-						ref={(r) => (rolesRef.current.po = r)}
-						role="po"
-						className="ScrumMaster rotate180"
-					/>
-					<Role
-						ref={(r) => (rolesRef.current.sm = r)}
-						role="sm"
-						className="ScrumMaster bottomHole"
-					/>
-					<Role
-						ref={(r) => (rolesRef.current.ee = r)}
-						role="ee"
-						className="ScrumMaster rotate180"
-					/>
-					<Role
-						ref={(r) => (rolesRef.current.gg = r)}
-						role="gg"
-						className="ScrumMaster rotate180"
-					/>
-				</div>
-				<div className="circle_2">
-					<StoreSvg id={storeId} />
-					<span className="point">20</span>
-					<span className="fz-s text tramLimit">team limit</span>
-					<span className="fz-s text storyPoint">Story Point</span>
-				</div>
-			</div>
-			<div className={`store stage_${stage}`}>
-				<Clock2Svg id={clockId} className="clock" />
-				<StoreSpineSvg className="storeSpine" />
-				{[1, 2, 3, 4, 5, 6, 7].map((n, i) => {
-					return (
-						<div
-							key={n}
-							className={`storeCover storeCover_${n}`}
-							data-number={fibonacci[i]}
-						>
-							<StoreCoverSvg
-								id={n === 1 ? storeCoverId : ''}
-								className={`storeCover storeCover_${n} ${
-									storesReady ? 'show' : ''
-								}`}
+			<Transition show={stage < 3}>
+				<Circle className={cx(flexCenter)} stage={stage}>
+					<Transition show={stage === 0}>
+						<span className="fz-s text sprint">Sprint</span>
+						<span className="fz-s text sprintBacklog">
+							Sprint Backlog
+						</span>
+						<SprintSmSvg id={sprintSmId} />
+					</Transition>
+					<Transition show={stage === 1}>
+						{Object.keys(roles).map((name) => (
+							<Role
+								key={name}
+								name={name}
+								aniType={roles[name]}
+								isBottom={name !== 'sm'}
+								className={name}
 							/>
-						</div>
-					);
-				})}
-				<Clock1Svg className="clock_item clock_item_1" />
-				<Clock2Svg className="clock_item clock_item_2" />
-				<Clock3Svg className="clock_item clock_item_3" />
-				<Clock4Svg className="clock_item clock_item_4" />
-				<Clock5Svg className="clock_item clock_item_5" />
-				<Clock1Svg className="clock_item clock_item_6" />
-				<BombSvg className="clock_item clock_item_7" />
-			</div>
-		</>
+						))}
+					</Transition>
+					<Transition show={stage === 2}>
+						<StoreSvg id={storeId} />
+						<span className={cx(flexCenter, 'point')}>20</span>
+						<span className="fz-s text tramLimit">team limit</span>
+						<span className="fz-s text storyPoint">
+							Story Point
+						</span>
+					</Transition>
+				</Circle>
+			</Transition>
+
+			<Transition show={1 < stage && stage < 5}>
+				<StoriesStyle className={cx(fixedCenterX, storiesClassName)}>
+					<div className="clock">
+						<Clock2Svg id={clockId} />
+					</div>
+					{fibonacci.map((n, i) => {
+						return (
+							<StoryStyle key={n} data-number={n}>
+								<StoreCoverSvg
+									id={n === 1 ? storeCoverId : ''}
+								/>
+								{React.cloneElement(clocks[i], {
+									className: 'storyClock'
+								})}
+							</StoryStyle>
+						);
+					})}
+					<StoreSpineSvg className="storeSpine" />
+				</StoriesStyle>
+			</Transition>
+		</MainStyle>
 	);
 }

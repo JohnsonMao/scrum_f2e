@@ -6,14 +6,12 @@ export const RoleFrameStyle = styled.div`
 
 	&::before {
 		content: '';
-		position: absolute;
 		left: -20%;
 		width: 140%;
 		height: 140%;
 		background-size: contain;
 		background-repeat: no-repeat;
 		transform: scale(0);
-		transform-origin: center 20px;
 		transition-duration: 0.5s;
 		opacity: 0;
 		z-index: 2;
@@ -22,14 +20,20 @@ export const RoleFrameStyle = styled.div`
 
 export const RoleStyle = styled.div`
 	position: relative;
+	display: flex;
+	align-items: ${(props) => (props.name === 'sm' ? 'end' : 'start')};
 	z-index: 29;
 	transform: rotate(${(props) => (props.isBottom ? '180deg' : '0')});
 	pointer-events: none;
 
 	img {
 		position: relative;
-		transform: translateY(-100%) scale(0.5, 0);
-		transform-origin: top;
+		transform: translateY(
+				${(props) => (props.name === 'sm' ? '100%' : '-100%')}
+			)
+			scale(0.5, 0);
+		transform-origin: ${(props) =>
+			props.name === 'sm' ? 'bottom' : 'top'};
 		z-index: 3;
 	}
 
@@ -37,7 +41,8 @@ export const RoleStyle = styled.div`
 		content: '';
 		position: absolute;
 		left: 0;
-		top: -8px;
+		top: ${(props) => (props.name === 'sm' ? 'initial' : '-8px')};
+		bottom: ${(props) => (props.name === 'sm' ? '-8px' : 'initial')};
 		width: 100%;
 		height: 40px;
 		background: ${color.bgDark};
@@ -48,6 +53,13 @@ export const RoleStyle = styled.div`
 	}
 
 	${RoleFrameStyle}::before {
+		position: absolute;
+		top: ${(props) => (props.name === 'sm' ? 'initial' : '0')};
+		bottom: ${(props) => (props.name === 'sm' ? '0' : 'initial')};
+		transform-origin: ${(props) =>
+			props.name === 'sm' ? 'bottom' : 'top'};
+		background-position: ${(props) =>
+			props.name === 'sm' ? 'bottom' : 'top'};
 		background-image: ${(props) =>
 			props.name &&
 			`url(/src/assets/images/role_${props.name}_light.png)`};
@@ -57,7 +69,7 @@ export const RoleStyle = styled.div`
 		${RoleFrameStyle}::before {
 			transform: scale(1);
 			transition-delay: ${(props) =>
-				props.delay != null ? `${(+props.delay) / 1000}s` : '0s'};
+				props.delay != null ? `${+props.delay / 1000}s` : '0s'};
 			opacity: 1;
 		}
 		&::after {

@@ -5,7 +5,7 @@ function List({ children, type, className, title, subtitle }) {
 		<ListStyle type={type || 'primary'} className={className}>
 			<ListHeaderStyle>
 				<h2>{title}</h2>
-				<div className="fz_s">{subtitle}</div>
+				<div className="fz-s">{subtitle}</div>
 			</ListHeaderStyle>
 			<ListBodyStyle>{children}</ListBodyStyle>
 		</ListStyle>
