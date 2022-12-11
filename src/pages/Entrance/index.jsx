@@ -11,7 +11,7 @@ import {
 	positionCenter,
 	positionCenterX
 } from '@styles/utils.style';
-import Fade from '@/components/Fade';
+import Transition from '@/components/Transition';
 import { MainStyle, LeafStyle, LogoStyle, LightPoint } from './Main.style';
 
 export default function Entrance() {
@@ -89,7 +89,7 @@ export default function Entrance() {
 				</LeafStyle>
 			))}
 			<MainStyle className={cx(fixedFullScreen)}>
-				<Fade show={stage === 0}>
+				<Transition show={stage === 0}>
 					<LogoStyle className={cx(positionCenter)}>
 						<LightPoint className="sm l_sm"></LightPoint>
 						<LightPoint className="ee l_ee"></LightPoint>
@@ -106,7 +106,7 @@ export default function Entrance() {
 							/>
 						</div>
 					</LogoStyle>
-				</Fade>
+				</Transition>
 				<div className={cx(fixedFullScreen, flexCenter, flexColumn, 'welcome')}>
 					<ChatBox className="welcome__text" {...chatBoxState} />
 					<Button

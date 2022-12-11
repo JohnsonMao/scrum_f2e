@@ -41,10 +41,12 @@ export const ListSideStyle = styled.div`
 `;
 
 export const ItemStyle = styled.li`
+    position: relative;
     padding: 12px 24px;
-    border: 2px solid var(--primary-default);
+    border: 2px solid;
+    border-color: ${color.primary};
     border-radius: 20px;
-    background: rgba(var(--dark), 0.6);
+    background: ${color.bgDark + alpha(60)};
     width: max-content;
     max-width: 300px;
     z-index: 10;
@@ -71,7 +73,7 @@ export const ItemsStyle = styled.div`
         }
         &:nth-child(2) {
             top: 46%;
-            left: 74%;
+            left: calc(98% - 300px);
         }
         &:nth-child(3) {
             top: 42%;
@@ -79,7 +81,8 @@ export const ItemsStyle = styled.div`
         }
         &:nth-child(4) {
             top: 70%;
-            left: 70%;
+            left: calc(90% - 300px);
+            will-change: auto;
             animation: moveItem ${props => props.animation ? '1s infinite alternate' : ''};
         }
     }
@@ -94,26 +97,26 @@ export const ItemsStyle = styled.div`
 
 export const ListStyle = styled(List)`
     margin: 0 auto;
+    width: 50%;
+    max-width: 450px;
 
     ${ListBodyStyle} {
-        min-height: 8rem;
         padding: 1.5rem 2rem;
         padding-left: 70px;
     }
 
     ${ItemStyle} {
-        margin-bottom: 1rem;
+        margin-top: 1rem;
         padding: 12px 24px;
         width: initial;
         max-width: initial;
-        border: 1px solid ${color.textTint};
+        border-color: ${color.text + alpha(60)};
         border-style: dashed;
         border-radius: 20px;
-        background: ${color.bgDark + alpha(60)};
         user-select: none;
 
-        &:last-child {
-            margin-bottom: 0;
+        &:first-child {
+            margin-top: 0;
         }
     }
 `;

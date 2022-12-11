@@ -1,4 +1,6 @@
 import { css } from '@linaria/core';
+import { RoleStyle } from '@/components/Role/Role.style';
+import { ChatBoxStyle } from '@/components/ChatBox/ChatBox.style';
 
 export const flexCenter = css`
 	display: flex;
@@ -42,4 +44,13 @@ export const roleChat = css`
 	display: flex;
 	padding: 2rem 1rem;
 	gap: 2rem;
+	height: 38vh;
+
+	${RoleStyle} {
+		flex: 0.15;
+	}
+
+	${ChatBoxStyle} {
+		flex: 0.85;
+	}
 `

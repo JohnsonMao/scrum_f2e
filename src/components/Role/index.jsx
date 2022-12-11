@@ -49,9 +49,8 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 
 		const leave = (complete) => {
 			const props = {
-				scale: 0.3,
-				translateY: '-100%',
-				opacity: 0
+				scale: 0.5,
+				translateY: -150
 			};
 			const options = {
 				type: dynamics.bezier,
@@ -61,9 +60,11 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 				],
 				friction: 400,
 				duration: 600,
-				complete
+				complete: () => {
+					setActive(false);
+					complete && complete();
+				}
 			};
-			setActive(false);
 			dynamics.animate(el, props, options);
 		};
 

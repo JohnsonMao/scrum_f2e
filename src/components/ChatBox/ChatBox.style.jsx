@@ -24,8 +24,6 @@ export const NextArrow = styled(TriangleSvg)`
 
 export const ChatBoxStyle = styled.div`
 	position: relative;
-	padding: ${(props) =>
-		roleKeys.includes(props.role) ? '40px 84px 40px 100px' : '100px 84px'};
 	background-image: ${(props) => role[props.role]?.linear || role.po.linear};
 	box-shadow: ${(props) => role[props.role]?.boxShadow || role.po.boxShadow};
 	border: 2px solid ${(props) => role[props.role]?.color || role.po.color};
@@ -35,8 +33,7 @@ export const ChatBoxStyle = styled.div`
 	transform-origin: ${(props) =>
 		role[props.role]?.transformOrigin || 'center'};
 	white-space: pre-wrap;
-	pointer-events: none;
-	flex: 1;
+	pointer-events: auto;
 	z-index: 30;
 
 	.name {
@@ -70,11 +67,28 @@ export const ChatBoxStyle = styled.div`
 	}
 
 	.text {
+		padding: ${(props) =>
+			roleKeys.includes(props.role)
+				? '40px 84px 40px 100px'
+				: '100px 84px'};
+		height: 100%;
+		overflow: auto;
 		pointer-events: auto;
-		overflow-y: auto;
-		max-height: ${props => props.maxHeight || 'initial'};
 		user-select: auto;
 
+		&::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: linear-gradient(
+				transparent 25px,
+				${(props) => role[props.role]?.color || role.po.color} 30px,
+				${(props) => role[props.role]?.color || role.po.color}
+					calc(100% - 30px),
+				transparent calc(100% - 25px)
+			);
+		}
 		.heightlight {
 			color: ${color.textTint};
 		}

@@ -5,7 +5,7 @@ import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
 import Button from '@/components/Button';
 import Mask from '@/components/Mask';
-import Fade from '@/components/Fade';
+import Transition from '@/components/Transition';
 import { Drop, DropChild, Drag } from '@/components/DnD';
 import { ReactComponent as JiraSvg } from '@images/jira.svg';
 import { ReactComponent as HandSvg } from '@images/hand.svg';
@@ -14,7 +14,7 @@ import { ListStyle, ListSideStyle, ItemStyle, ItemsStyle } from './List.style';
 
 export default function ProductOwner() {
 	const navigate = useNavigate();
-	const [stage, setStage] = useState(3);
+	const [stage, setStage] = useState(0);
 	const [mask, setMask] = useState(false);
 	const top = useRef(0);
 	const [roleState, setRoleState] = useState({
@@ -94,9 +94,32 @@ export default function ProductOwner() {
 					return newButtons;
 				});
 				break;
+			case 4:
+				setButtonState((pre) => {
+					const newButtons = [...pre];
+					newButtons[1].aniType = 'leave';
+					return newButtons;
+				});
+				setTimeout(() => setMask(true), 1500);
+				break;
+			case 5:
+				setRoleState((pre) => ({
+					...pre,
+					aniType: 'leave',
+					aniCallback: () => {
+						setTimeout(() => {
+							navigate('/SprintPlanning');
+						}, 1000);
+					}
+				}));
+				setChatBoxState((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				break;
 			default:
 		}
-	}, [stage]);
+	}, [stage, navigate]);
 
 	useEffect(() => {
 		const roleChatRect = document.querySelector(`.${roleChat}`);
@@ -107,11 +130,6 @@ export default function ProductOwner() {
 	const closeMask = () => {
 		setMask(false);
 		setStage((pre) => pre + 1);
-		if (stage > 10) {
-			setTimeout(() => {
-				navigate('/SprintPlanning');
-			}, 1000);
-		}
 	};
 
 	const handleDragEnd = ({ source, destination }) => {
@@ -151,7 +169,7 @@ export default function ProductOwner() {
 				onClick={() => setStage(2)}
 				{...buttonState[0]}
 			/>
-			<Fade show={1 < stage && stage < 4}>
+			<Transition show={1 < stage && stage < 4}>
 				<DragDropContext onDragEnd={handleDragEnd}>
 					<ItemsStyle top={top.current} animation={stage === 2}>
 						<Drop droppableId="items">
@@ -197,11 +215,11 @@ export default function ProductOwner() {
 						</ListSideStyle>
 					</ListStyle>
 				</DragDropContext>
-			</Fade>
+			</Transition>
 			<Button
 				className={fixedRB}
 				disabled={backlog.length !== 4}
-				onClick={() => setStage(5)}
+				onClick={() => setStage(4)}
 				{...buttonState[1]}
 			/>
 		</>

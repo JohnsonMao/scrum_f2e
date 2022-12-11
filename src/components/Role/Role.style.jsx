@@ -12,7 +12,9 @@ export const RoleFrameStyle = styled.div`
 		height: 140%;
 		background-size: contain;
 		background-repeat: no-repeat;
-		transition-duration: 1s;
+		transform: scale(0);
+		transform-origin: center 20px;
+		transition-duration: 0.5s;
 		opacity: 0;
 		z-index: 2;
 	}
@@ -21,16 +23,11 @@ export const RoleFrameStyle = styled.div`
 export const RoleStyle = styled.div`
 	position: relative;
 	z-index: 29;
-	flex: 0 0 10%;
-	width: 10%;
-	min-width: 180px;
 	transform: rotate(${(props) => (props.isBottom ? '180deg' : '0')});
 	pointer-events: none;
 
 	img {
 		position: relative;
-		width: 100%;
-		object-fit: cover;
 		transform: translateY(-100%) scale(0.5, 0);
 		transform-origin: top;
 		z-index: 3;
@@ -40,12 +37,12 @@ export const RoleStyle = styled.div`
 		content: '';
 		position: absolute;
 		left: 0;
-		top: -40%;
+		top: -8px;
 		width: 100%;
-		height: 100%;
+		height: 40px;
 		background: ${color.bgDark};
 		border-radius: 50%;
-		transform: rotateX(75deg) scale(0);
+		transform: scale(0);
 		transition-duration: 0.5s;
 		z-index: 1;
 	}
@@ -58,14 +55,15 @@ export const RoleStyle = styled.div`
 
 	&.active {
 		${RoleFrameStyle}::before {
+			transform: scale(1);
 			transition-delay: ${(props) =>
-				props.delay != null ? `${(+props.delay + 500) / 1000}s` : '0.5s'};
+				props.delay != null ? `${(+props.delay) / 1000}s` : '0s'};
 			opacity: 1;
 		}
 		&::after {
 			transition-delay: ${(props) =>
 				props.delay != null ? `${+props.delay / 1000}s` : '0s'};
-			transform: rotateX(75deg) scale(1);
+			transform: scale(1);
 		}
 	}
 `;

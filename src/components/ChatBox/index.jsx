@@ -10,7 +10,7 @@ import { color } from '@styles/setting.style.jsx';
 import { ChatBoxStyle, NextArrow } from './ChatBox.style';
 
 function CheckBox(
-	{ name, text, nextArrow, aniType, aniDelay, aniCallback, maxHeight, className, slot },
+	{ name, text, nextArrow, aniType, aniDelay, aniCallback, className, slot },
 	ref
 ) {
 	const SLOT_KEY = '_SLOT_';
@@ -267,24 +267,25 @@ function CheckBox(
 	}, [id, name]);
 
 	return (
-		<ChatBoxStyle
-			id={id}
-			role={name.toLowerCase()}
-			maxHeight={maxHeight}
-			className={cx(className)}
-		>
-			<i className="name">{name}</i>
-			<p className="text">
-				{textArray.map((str, index) =>
-					hasSlot ? (
-						<Slot key={index} str={str} element={slot[index]} />
-					) : (
-						<HeightLight key={index} index={index} str={str} />
-					)
-				)}
-			</p>
-			{nextArrow !== false && <NextArrow />}
-		</ChatBoxStyle>
+		<>
+			<ChatBoxStyle
+				id={id}
+				role={name.toLowerCase()}
+				className={cx(className)}
+			>
+				<i className="name">{name}</i>
+				<p className="text">
+					{textArray.map((str, index) =>
+						hasSlot ? (
+							<Slot key={index} str={str} element={slot[index]} />
+						) : (
+							<HeightLight key={index} index={index} str={str} />
+						)
+					)}
+				</p>
+				{nextArrow !== false && <NextArrow />}
+			</ChatBoxStyle>
+		</>
 	);
 }
 

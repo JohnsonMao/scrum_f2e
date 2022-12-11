@@ -18,11 +18,11 @@ export const ListHeaderStyle = styled.header`
 
 export const ListBodyStyle = styled.div`
 	border-radius: 0 0 20px 20px;
-	min-height: 3rem;
+	min-height: 8rem;
 `;
 
 export const ListStyle = styled.div`
-	/* position: relative; */
+	position: relative;
 	width: 33%;
 	border-radius: 20px;
 
@@ -35,18 +35,30 @@ export const ListStyle = styled.div`
 	}
 
 	${ListBodyStyle} {
+		position: relative;
 		background: ${(props) => listStyle[props.type].bg + alpha(30)};
-        backdrop-filter: blur(5px);
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: inherit;
+			backdrop-filter: blur(5px);
+			z-index: -1;
+		}
 	}
 
-    /* &::before,
+    &::before,
     &::after {
         content: '';
         position: absolute;
         width: 100%;
         height: 100%;
         border-radius: inherit;
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(5px);
     }
     &::before {
         top: 12px;
@@ -60,5 +72,5 @@ export const ListStyle = styled.div`
         left: 24px;
 		background: ${(props) => listStyle[props.type].radial};
         z-index: -2;
-    } */
+    }
 `;
