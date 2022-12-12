@@ -28,11 +28,12 @@ export default function Entrance() {
 	const [isClickTime, setIsClickTime] = useState(false);
 	const [stage, setStage] = useState(0);
 	const [poRole, setPoRole] = useState({
-		aniType: '',
+		aniType: 'keep',
 		name: 'po'
 	});
 	const [poChatBox, setPoChatBox] = useState({
 		aniType: 'join',
+		aniDelay: 200,
 		name: 'po',
 		text: '產品待辦清單好了之後 ， 我們來召集 ScrumMaster 和開發團隊共同召開_HEIGHTLIGHT_短衝規劃會議（Sprint Planning）_HEIGHTLIGHT_ 。 短衝即是一個迭代 ， 具有固定時間限制 ， 我們會在這個會議中 ， 決定要完成哪些工作事項來達到商業需求 ， 列出短衝待辦清單 （Sprint Backlog） ， 並由開發團隊在接下來的產品開發週期裡執行 。'
 	});
@@ -91,10 +92,6 @@ export default function Entrance() {
 		switch (stage) {
 			case 0:
 				{
-					setPoRole((pre) => ({
-						...pre,
-						aniType: 'join'
-					}));
 					setSmRole((pre) => ({
 						...pre,
 						aniType: 'join'
@@ -198,11 +195,11 @@ export default function Entrance() {
 				}));
 				setEeRole((pre) => ({
 					...pre,
-					aniType: 'leave'
+					aniType: 'keep'
 				}));
 				setGgRole((pre) => ({
 					...pre,
-					aniType: 'leave'
+					aniType: 'keep'
 				}));
 				setTimeout(() => {
 					navigate('/SprintBacklog');

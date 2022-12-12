@@ -4,6 +4,11 @@
         url('./fonts/GenJyuuGothic-P-Medium.woff') format('woff');
 }
 
+:root {
+    --primary: #00EEF0;
+    --primary-dark: #008D96;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -72,7 +77,8 @@ svg {
     color: #000;
 }
 
-.logo_svg {
+.jira,
+.confluence {
     display: inline-block;
     margin-bottom: -6px;
     height: auto;
@@ -80,7 +86,8 @@ svg {
     cursor: pointer;
 }
 
-.logo_svg:hover path {
+.jira:hover path,
+.confluence:hover path {
     fill: #00EEF0;
 }
 

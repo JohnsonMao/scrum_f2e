@@ -1,0 +1,10 @@
+<svg style='position: absolute; width: 0; height: 0'>
+  <defs>
+    <linearGradient id="buttonGradient"
+            x1="0%" y1="0%"
+            x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="var(--primary)" stop-opacity="1"/>
+      <stop offset="100%" stop-color="var(--primary-dark)" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+</svg>

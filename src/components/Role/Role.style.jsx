@@ -36,6 +36,17 @@ export const RoleStyle = styled.div`
 			props.name === 'sm' ? 'bottom' : 'top'};
 		z-index: 3;
 	}
+	&.keep {
+		img {
+			transform: translateY(0) scale(1);
+		}
+		&::after {
+			transition: 0s;
+		}
+		${RoleFrameStyle}::before {
+			transition: 0s;
+		}
+	}
 
 	&::after {
 		content: '';
@@ -66,16 +77,16 @@ export const RoleStyle = styled.div`
 	}
 
 	&.active {
+		&::after {
+			transition-delay: ${(props) =>
+				props.delay != null ? `${+props.delay / 1000}s` : '0s'};
+			transform: scale(1);
+		}
 		${RoleFrameStyle}::before {
 			transform: scale(1);
 			transition-delay: ${(props) =>
 				props.delay != null ? `${+props.delay / 1000}s` : '0s'};
 			opacity: 1;
-		}
-		&::after {
-			transition-delay: ${(props) =>
-				props.delay != null ? `${+props.delay / 1000}s` : '0s'};
-			transform: scale(1);
 		}
 	}
 `;

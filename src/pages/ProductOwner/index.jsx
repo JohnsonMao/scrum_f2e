@@ -103,19 +103,17 @@ export default function ProductOwner() {
 				setTimeout(() => setMask(true), 1500);
 				break;
 			case 5:
-				setRoleState((pre) => ({
-					...pre,
-					aniType: 'leave',
-					aniCallback: () => {
-						setTimeout(() => {
-							navigate('/SprintPlanning');
-						}, 1000);
-					}
-				}));
 				setChatBoxState((pre) => ({
 					...pre,
 					aniType: 'leave'
 				}));
+				setRoleState((pre) => ({
+					...pre,
+					aniType: 'keep'
+				}));
+				setTimeout(() => {
+					navigate('/SprintPlanning');
+				}, 500);
 				break;
 			default:
 		}
@@ -159,7 +157,7 @@ export default function ProductOwner() {
 			<div className={roleChat}>
 				<Role {...roleState} />
 				<ChatBox
-					slot={[<JiraSvg className="logo_svg jira" />]}
+					slot={[<JiraSvg className="jira" />]}
 					text={text[stage]}
 					{...chatBoxState}
 				/>

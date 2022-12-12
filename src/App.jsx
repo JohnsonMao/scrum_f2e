@@ -10,6 +10,7 @@ import ProgressBar from './components/ProgressBar';
 import Footer from './components/Footer';
 import { ProgressProvider } from './contexts/Progress';
 import { ReactComponent as NoiseSvg } from '@images/filter_noise.svg';
+import { ReactComponent as GradientSvg } from '@images/filter_gradient.svg';
 
 function App() {
 	const particlesInit = useCallback(async (engine) => {
@@ -24,6 +25,7 @@ function App() {
 			<RouterProvider router={router} />
 			<Footer />
 			<NoiseSvg />
+			<GradientSvg />
 		</ProgressProvider>
 	);
 }

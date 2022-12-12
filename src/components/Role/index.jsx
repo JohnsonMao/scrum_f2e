@@ -9,7 +9,7 @@ import dynamics from 'dynamics.js';
 import { cx } from '@linaria/core';
 import { RoleStyle, RoleFrameStyle } from './Role.style';
 
-function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref) {
+function Role({ name, isBottom, initShow, aniType, aniDelay, aniCallback, className }, ref) {
 	const roleModules = import.meta.glob(
 		['/src/assets/images/role*.png', '!/src/assets/images/role*light.png'],
 		{
@@ -24,7 +24,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 	const id = useId();
 	const join = useRef(null);
 	const leave = useRef(null);
-	const [active, setActive] = useState(false);
+	const [state, setState] = useState('');
 
 	useImperativeHandle(ref, () => ({ join, leave }));
 
@@ -43,7 +43,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 				delay,
 				complete
 			};
-			setActive(true);
+			setState('active');
 			dynamics.animate(el, props, options);
 		};
 
@@ -61,7 +61,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 				friction: 400,
 				duration: 600,
 				complete: () => {
-					setActive(false);
+					setState('');
 					complete && complete();
 				}
 			};
@@ -75,6 +75,9 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 			case 'leave':
 				leave(aniCallback);
 				break;
+			case 'keep':
+				setState('active keep');
+				break;
 			default:
 		}
 	}, [id, name, aniType, aniDelay, aniCallback]);
@@ -84,7 +87,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 
 		join.current = (joinParam) => {
 			const complete = joinParam?.complete;
-			setActive(true);
+			setState('active');
 			dynamics.animate(
 				el,
 				{
@@ -103,7 +106,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 
 		leave.current = (leaveParam) => {
 			const complete = leaveParam?.complete;
-			setActive(false);
+			setState('');
 			dynamics.animate(
 				el,
 				{
@@ -130,7 +133,7 @@ function Role({ name, isBottom, aniType, aniDelay, aniCallback, className }, ref
 			isBottom={isBottom}
 			delay={aniDelay}
 			name={name}
-			className={cx(name, className, active ? 'active' : '')}
+			className={cx(name, className, state)}
 		>
 			<RoleFrameStyle>
 				<img id={id} src={roleImages[name]} alt="PO" />

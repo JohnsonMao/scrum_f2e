@@ -1,19 +1,39 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { cx } from '@linaria/core';
 import { DragDropContext } from 'react-beautiful-dnd';
 import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
 import Button from '@/components/Button';
 import List from '@/components/List';
 import { Drop, DropChild, Drag } from '@/components/DnD';
+import Mask from '@/components/Mask';
 import { ReactComponent as JiraSvg } from '@images/jira.svg';
+import { roleChat, fixedFullScreen, flexCenter } from '@styles/utils.style';
+import { MainStyle } from './Main.style';
 import './index.scss';
 
 export default function ProductOwner() {
-	const ggChatBoxRef = useRef(null);
-	const ggRoleRef = useRef(null);
-	const eeChatBoxRef = useRef(null);
-	const eeRoleRef = useRef(null);
+	const [ggRole, setGgRole] = useState({
+		aniType: 'keep',
+		name: 'gg'
+	});
+	const [ggChatBox, setGgChatBox] = useState({
+		aniType: 'join',
+		aniDelay: 1000,
+		name: 'gg'
+	});
+	const [eeRole, setEeRole] = useState({
+		aniType: 'keep',
+		name: 'ee'
+	});
+	const [eeChatBox, setEeChatBox] = useState({
+		aniType: 'join',
+		aniDelay: 200,
+		name: 'ee',
+		text: 'By the way , 我們平常管理任務是使用 _SLOT_ 這套軟體 ， 你有時間記得先去註冊和熟悉唷 !',
+		className: 'eeChatBox'
+	});
 	const [mask, setMask] = useState(false);
 	const [stage, setStage] = useState(0);
 	const [eeGoOut, setEeGoOut] = useState(false);
@@ -25,8 +45,6 @@ export default function ProductOwner() {
 		check: '至少置入兩項以上的 Story，你在嘗試看看',
 		error: '點數總和不能超過團隊負擔上限 20 點唷 ！'
 	};
-	const eeText =
-		'By the way , 我們平常管理任務是使用 _SLOT_ 這套軟體 ， 你有時間記得先去註冊和熟悉唷 !';
 	const [backlog, setBacklog] = useState([
 		{
 			id: 1,
@@ -43,33 +61,32 @@ export default function ProductOwner() {
 	const MAX = 20;
 
 	useEffect(() => {
-		if (stage === 0) {
-			ggChatBoxRef.current.join.current();
-			eeChatBoxRef.current.join.current();
-			ggRoleRef.current.join.current();
-			eeRoleRef.current.join.current();
+		switch (stage) {
+			case 0:
+				break;
+			default:
 		}
 	}, [stage]);
 
 	const closeMask = () => {
 		setMask(false);
-		ggChatBoxRef.current.leave.current();
-		ggRoleRef.current.leave.current();
+		// ggChatBoxRef.current.leave.current();
+		// ggRoleRef.current.leave.current();
 		setTimeout(() => {
-			navigate('/SprintReview');
+			// navigate('/SprintReview');
 		}, 1000);
 	};
 
 	const handleStage = (s) => {
 		setStage(s);
-		ggChatBoxRef.current.toggle.current();
+		// ggChatBoxRef.current.toggle.current();
 
 		switch (s) {
 			case 1:
-				eeChatBoxRef.current.leave.current();
-				eeRoleRef.current.leave.current({
-					complete: () => setEeGoOut(true)
-				});
+				// eeChatBoxRef.current.leave.current();
+				// eeRoleRef.current.leave.current({
+				// 	complete: () => setEeGoOut(true)
+				// });
 				break;
 			case 2:
 				setTimeout(() => {
@@ -133,38 +150,16 @@ export default function ProductOwner() {
 	};
 
 	return (
-		<>
-			<div
-				className={['mask', mask ? 'show' : '', `sb_${stage}`].join(
-					' '
-				)}
-				onClick={closeMask}
-			>
-				<span className="b">點擊畫面任意處繼續</span>
+		<MainStyle>
+			<Mask show={mask} text="點擊畫面任意處繼續" onClick={closeMask} />
+			<div className={roleChat}>
+				<ChatBox text={ggText[stage]} {...ggChatBox} />
+				<Role {...eeRole} />
+				<Role {...ggRole} />
 			</div>
-			<div className="roleChat fixedRT">
-				<div className="roleChat__chat">
-					<ChatBox
-						ref={ggChatBoxRef}
-						text={ggText?.[stage] || ''}
-						name="GG"
-						className="gg"
-					/>
-					<Role
-						ref={eeRoleRef}
-						role="ee"
-						className={eeGoOut ? 'eeGoOut' : ''}
-					/>
-					<Role ref={ggRoleRef} role="gg" />
-				</div>
+			<div className={cx(fixedFullScreen, flexCenter)}>
+				<ChatBox slot={[<JiraSvg className="jira" />]} {...eeChatBox} />
 			</div>
-			<ChatBox
-				ref={eeChatBoxRef}
-				text={eeText}
-				name="EE"
-				className="ee fixedCenter"
-				slot={[<JiraSvg className="jira" />]}
-			/>
 			<Button
 				as="button"
 				className={`stage_${stage} sb_0_button fixedRB`}
@@ -240,6 +235,6 @@ export default function ProductOwner() {
 				text="開始 sprint"
 				onClick={checkSprint}
 			/>
-		</>
+		</MainStyle>
 	);
 }

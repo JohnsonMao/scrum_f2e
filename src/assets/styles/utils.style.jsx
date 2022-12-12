@@ -26,6 +26,7 @@ export const positionCenterX = css`
 `;
 
 export const fixedCenterX = css`
+	--position: fixed;
 	position: fixed;
 	left: 50%;
 	transform: translateX(-50%);
@@ -61,6 +62,7 @@ export const roleChat = css`
 	padding: 2rem 1rem;
 	gap: 2rem;
 	height: 38vh;
+	z-index: 30;
 
 	${RoleStyle} {
 		flex: 0 0 15%;

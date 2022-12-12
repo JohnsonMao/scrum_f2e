@@ -315,12 +315,12 @@ export const StoriesStyle = styled.div`
 	}
 	.storeSpine {
 		position: absolute;
-		top: 0;
-		left: calc(var(--x) * 2.15);
-		width: 43px;
+		top: -1px;
+		left: 216.5px;
+		width: 43.5px;
 		height: auto;
 		transition: 0.3s;
-		transform: translate(-18px, -108px) scale(0.86);
+		transform: translate(-18px, -108px) scale(0.85);
 		opacity: 0;
 	}
 
