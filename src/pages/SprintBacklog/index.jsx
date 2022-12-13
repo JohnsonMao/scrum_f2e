@@ -5,15 +5,29 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
 import Button from '@/components/Button';
-import List from '@/components/List';
-import { Drop, DropChild, Drag } from '@/components/DnD';
 import Mask from '@/components/Mask';
+import Transition from '@/components/Transition';
+import { Drop, DropChild, Drag } from '@/components/DnD';
 import { ReactComponent as JiraSvg } from '@images/jira.svg';
-import { roleChat, fixedFullScreen, flexCenter } from '@styles/utils.style';
-import { MainStyle } from './Main.style';
+import {
+	roleChat,
+	fixedFullScreen,
+	flexCenter,
+	fixedRB
+} from '@styles/utils.style';
+import {
+	MainStyle,
+	ListGroup,
+	ListStyle,
+	ItemStyle,
+	Process
+} from './Main.style';
 import './index.scss';
 
 export default function ProductOwner() {
+	const navigate = useNavigate();
+	const [stage, setStage] = useState(0);
+	const [mask, setMask] = useState(false);
 	const [ggRole, setGgRole] = useState({
 		aniType: 'keep',
 		name: 'gg'
@@ -34,10 +48,19 @@ export default function ProductOwner() {
 		text: 'By the way , 我們平常管理任務是使用 _SLOT_ 這套軟體 ， 你有時間記得先去註冊和熟悉唷 !',
 		className: 'eeChatBox'
 	});
-	const [mask, setMask] = useState(false);
-	const [stage, setStage] = useState(0);
+	const [buttonState, setButtonState] = useState([
+		{
+			aniType: '',
+			aniDelay: 1800,
+			text: '練習去了'
+		},
+		{
+			aniType: '',
+			aniDelay: 2400,
+			text: '開始 sprint'
+		}
+	]);
 	const [eeGoOut, setEeGoOut] = useState(false);
-	const navigate = useNavigate();
 	const ggText = {
 		0: '沒錯，如 EE 說的，我這邊已經把剛剛討論好的點數標上去囉～ 你來練習把任務排到短衝待辦清單吧 ！',
 		1: '換你來試試看吧 ！ \n把 _HEIGHTLIGHT_「 產品待辦清單 」_HEIGHTLIGHT_ 的項目拖進 _HEIGHTLIGHT_「 開發Ａ組的短衝待辦清單 」_HEIGHTLIGHT_ 裡吧 ！\n提示 ： 置入兩項以上的 Story ， 點數總和不能超過團隊負擔上限 20 點唷 ！',
@@ -63,6 +86,51 @@ export default function ProductOwner() {
 	useEffect(() => {
 		switch (stage) {
 			case 0:
+				setButtonState((pre) => {
+					const newButtons = [...pre];
+					newButtons[0].aniType = 'join';
+					return newButtons;
+				});
+				break;
+			case 1:
+				setEeChatBox((pre) => ({
+					...pre,
+					aniType: 'leave'
+				}));
+				setEeRole((pre) => ({
+					...pre,
+					aniType: 'leave',
+					aniCallback: () => {
+						setTimeout(() => {
+							setEeRole((pre) => ({
+								...pre,
+								className: 'd-none'
+							}));
+						}, 300);
+					}
+				}));
+				setGgChatBox((pre) => ({
+					...pre,
+					aniType: 'leave',
+					aniCallback: () => {
+						setGgChatBox((pre) => ({
+							...pre,
+							aniType: 'join'
+						}));
+					}
+				}));
+				setButtonState((pre) => {
+					const newButtons = [...pre];
+					newButtons[0].aniType = 'leave';
+					newButtons[1].aniType = 'join';
+					return newButtons;
+				});
+				break;
+			case 2:
+				break;
+			case 'ckeck':
+				break;
+			case 'error':
 				break;
 			default:
 		}
@@ -79,7 +147,6 @@ export default function ProductOwner() {
 
 	const handleStage = (s) => {
 		setStage(s);
-		// ggChatBoxRef.current.toggle.current();
 
 		switch (s) {
 			case 1:
@@ -161,78 +228,72 @@ export default function ProductOwner() {
 				<ChatBox slot={[<JiraSvg className="jira" />]} {...eeChatBox} />
 			</div>
 			<Button
-				as="button"
-				className={`stage_${stage} sb_0_button fixedRB`}
-				text="練習去了"
-				onClick={() => handleStage(1)}
+				className={fixedRB}
+				onClick={() => setStage(1)}
+				{...buttonState[0]}
 			/>
-			<div className={`sb_lists stage_${stage}`}>
-				<DragDropContext onDragEnd={handleDragEnd}>
-					<List className={`primary sb_list stage_${stage}`}>
-						<Drop droppableId="backlog">
-							<DropChild
-								as="ul"
-								className={`sb_items stage_${stage}`}
-							>
-								{backlog.map((item, index) => (
-									<Drag
-										key={item.id}
-										draggableId={`backlog_${item.id}`}
-										index={index}
-									>
-										<li className="backlog__item">
-											<span className="backlog__number">
-												{item.number}
-											</span>
-											<span>{item.content}</span>
-										</li>
-									</Drag>
-								))}
-							</DropChild>
-						</Drop>
-					</List>
-					<List
-						className={`secondary sb_list stage_${stage} ${
-							danger ? 'danger' : ''
-						}`}
-						title="開發Ａ組的短衝待辦清單"
-						subtitle="Sprint Backlog"
-					>
-						<Drop droppableId="sprint">
-							<DropChild
-								as="ul"
-								className={`sb_items stage_${stage}`}
-							>
-								{sprint.map((item, index) => (
-									<Drag
-										key={item.id}
-										draggableId={`sprint_${item.id}`}
-										index={index}
-									>
-										<li className="sprint__item">
-											<span className="sprint__number">
-												{item.number}
-											</span>
-											<span>{item.content}</span>
-										</li>
-									</Drag>
-								))}
-							</DropChild>
-						</Drop>
-						<div
-							className="process"
-							data-score={`${score}/${MAX} (5人)`}
-							style={{
-								'--score': Math.min(score / MAX, 1).toFixed(2)
-							}}
-						></div>
-					</List>
-				</DragDropContext>
-			</div>
+			<Transition show={stage === 1 || Number.isNaN(+stage)} delay={800}>
+				<ListGroup>
+					<DragDropContext onDragEnd={handleDragEnd}>
+						<ListStyle
+							type="primary"
+							title="產品代辦清單"
+							subtitle="Product Backlog"
+						>
+							<Drop droppableId="backlog">
+								<DropChild as="ul">
+									{backlog.map((item, index) => (
+										<Drag
+											key={item.id}
+											draggableId={`backlog_${item.id}`}
+											index={index}
+										>
+											<ItemStyle>
+												<span>{item.number}</span>
+												<span>{item.content}</span>
+											</ItemStyle>
+										</Drag>
+									))}
+								</DropChild>
+							</Drop>
+						</ListStyle>
+						<ListStyle
+							type="secondary"
+							title="開發Ａ組的短衝待辦清單"
+							subtitle="Sprint Backlog"
+						>
+							<Drop droppableId="sprint">
+								<DropChild as="ul">
+									{sprint.map((item, index) => (
+										<Drag
+											key={item.id}
+											draggableId={`sprint_${item.id}`}
+											index={index}
+										>
+											<ItemStyle>
+												<span>{item.number}</span>
+												<span>{item.content}</span>
+											</ItemStyle>
+										</Drag>
+									))}
+								</DropChild>
+							</Drop>
+							<Process
+								data-score={`${score}/${MAX} (5人)`}
+								style={{
+									'--score': Math.min(score / MAX, 1).toFixed(
+										2
+									)
+								}}
+							></Process>
+						</ListStyle>
+					</DragDropContext>
+				</ListGroup>
+			</Transition>
 			<Button
-				as="button"
-				className={`stage_${stage} sb_1_button fixedRB`}
+				className={fixedRB}
 				text="開始 sprint"
+				{...buttonState[1]}
 				onClick={checkSprint}
 			/>
 		</MainStyle>

@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { color, listStyle, alpha } from '@styles/setting.style';
+import { color, listStyle } from '@styles/setting.style';
 
 export const ListHeaderStyle = styled.header`
 	padding: 15px 0;
@@ -23,7 +23,7 @@ export const ListBodyStyle = styled.div`
 
 export const ListStyle = styled.div`
 	position: relative;
-	width: 33%;
+	width: 36%;
 	border-radius: 20px;
 
 	${ListHeaderStyle} {
@@ -36,7 +36,7 @@ export const ListStyle = styled.div`
 
 	${ListBodyStyle} {
 		position: relative;
-		background: ${(props) => listStyle[props.type].bg + alpha(30)};
+		background: ${(props) => listStyle[props.type].bg1};
 
 		&::before {
 			content: '';
@@ -63,8 +63,8 @@ export const ListStyle = styled.div`
     &::before {
         top: 12px;
         left: 12px;
-		background: ${(props) => listStyle[props.type].bg + alpha(20)};
-        box-shadow: 12px 12px ${(props) => listStyle[props.type].bg + alpha(10)};
+		background: ${(props) => listStyle[props.type].bg2};
+        box-shadow: 12px 12px ${(props) => listStyle[props.type].bg3};
         z-index: -1;
     }
     &::after {

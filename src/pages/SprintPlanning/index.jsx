@@ -21,11 +21,12 @@ import {
 import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
 import Transition from '@/components/Transition';
+import { useWindowClick } from '@/hooks';
 import { Circle, MainStyle, StoriesStyle, StoryStyle } from './Main.style';
 
 export default function Entrance() {
 	const navigate = useNavigate();
-	const [isClickTime, setIsClickTime] = useState(false);
+	const [isClick] = useWindowClick(2400);
 	const [stage, setStage] = useState(0);
 	const [poRole, setPoRole] = useState({
 		aniType: 'keep',
@@ -210,24 +211,8 @@ export default function Entrance() {
 	}, [stage, sprintSmId, storeId, storeCoverId, clockId, navigate]);
 
 	useEffect(() => {
-		const handleClick = () => {
-			isClickTime && setStage((pre) => pre + 1);
-			setIsClickTime(false);
-		};
-		window.addEventListener('click', handleClick);
-		return () => window.removeEventListener('click', handleClick);
-	}, [isClickTime]);
-
-	useEffect(() => {
-		let timer = null;
-		if (!timer && !isClickTime) {
-			timer = setTimeout(() => {
-				setIsClickTime(true);
-				timer = null;
-			}, 2400);
-		}
-		return () => timer && clearTimeout(timer);
-	}, [isClickTime]);
+		isClick && setStage((pre) => pre + 1);
+	}, [isClick]);
 
 	return (
 		<MainStyle>

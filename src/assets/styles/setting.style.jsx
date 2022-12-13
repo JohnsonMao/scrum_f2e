@@ -116,13 +116,17 @@ export const listStyle = {
 	primary: {
 		header: color.primary,
 		dark: color.primaryDark,
-		bg: color.primary,
+		bg1: color.primary + alpha(30),
+		bg2: color.primary + alpha(20),
+		bg3: color.primary + alpha(10),
 		radial: radial(color.primary)
 	},
 	secondary: {
 		header: color.roleTeam1,
 		dark: color.roleTeamDark,
-		bg: color.roleTeam2,
+		bg1: color.roleTeam2 + alpha(40),
+		bg2: color.roleTeam2 + alpha(30),
+		bg3: color.roleTeam2 + alpha(20),
 		radial: radial(color.roleTeam2)
 	}
 }

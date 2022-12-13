@@ -51,12 +51,12 @@ img, picture, svg, video {
 
 h2 {
     line-height: 1.5;
-    font-size: 32px;
+    font-size: calc(32px - 0.5vw);
     font-weight: bold;
 }
 
 h3 {
-    font-size: 24px;
+    font-size: calc(24px - 0.25vw);
 }
 
 button {
