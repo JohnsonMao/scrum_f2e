@@ -19,16 +19,18 @@ const convertToNumber = (number) => {
 };
 
 function Transition({ children, show, duration = 1, delay = 0 }) {
-	const [active, setActive] = useState('');
+	const [active, setActive] = useState('hide');
 	const transformDuration = convertToSecond(duration);
 	const transformDelay = convertToSecond(delay);
 	const activeDelayTime = convertToNumber(delay);
 	const endTotalTime = convertToNumber(delay) + convertToNumber(duration);
 
 	useLayoutEffect(() => {
-		const setState = () => setActive(show ? 'active' : '');
+		const handleActive = () => setActive(show ? 'active' : 'hide');
 		const time = show ? activeDelayTime : endTotalTime;
-		const timer = setTimeout(() => setState(), time);
+		const timer = setTimeout(handleActive, time);
+
+		if (show) setActive(show ? '' : 'active')
 
 		return () => clearTimeout(timer);
 	}, [show, activeDelayTime, endTotalTime]);

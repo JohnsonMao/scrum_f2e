@@ -1,6 +1,6 @@
 .review {
     &_intro {
-        @include flex(space-between, flex-start, row);
+        // @include flex(space-between, flex-start, row);
         margin: 0 2vw;
         margin-top: 33vh;
         gap: 2vw;

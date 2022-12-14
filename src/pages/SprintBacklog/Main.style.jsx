@@ -44,9 +44,9 @@ export const ListStyle = styled(List)`
 
 	${ListBodyStyle} {
 		padding: 24px 32px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 `;
 
@@ -58,25 +58,27 @@ export const ListGroup = styled.div`
 
 export const Process = styled.div`
 	position: relative;
-    margin-top: 12px;
+	box-sizing: content-box;
+	margin-top: 12px;
 	background: ${color.roleTeamDark};
-	height: 20px;
-	border-radius: 10px;
+	border: 4px solid ${color.roleTeamDark};
+	height: 14px;
 	width: 100%;
+	border-radius: 11px;
 
 	&::after {
 		content: '';
 		position: absolute;
-		background: ${color.roleTeam1};
-		border: 4px solid ${color.roleTeamDark};
-		border-radius: inherit;
+		background: ${(props) =>
+			props.danger ? color.danger : color.roleTeam1};
 		height: 100%;
-		width: 100%;
+		border-radius: 7px;
+		width: ${(props) => `${props.percent}%`};
+		transition: 0.3s;
 		transform-origin: left;
-		transform: scaleX(var(--score));
 	}
 	&::before {
-		content: attr(data-score);
+		content: attr(data-content);
 		position: absolute;
 		top: 50%;
 		left: 50%;

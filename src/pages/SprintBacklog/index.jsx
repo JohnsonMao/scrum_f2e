@@ -22,7 +22,6 @@ import {
 	ItemStyle,
 	Process
 } from './Main.style';
-import './index.scss';
 
 export default function ProductOwner() {
 	const navigate = useNavigate();
@@ -60,7 +59,6 @@ export default function ProductOwner() {
 			text: '開始 sprint'
 		}
 	]);
-	const [eeGoOut, setEeGoOut] = useState(false);
 	const ggText = {
 		0: '沒錯，如 EE 說的，我這邊已經把剛剛討論好的點數標上去囉～ 你來練習把任務排到短衝待辦清單吧 ！',
 		1: '換你來試試看吧 ！ \n把 _HEIGHTLIGHT_「 產品待辦清單 」_HEIGHTLIGHT_ 的項目拖進 _HEIGHTLIGHT_「 開發Ａ組的短衝待辦清單 」_HEIGHTLIGHT_ 裡吧 ！\n提示 ： 置入兩項以上的 Story ， 點數總和不能超過團隊負擔上限 20 點唷 ！',
@@ -127,10 +125,9 @@ export default function ProductOwner() {
 				});
 				break;
 			case 2:
-				break;
-			case 'ckeck':
-				break;
-			case 'error':
+				setTimeout(() => {
+					setMask(true);
+				}, 600);
 				break;
 			default:
 		}
@@ -138,30 +135,19 @@ export default function ProductOwner() {
 
 	const closeMask = () => {
 		setMask(false);
-		// ggChatBoxRef.current.leave.current();
-		// ggRoleRef.current.leave.current();
-		setTimeout(() => {
-			// navigate('/SprintReview');
-		}, 1000);
-	};
-
-	const handleStage = (s) => {
-		setStage(s);
-
-		switch (s) {
-			case 1:
-				// eeChatBoxRef.current.leave.current();
-				// eeRoleRef.current.leave.current({
-				// 	complete: () => setEeGoOut(true)
-				// });
-				break;
-			case 2:
+		setGgChatBox((pre) => ({
+			...pre,
+			aniType: 'leave'
+		}));
+		setGgRole((pre) => ({
+			...pre,
+			aniType: 'leave',
+			aniCallback: () => {
 				setTimeout(() => {
-					setMask(true);
-				}, 600);
-				break;
-			default:
-		}
+					navigate('/SprintReview');
+				}, 1000);
+			}
+		}));
 	};
 
 	const handleDragEnd = ({ source, destination }) => {
@@ -204,16 +190,19 @@ export default function ProductOwner() {
 	};
 
 	const checkSprint = () => {
-		console.log(score, MAX, sprint.length);
+		setGgChatBox((pre) => ({
+			...pre,
+			aniType: 'toggle'
+		}));
 		if (score <= MAX && sprint.length < 2) {
-			handleStage('check');
+			setStage('check');
 			return;
 		}
 		if (score > MAX) {
-			handleStage('error');
+			setStage('error');
 			return;
 		}
-		handleStage(2);
+		setStage(2);
 	};
 
 	return (
@@ -279,12 +268,11 @@ export default function ProductOwner() {
 								</DropChild>
 							</Drop>
 							<Process
-								data-score={`${score}/${MAX} (5人)`}
-								style={{
-									'--score': Math.min(score / MAX, 1).toFixed(
-										2
-									)
-								}}
+								data-content={`${score}/${MAX} (5人)`}
+								percent={
+									Math.min(score / MAX, 1).toFixed(2) * 100
+								}
+								danger={danger}
 							></Process>
 						</ListStyle>
 					</DragDropContext>

@@ -1,25 +1,42 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd';
+import Vivus from 'vivus';
 import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
 import Button from '@/components/Button';
 import List from '@/components/List';
+import Mask from '@/components/Mask';
 import { Drop, DropChild, Drag } from '@/components/DnD';
 import { ReactComponent as ConfluenceSvg } from '@images/confluence.svg';
 import { ReactComponent as SprintProcessSvg } from '@images/sprint_process.svg';
 import sprintDailyPng from '@images/sprint_daily.png';
 import sprintReviewPng from '@images/sprint_review.png';
 import sprintRetroPng from '@images/sprint_retro.png';
+import { useWindowClick } from '@/hooks';
+import { roleChat } from '@styles/utils.style';
+import {
+	MainStyle,
+	IntroList,
+	IntroItem,
+	IntroHeader,
+	IntroContent
+} from './Main.style';
 import './index.scss';
-import Vivus from 'vivus';
 
 export default function ProductOwner() {
-	const eeChatBoxRef = useRef(null);
-	const eeRoleRef = useRef(null);
-	const [mask, setMask] = useState(false);
-	const [stage, setStage] = useState(0);
 	const navigate = useNavigate();
+	const [stage, setStage] = useState(0);
+	const [mask, setMask] = useState(false);
+	const [isClick] = useWindowClick(2400);
+	const [eeRole, setEeRole] = useState({
+		aniType: '',
+		name: 'ee'
+	});
+	const [eeChatBox, setEeChatBox] = useState({
+		aniType: 'join',
+		name: 'ee'
+	});
 	const sprintProcess = useId();
 	const eeText = {
 		0: '等等等等等 ， 你都還不知道什麼是 Sprint 吧 ！ 讓我先為你介紹一下～\n仔細聽好唷 ， 等等會考考你 ！',
@@ -74,149 +91,95 @@ export default function ProductOwner() {
 		}
 	];
 	const [sprint, setSprint] = useState([]);
-	const [score, setScore] = useState(0);
-	const [danger, setDanger] = useState(false);
-	const [isClickTime, setIsClickTime] = useState(false);
-	const MAX = 20;
 
-	const handleStage = useCallback((s) => {
-		eeChatBoxRef.current.toggle.current();
-		setStage(s);
+	const handleStage = useCallback(
+		(s) => {
+			setStage(s);
 
-		switch (s) {
-			case 1:
-				setTimeout(() => {
-					handleStage(2);
-				}, 6000);
-				break;
-			case 2:
-				break;
-			case 3:
-				{
-					const svg = new Vivus(sprintProcess, {
-						type: 'oneByOne',
-						duration: 50
-					});
-				}
+			switch (s) {
+				case 1:
+					setTimeout(() => {
+						handleStage(2);
+					}, 6000);
+					break;
+				case 2:
+					break;
+				case 3:
+					{
+						const svg = new Vivus(sprintProcess, {
+							type: 'oneByOne',
+							duration: 50
+						});
+					}
+					break;
+				default:
+			}
+		},
+		[sprintProcess]
+	);
+
+	useEffect(() => {
+		switch (stage) {
+			case 0:
+				setEeRole((pre) => ({
+					...pre,
+					aniType: 'join'
+				}));
 				break;
 			default:
 		}
-	}, [sprintProcess]);
-
-	useEffect(() => {
-		if (stage === 0) {
-			eeChatBoxRef.current.join.current();
-			eeRoleRef.current.join.current();
-		}
 	}, [stage]);
-
-	const closeMask = () => {
-		setMask(false);
-		setTimeout(() => {
-			navigate('/SprintPlanning');
-		}, 1000);
-	};
 
 	const handleDragEnd = ({ source, destination }) => {
 		if (!destination) return;
-		const isSelf = source.droppableId === destination.droppableId;
-		const isBacklog = source.droppableId === 'backlog';
-		const selfItem = isBacklog
-			? backlog[source.index]
-			: sprint[source.index];
-		const changeSelf = (pre) => {
-			const result = pre.filter((_, i) => i !== source.index);
-			result.splice(destination.index, 0, selfItem);
-			return result;
-		};
-		const addItemSelf = (pre) => {
-			const result = [...pre];
-			result.splice(destination.index, 0, selfItem);
-			return result;
-		};
-		const filterSelf = (items) => () =>
-			items.filter((_, i) => i !== source.index);
-
-		if (isSelf) {
-			isBacklog ? setBacklog(changeSelf) : setSprint(changeSelf);
-		} else if (isBacklog) {
-			const newScore = score + selfItem.number;
-
-			if (newScore > MAX) setDanger(true);
-			setScore(newScore);
-			setSprint(addItemSelf);
-			setBacklog(filterSelf(backlog));
-		} else {
-			const newScore = score - selfItem.number;
-
-			if (newScore <= MAX) setDanger(false);
-			setScore(newScore);
-			setBacklog(addItemSelf);
-			setSprint(filterSelf(sprint));
-		}
 	};
 
-	const checkSprint = () => {
-		console.log(score, MAX, sprint.length);
-		if (score <= MAX && sprint.length < 2) {
-			handleStage('check');
-			return;
-		}
-		if (score > MAX) {
-			handleStage('error');
-			return;
-		}
-		handleStage(2);
+	useEffect(() => {
+		isClick && setStage((pre) => pre + 1);
+	}, [isClick]);
+
+	const closeMask = () => {
+		setMask(false);
+		setStage((pre) => pre + 1);
 	};
 
 	return (
-		<>
-			<div
-				className={['mask', mask ? 'show' : '', `review_${stage}`].join(
-					' '
-				)}
-				onClick={closeMask}
-			>
-				<span className="b">點擊畫面任意處繼續</span>
+		<MainStyle>
+			<Mask show={mask} text="點擊畫面任意處繼續" onClick={closeMask} />
+			<div className={roleChat}>
+				<ChatBox
+					text={eeText?.[stage] || ''}
+					slot={[<ConfluenceSvg className="confluence" />]}
+					{...eeChatBox}
+				/>
+				<Role {...eeRole} />
 			</div>
-			<div className="roleChat fixedRT">
-				<div className="roleChat__chat">
-					<ChatBox
-						ref={eeChatBoxRef}
-						text={eeText?.[stage] || ''}
-						name="EE"
-						className="ee"
-						slot={[<ConfluenceSvg className="confluence" />]}
-					/>
-					<Role ref={eeRoleRef} role="ee" />
-				</div>
-			</div>
-			<ul className={`review_intro stage_${stage}`}>
+			<IntroList>
 				{intro.map((item, index) => {
 					return (
-						<li className='review_intro__item' key={index}>
-							<div><img src={item.img} alt={item.subtitle} /></div>
-							<div className='header'>
+						<IntroItem key={index}>
+							<img src={item.img} alt={item.subtitle} />
+							<IntroHeader>
 								<h2>{item.title}</h2>
-								<h3 className='fz-s'>{item.subtitle}</h3>
-							</div>
-							<div>
+								<h3 className="fz-s">{item.subtitle}</h3>
+							</IntroHeader>
+							<IntroContent>
 								{item.content.map((text, textIndex) => {
 									return typeof text === 'string' ? (
-										<div className='review_intro__content' key={textIndex}>{text}</div>
+										<div key={textIndex}>{text}</div>
 									) : (
-										<ul className='review_intro__content_list' key={textIndex}>
+										<ul key={textIndex}>
 											{text.map((t, i) => (
 												<li key={i}>{t}</li>
 											))}
 										</ul>
 									);
 								})}
-							</div>
-						</li>
+							</IntroContent>
+						</IntroItem>
 					);
 				})}
-			</ul>
+			</IntroList>
 			<Button
 				as="button"
 				className={`stage_${stage} review_1_button fixedRB`}
@@ -225,7 +188,10 @@ export default function ProductOwner() {
 			/>
 			<div className={`review_lists stage_${stage}`}>
 				<DragDropContext onDragEnd={handleDragEnd}>
-					<SprintProcessSvg id={sprintProcess} className='sprintProcess' />
+					<SprintProcessSvg
+						id={sprintProcess}
+						className="sprintProcess"
+					/>
 					<Drop droppableId="backlog">
 						<DropChild
 							as="ul"
@@ -248,9 +214,6 @@ export default function ProductOwner() {
 						</DropChild>
 					</Drop>
 					<List
-						className={`secondary review_list stage_${stage} ${
-							danger ? 'danger' : ''
-						}`}
 						title="開發Ａ組的短衝待辦清單"
 						subtitle="Sprint Backlog"
 					>
@@ -275,22 +238,9 @@ export default function ProductOwner() {
 								))}
 							</DropChild>
 						</Drop>
-						<div
-							className="process"
-							data-score={`${score}/${MAX} (5人)`}
-							style={{
-								'--score': Math.min(score / MAX, 1).toFixed(2)
-							}}
-						></div>
 					</List>
 				</DragDropContext>
 			</div>
-			<Button
-				as="button"
-				className={`stage_${stage} review_3_button fixedRB`}
-				text="我完成了"
-				onClick={checkSprint}
-			/>
-		</>
+		</MainStyle>
 	);
 }
