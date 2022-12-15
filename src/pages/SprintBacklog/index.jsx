@@ -125,6 +125,11 @@ export default function ProductOwner() {
 				});
 				break;
 			case 2:
+				setButtonState((pre) => {
+					const newButtons = [...pre];
+					newButtons[1].aniType = 'leave';
+					return newButtons;
+				});
 				setTimeout(() => {
 					setMask(true);
 				}, 600);

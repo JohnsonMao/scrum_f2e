@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import './index.scss';
+import { useContext } from 'react';
+import { ProgressContext } from '@/contexts/Progress';
+import { Root, BgVillage } from './Background.style';
+import { fixedFullScreen } from '@styles/utils.style';
 
 function Background() {
 	const bgImages = import.meta.glob('/src/assets/images/bg_village*.png', {
@@ -7,8 +10,9 @@ function Background() {
 		import: 'default'
 	});
 
-	const [parallax, setParallax] = useState('0%');
-	
+	const { state } = useContext(ProgressContext);
+	const [parallax, setParallax] = useState(0);
+
 	useEffect(() => {
 		let timer = null;
 
@@ -16,10 +20,10 @@ function Background() {
 			if (!timer) {
 				timer = setTimeout(() => {
 					setParallax(
-						((e.pageX / window.innerWidth) * 10 - 5).toFixed(2) + '%'
+						((e.pageX / window.innerWidth) * 10 - 5).toFixed(1)
 					);
-					timer = null
-				}, 10)
+					timer = null;
+				}, 20);
 			}
 		};
 
@@ -28,20 +32,17 @@ function Background() {
 		return () => {
 			window.removeEventListener('mousemove', handleMouse);
 			timer && clearTimeout(timer);
-		}
+		};
 	}, []);
 
 	return (
-		<div className="bgRoot" style={{ '--bg-parallax': parallax }}>
-			{Object.keys(bgImages).map((imgKey, index) => (
-				<div
-					key={imgKey}
-					className={['bgVillage', `bgVillage-${index}`].join(' ')}
-				>
+		<Root parallax={parallax} className={fixedFullScreen}>
+			{Object.keys(bgImages).map((imgKey) => (
+				<BgVillage key={imgKey}>
 					<img src={bgImages[imgKey]} alt="background" />
-				</div>
+				</BgVillage>
 			))}
-		</div>
+		</Root>
 	);
 }
 

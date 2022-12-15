@@ -1,5 +1,4 @@
 import { createHashRouter } from 'react-router-dom';
-import Loading from '@/pages/Loading';
 import Entrance from '@/pages/Entrance';
 import ProductOwner from '@/pages/ProductOwner';
 import SprintPlanning from '@/pages/SprintPlanning';
@@ -11,10 +10,6 @@ import Finish from '@/pages/Finish';
 const router = [
 	{
 		path: '/',
-		element: <Loading />
-	},
-	{
-		path: '/Entrance',
 		element: <Entrance />
 	},
 	{

@@ -31,7 +31,8 @@ export const IntroHeader = styled.header`
 export const IntroItem = styled.li`
 	flex: 0 0 calc(33.33% - 2vw);
 	transition-duration: 0.5s;
-	/* transform: translateY(200px); */
+	transform: translateY(200px);
+	opacity: 0;
 
 	&:nth-child(2) {
 		transition-delay: 0.25s;

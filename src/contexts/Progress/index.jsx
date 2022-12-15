@@ -15,9 +15,14 @@ export const ProgressProvider = ({ children }) => {
 		});
 	};
 
+	const loaded = () => {
+		dispatch({ type: ACTIONS.LOADED });
+	};
+
 	const value = {
 		state,
-		next
+		next,
+		loaded
 	};
 
 	return (

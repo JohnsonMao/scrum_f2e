@@ -31,6 +31,7 @@ export const ButtonStyle = styled.button`
 	}
 
 	.buttonText {
+		white-space: nowrap;
 		transition: 0.3s;
 	}
 

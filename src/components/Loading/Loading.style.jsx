@@ -2,8 +2,8 @@ import { styled } from '@linaria/react';
 import { color, radial, primaryLinear } from '@styles/setting.style';
 
 export const LoadingStyle = styled.div`
+	background: ${color.bgDark};
 	flex-direction: column;
-	height: 100vh;
 	overflow: hidden;
 	gap: 24px;
 
@@ -30,7 +30,7 @@ export const LoadingImgStyle = styled.div`
 		width: 100%;
 		height: 100%;
 		background: ${radial(color.primary)};
-		transform: translateY(38%) scaleX(1.6) rotateX(60deg);
+		transform: translateY(42%) scaleX(1.6) rotateX(60deg);
 		z-index: -1;
 	}
 `;

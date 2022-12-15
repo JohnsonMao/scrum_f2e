@@ -72,6 +72,7 @@ export const ChatBoxStyle = styled.div`
 				? '40px 84px 40px 100px'
 				: '100px 84px'};
 		height: 100%;
+		max-height: 60vh;
 		overflow: auto;
 		pointer-events: auto;
 		user-select: auto;
@@ -82,11 +83,22 @@ export const ChatBoxStyle = styled.div`
 
 		&::-webkit-scrollbar-thumb {
 			background: linear-gradient(
-				transparent 25px,
-				${(props) => role[props.role]?.color || role.po.color} 30px,
+				transparent
+					${(props) =>
+						roleKeys.includes(props.role) ? '25px' : '60px'},
 				${(props) => role[props.role]?.color || role.po.color}
-					calc(100% - 30px),
-				transparent calc(100% - 25px)
+					${(props) =>
+						roleKeys.includes(props.role) ? '30px' : '70px'},
+				${(props) => role[props.role]?.color || role.po.color}
+					${(props) =>
+						roleKeys.includes(props.role)
+							? 'calc(100% - 30px)'
+							: 'calc(100% - 70px)'},
+				transparent
+					${(props) =>
+						roleKeys.includes(props.role)
+							? 'calc(100% - 25px)'
+							: 'calc(100% - 60px)'}
 			);
 		}
 		.heightlight {

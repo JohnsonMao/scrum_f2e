@@ -1,7 +1,8 @@
-export const initState = { max: 8, progress: 0 };
+export const initState = { loading: true, max: 8, progress: 0 };
 
 export const ACTIONS = {
-	NEXT: 'NEXT'
+	NEXT: 'NEXT',
+	LOADED: 'LOADED'
 };
 
 const ProgressReducer = (state, action) => {
@@ -10,6 +11,8 @@ const ProgressReducer = (state, action) => {
 	switch (type) {
 		case ACTIONS.NEXT:
 			return { ...state, progress: payload.progress };
+		case ACTIONS.LOADED:
+			return { ...state, loading: false };
 		default:
 			return state;
 	}

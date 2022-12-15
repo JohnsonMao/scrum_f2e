@@ -235,9 +235,15 @@ export const StoriesStyle = styled.div`
 	--x: calc(var(--w) + var(--g));
 	--y: calc(var(--h) + var(--g));
 
+	@media (max-width: 900px) {
+		--w: 55px;
+		--h: 110px;
+		--g: 1.5rem;
+	}
+
 	bottom: 2rem;
 	display: grid;
-	grid-template-columns: repeat(9, var(--w));
+	grid-template-columns: 35px repeat(8, var(--w));
 	grid-template-rows: repeat(2, var(--h));
 	gap: var(--g);
 
@@ -264,8 +270,6 @@ export const StoriesStyle = styled.div`
 	}
 	div:nth-child(1) {
 		grid-column: 1/3;
-		padding-left: 3rem;
-		padding-bottom: 3rem;
 		opacity: 0;
 	}
 	div:nth-child(2) {

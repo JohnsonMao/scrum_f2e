@@ -22,7 +22,6 @@ import {
 	IntroHeader,
 	IntroContent
 } from './Main.style';
-import './index.scss';
 
 export default function ProductOwner() {
 	const navigate = useNavigate();

@@ -7,7 +7,6 @@ import Button from '@/components/Button';
 import List from '@/components/List';
 import { Drop, DropChild, Drag } from '@/components/DnD';
 import { ReactComponent as JiraSvg } from '@images/jira.svg';
-import './index.scss';
 
 export default function ProductOwner() {
 	const ggChatBoxRef = useRef(null);
