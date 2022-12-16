@@ -24,11 +24,11 @@ function Layout() {
 
 	return (
 		<>
-            <Loading />
+            {state.loading && <Loading />}
 			<Background />
 			<ProgressBar />
 			<Particles url={particlesJson} init={particlesInit} />
-			<RouterProvider router={router} />
+			{!state.loading && <RouterProvider router={router} />}
 			<Footer />
 			<NoiseSvg />
 			<GradientSvg />

@@ -130,3 +130,7 @@ export const listStyle = {
 		radial: radial(color.roleTeam2)
 	}
 }
+
+export const rwd = {
+	l: 'max-width: 900px'
+}

@@ -32,13 +32,6 @@ export default defineConfig(({ mode }) => {
 				'@styles': '/src/assets/styles'
 			}
 		},
-		css: {
-			preprocessorOptions: {
-				scss: {
-					additionalData: '@import "@/assets/styles/inject.scss";'
-				}
-			}
-		},
 		build: {
 			outDir: 'dist',
 			target: isDev ? 'modules' : 'es2015'

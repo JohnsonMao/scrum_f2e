@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { color, alpha, radial } from '@styles/setting.style';
+import { color, alpha, radial, rwd } from '@styles/setting.style';
 import { RoleStyle } from '@/components/Role/Role.style';
 
 const stageConfig = {
@@ -235,7 +235,7 @@ export const StoriesStyle = styled.div`
 	--x: calc(var(--w) + var(--g));
 	--y: calc(var(--h) + var(--g));
 
-	@media (max-width: 900px) {
+	@media (${rwd.l}) {
 		--w: 55px;
 		--h: 110px;
 		--g: 1.5rem;
@@ -320,12 +320,16 @@ export const StoriesStyle = styled.div`
 	.storeSpine {
 		position: absolute;
 		top: -1px;
-		left: 216.5px;
-		width: 43.5px;
+		left: 181.5px;
+		width: calc(var(--w) * 0.62);
 		height: auto;
 		transition: 0.3s;
 		transform: translate(-18px, -108px) scale(0.85);
 		opacity: 0;
+
+		@media (${rwd.l}) {
+			left: 145px;
+		}
 	}
 
 	&.ready {
