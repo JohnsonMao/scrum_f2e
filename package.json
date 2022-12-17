@@ -23,6 +23,7 @@
     "vivus": "^0.4.6"
   },
   "devDependencies": {
+    "@linaria/shaker": "^4.2.6",
     "@linaria/vite": "^4.2.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/react": "^18.0.17",
