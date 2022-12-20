@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Vivus from 'vivus';
@@ -7,8 +7,8 @@ import Role from '@/components/Role';
 import Button from '@/components/Button';
 import List from '@/components/List';
 import Mask from '@/components/Mask';
+import LogoLink from '@/components/LogoLink';
 import { Drop, DropChild, Drag } from '@/components/DnD';
-import { ReactComponent as ConfluenceSvg } from '@images/confluence.svg';
 import { ReactComponent as SprintProcessSvg } from '@images/sprint_process.svg';
 import sprintDailyPng from '@images/sprint_daily.png';
 import sprintReviewPng from '@images/sprint_review.png';
@@ -91,32 +91,6 @@ export default function ProductOwner() {
 	];
 	const [sprint, setSprint] = useState([]);
 
-	const handleStage = useCallback(
-		(s) => {
-			setStage(s);
-
-			switch (s) {
-				case 1:
-					setTimeout(() => {
-						handleStage(2);
-					}, 6000);
-					break;
-				case 2:
-					break;
-				case 3:
-					{
-						const svg = new Vivus(sprintProcess, {
-							type: 'oneByOne',
-							duration: 50
-						});
-					}
-					break;
-				default:
-			}
-		},
-		[sprintProcess]
-	);
-
 	useEffect(() => {
 		switch (stage) {
 			case 0:
@@ -124,6 +98,20 @@ export default function ProductOwner() {
 					...pre,
 					aniType: 'join'
 				}));
+				break;
+			case 1:
+				setEeChatBox((pre) => ({
+					...pre,
+					aniType: 'toggle'
+				}));
+				break;
+			case 3:
+				{
+					const svg = new Vivus(sprintProcess, {
+						type: 'oneByOne',
+						duration: 50
+					});
+				}
 				break;
 			default:
 		}
@@ -148,7 +136,7 @@ export default function ProductOwner() {
 			<div className={roleChat}>
 				<ChatBox
 					text={eeText?.[stage] || ''}
-					slot={[<ConfluenceSvg className="confluence" />]}
+					slot={[<LogoLink logoName="Confluence" />]}
 					{...eeChatBox}
 				/>
 				<Role {...eeRole} />
@@ -183,7 +171,7 @@ export default function ProductOwner() {
 				as="button"
 				className={`stage_${stage} review_1_button fixedRB`}
 				text="練習去了"
-				onClick={() => handleStage(3)}
+				onClick={() => setStage(3)}
 			/>
 			<div className={`review_lists stage_${stage}`}>
 				<DragDropContext onDragEnd={handleDragEnd}>

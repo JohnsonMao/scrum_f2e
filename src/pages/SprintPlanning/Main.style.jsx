@@ -24,7 +24,7 @@ const stageConfig = {
 		bg1: color.roleSm + alpha(15),
 		bg2: radial(color.roleSm),
 		tooltip: color.roleSmDark,
-		padding: '3rem',
+		padding: '4rem',
 		translate: 'translate(-120%, -85%)'
 	},
 	3: {
@@ -35,16 +35,6 @@ const stageConfig = {
 		padding: '3rem',
 		translate: 'translate(-120%, -85%)'
 	}
-};
-
-const clockImg = {
-	1: '../../../src/assets/images/clock_1.svg',
-	2: '../../../src/assets/images/clock_2.svg',
-	3: '../../../src/assets/images/clock_3.svg',
-	4: '../../../src/assets/images/clock_4.svg',
-	5: '../../../src/assets/images/clock_5.svg',
-	6: '../../../src/assets/images/clock_6.svg',
-	7: '../../../src/assets/images/bomb.svg'
 };
 
 export const Circle = styled.div`
@@ -123,12 +113,12 @@ export const Circle = styled.div`
 		}
 	}
 	.sprint {
-		top: 16%;
-		left: 16%;
+		top: 18%;
+		left: 22%;
 	}
 	.sprintBacklog {
-		top: 16%;
-		right: 0;
+		top: 18%;
+		right: 8%;
 	}
 	${RoleStyle} {
 		position: absolute;
@@ -172,8 +162,8 @@ export const Circle = styled.div`
 		right: 25%;
 	}
 	.storyPoint {
-		bottom: -6%;
-		left: 19.5%;
+		bottom: 4%;
+		left: 25%;
 
 		&::before {
 			top: -180%;

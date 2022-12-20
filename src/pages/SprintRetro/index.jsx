@@ -5,8 +5,8 @@ import ChatBox from '@/components/ChatBox';
 import Role from '@/components/Role';
 import Button from '@/components/Button';
 import List from '@/components/List';
+import LogoLink from '@/components/LogoLink';
 import { Drop, DropChild, Drag } from '@/components/DnD';
-import { ReactComponent as JiraSvg } from '@images/jira.svg';
 
 export default function ProductOwner() {
 	const ggChatBoxRef = useRef(null);
@@ -160,7 +160,7 @@ export default function ProductOwner() {
 				text={eeText}
 				name="EE"
 				className="ee fixedCenter"
-				slot={[<JiraSvg className="jira" />]}
+				slot={[<LogoLink logoName="Jira" />]}
 			/>
 			<Button
 				as="button"

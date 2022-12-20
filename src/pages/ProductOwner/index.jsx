@@ -6,8 +6,8 @@ import Role from '@/components/Role';
 import Button from '@/components/Button';
 import Mask from '@/components/Mask';
 import Transition from '@/components/Transition';
+import LogoLink from '@/components/LogoLink';
 import { Drop, DropChild, Drag } from '@/components/DnD';
-import { ReactComponent as JiraSvg } from '@images/jira.svg';
 import { ReactComponent as HandSvg } from '@images/hand.svg';
 import { roleChat, fixedRB } from '@styles/utils.style';
 import { ListStyle, ListSideStyle, ItemStyle, ItemsStyle } from './List.style';
@@ -157,7 +157,7 @@ export default function ProductOwner() {
 			<div className={roleChat}>
 				<Role {...roleState} />
 				<ChatBox
-					slot={[<JiraSvg className="jira" />]}
+					slot={[<LogoLink logoName="JiraSvg" />]}
 					text={text[stage]}
 					{...chatBoxState}
 				/>

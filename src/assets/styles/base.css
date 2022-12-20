@@ -80,28 +80,6 @@ svg {
     pointer-events: none;
 }
 
-.jira,
-.confluence {
-    display: inline-block;
-    margin-bottom: -6px;
-    height: auto;
-    pointer-events: auto;
-    cursor: pointer;
-}
-
-.jira:hover path,
-.confluence:hover path {
-    fill: #00EEF0;
-}
-
-.jira {
-    width: 90px;
-}
-
-.confluence {
-    width: 200px;
-}
-
 .fz-s {
     font-size: 16px;
 }

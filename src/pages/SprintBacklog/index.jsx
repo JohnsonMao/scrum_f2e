@@ -7,8 +7,8 @@ import Role from '@/components/Role';
 import Button from '@/components/Button';
 import Mask from '@/components/Mask';
 import Transition from '@/components/Transition';
+import LogoLink from '@/components/LogoLink';
 import { Drop, DropChild, Drag } from '@/components/DnD';
-import { ReactComponent as JiraSvg } from '@images/jira.svg';
 import {
 	roleChat,
 	fixedFullScreen,
@@ -219,7 +219,7 @@ export default function ProductOwner() {
 				<Role {...ggRole} />
 			</div>
 			<div className={cx(fixedFullScreen, flexCenter)}>
-				<ChatBox slot={[<JiraSvg className="jira" />]} {...eeChatBox} />
+				<ChatBox slot={[<LogoLink logoName="Jira" />]} {...eeChatBox} />
 			</div>
 			<Button
 				className={fixedRB}

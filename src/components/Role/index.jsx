@@ -18,8 +18,16 @@ function Role({
 			import: 'default'
 		}
 	);
+	const lightModules = import.meta.glob('/src/assets/images/role*light.png', {
+		eager: true,
+		import: 'default'
+	});
 	const roleImages = Object.keys(roleModules).reduce((obj, key) => {
 		obj[/role_(.*)\.png/.exec(key)?.[1]] = roleModules[key];
+		return obj;
+	}, {});
+	const lightImages = Object.keys(lightModules).reduce((obj, key) => {
+		obj[/role_(.*)_light\.png/.exec(key)?.[1]] = lightModules[key];
 		return obj;
 	}, {});
 	const id = useId();
@@ -47,7 +55,7 @@ function Role({
 		const leave = (complete) => {
 			const props = {
 				scale: 0.5,
-				translateY: name === 'sm' ? 150 : -150
+				translateY: name === 'sm' ? 200 : -200
 			};
 			const options = {
 				type: dynamics.bezier,
@@ -85,6 +93,7 @@ function Role({
 			delay={aniDelay - 400}
 			name={name}
 			className={cx(name, className, state)}
+			bgLight={lightImages[name]}
 		>
 			<RoleFrameStyle>
 				<img id={id} src={roleImages[name]} alt="PO" />

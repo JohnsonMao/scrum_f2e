@@ -1,13 +1,19 @@
-import React, { useId, useLayoutEffect, useRef } from 'react';
+import React, { useState, useId, useLayoutEffect, useRef } from 'react';
 import dynamics from 'dynamics.js';
 import { cx } from '@linaria/core';
 import { color } from '@styles/setting.style.jsx';
 import { ChatBoxStyle, NextArrow } from './ChatBox.style';
 
-function CheckBox(
-	{ name, text, nextArrow, aniType, aniDelay, aniCallback, className, slot },
-	ref
-) {
+function CheckBox({
+	name,
+	text,
+	nextArrow,
+	aniType,
+	aniDelay,
+	aniCallback,
+	className,
+	slot
+}) {
 	const SLOT_KEY = '_SLOT_';
 	const HEIGHTLIGHT_KEY = '_HEIGHTLIGHT_';
 	const hasSlot = typeof text === 'string' && text.includes(SLOT_KEY);
@@ -58,7 +64,8 @@ function CheckBox(
 			});
 		};
 
-		const leave = (complete) => {
+		const leave = (complete, isToggle) => {
+			if (isToggle) processProps.color = 'transparent';
 			dynamics.animate(el, processProps, {
 				type: dynamics.linear,
 				friction: 50,

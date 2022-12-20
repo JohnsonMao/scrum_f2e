@@ -71,9 +71,7 @@ export const RoleStyle = styled.div`
 			props.name === 'sm' ? 'bottom' : 'top'};
 		background-position: ${(props) =>
 			props.name === 'sm' ? 'bottom' : 'top'};
-		background-image: ${(props) =>
-			props.name &&
-			`url(/src/assets/images/role_${props.name}_light.png)`};
+		background-image: ${(props) => `url(${props.bgLight})`};
 	}
 
 	&.active {
