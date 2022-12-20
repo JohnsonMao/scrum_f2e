@@ -157,7 +157,7 @@ export default function ProductOwner() {
 			<div className={roleChat}>
 				<Role {...roleState} />
 				<ChatBox
-					slot={[<LogoLink logoName="JiraSvg" />]}
+					slot={[<LogoLink logoName="Jira" />]}
 					text={text[stage]}
 					{...chatBoxState}
 				/>
