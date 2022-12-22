@@ -1,3 +1,4 @@
+import { cx } from '@linaria/core';
 import { useState, useLayoutEffect } from 'react';
 import TransitionStyle from './Transition.style';
 
@@ -18,7 +19,7 @@ const convertToNumber = (number) => {
 	return +number;
 };
 
-function Transition({ children, show, duration = 1, delay = 0 }) {
+function Transition({ children, className, show, duration = 1, delay = 0 }) {
 	const [active, setActive] = useState('hide');
 	const transformDuration = convertToSecond(duration);
 	const transformDelay = convertToSecond(delay);
@@ -40,7 +41,7 @@ function Transition({ children, show, duration = 1, delay = 0 }) {
 			duration={transformDuration}
 			delay={transformDelay}
 			show={show}
-			className={active}
+			className={cx(active, className)}
 		>
 			{children}
 		</TransitionStyle>
