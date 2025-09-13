@@ -9,8 +9,8 @@ import Loading from '@/components/Loading';
 import Background from '@/components/Background';
 import ProgressBar from '@/components/ProgressBar';
 import Footer from '@/components/Footer';
-import { ReactComponent as NoiseSvg } from '@images/filter_noise.svg';
-import { ReactComponent as GradientSvg } from '@images/filter_gradient.svg';
+import NoiseSvg from '@images/filter_noise.svg?react';
+import GradientSvg from '@images/filter_gradient.svg?react';
 import { ProgressContext } from '@/contexts/Progress';
 
 function App() {

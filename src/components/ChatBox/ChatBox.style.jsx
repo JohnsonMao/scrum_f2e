@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { ReactComponent as TriangleSvg } from '@images/triangle.svg';
+import TriangleSvg from '@images/triangle.svg?react';
 import { color, role } from '@styles/setting.style';
 
 const roleKeys = Object.keys(role);

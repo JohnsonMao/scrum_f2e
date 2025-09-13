@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react';
 import { color, alpha } from '@styles/setting.style';
-import { ReactComponent as SprintProcessSvg } from '@images/sprint_process.svg';
+import SprintProcessSvg from '@images/sprint_process.svg?react';
 
 export const SprintProcessBg = styled(SprintProcessSvg)`
 	filter: url(#noise) blur(1px);

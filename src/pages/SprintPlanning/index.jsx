@@ -2,16 +2,16 @@ import React, { useEffect, useState, useId } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cx } from '@linaria/core';
 import Vivus from 'vivus';
-import { ReactComponent as SprintSmSvg } from '@images/sprint_sm.svg';
-import { ReactComponent as StoreSvg } from '@images/store.svg';
-import { ReactComponent as StoreSpineSvg } from '@images/store_spine.svg';
-import { ReactComponent as StoreCoverSvg } from '@images/store_cover.svg';
-import { ReactComponent as Clock1Svg } from '@images/clock_1.svg';
-import { ReactComponent as Clock2Svg } from '@images/clock_2.svg';
-import { ReactComponent as Clock3Svg } from '@images/clock_3.svg';
-import { ReactComponent as Clock4Svg } from '@images/clock_4.svg';
-import { ReactComponent as Clock5Svg } from '@images/clock_5.svg';
-import { ReactComponent as BombSvg } from '@images/bomb.svg';
+import SprintSmSvg from '@images/sprint_sm.svg?react';
+import StoreSvg from '@images/store.svg?react';
+import StoreSpineSvg from '@images/store_spine.svg?react';
+import StoreCoverSvg from '@images/store_cover.svg?react';
+import Clock1Svg from '@images/clock_1.svg?react';
+import Clock2Svg from '@images/clock_2.svg?react';
+import Clock3Svg from '@images/clock_3.svg?react';
+import Clock4Svg from '@images/clock_4.svg?react';
+import Clock5Svg from '@images/clock_5.svg?react';
+import BombSvg from '@images/bomb.svg?react';
 import {
 	roleChat,
 	fixedRT,

@@ -48,7 +48,7 @@ export const LoadingBarStyle = styled.div`
 		width: 100%;
 		height: inherit;
 		animation: loading 1s infinite linear;
-		transform: scaleX(${(prop) => prop.percent});
+		transform: scaleX(${(props) => props.percent});
 		transition: 0.4s;
 		transform-origin: left;
 	}

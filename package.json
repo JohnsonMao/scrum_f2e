@@ -33,6 +33,6 @@
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.31.10",
     "vite": "^7.1.5",
-    "vite-plugin-svgr": "^2.2.2"
+    "vite-plugin-svgr": "^4.5.0"
   }
 }

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import svgrPlugin from 'vite-plugin-svgr';
 import linaria from '@linaria/vite';
+import svgr from 'vite-plugin-svgr';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 // https://vitejs.dev/config/
@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
 			react({
 				jsxRuntime: 'classic'
 			}),
-			svgrPlugin()
+			svgr(),
 		],
 		resolve: {
 			alias: {

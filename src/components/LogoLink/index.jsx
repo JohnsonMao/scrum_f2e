@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent as Jira } from '@images/jira.svg';
-import { ReactComponent as Confluence } from '@images/confluence.svg';
+import Jira from '@images/jira.svg?react';
+import Confluence from '@images/confluence.svg?react';
 import LogoLinkStyle from './LogoLink.style';
 
 function LogoLink({ logoName }) {

@@ -8,7 +8,7 @@ import Mask from '@/components/Mask';
 import Transition from '@/components/Transition';
 import LogoLink from '@/components/LogoLink';
 import { Drop, DropChild, Drag } from '@/components/DnD';
-import { ReactComponent as HandSvg } from '@images/hand.svg';
+import HandSvg from '@images/hand.svg?react';
 import { roleChat, fixedRB } from '@styles/utils.style';
 import { ListStyle, ListSideStyle, ItemStyle, ItemsStyle } from './List.style';
 

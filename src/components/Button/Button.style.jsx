@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { ReactComponent as PillSvg } from '@images/pill.svg';
+import PillSvg from '@images/pill.svg?react';
 import { color } from '@styles/setting.style';
 
 export const PillShape = styled(PillSvg)`
