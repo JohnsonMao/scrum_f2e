@@ -15,14 +15,9 @@ export default defineConfig(({ mode }) => {
 				extensions: ['.jsx', '.js']
 			}),
 			linaria({
-				include: ['**/*.{js,jsx}'],
-				babelOptions: {
-					presets: ['@babel/preset-react']
-				}
+				include: ['**/*.{js,jsx}']
 			}),
-			react({
-				jsxRuntime: 'classic'
-			}),
+			react(),
 			svgr(),
 		],
 		resolve: {
